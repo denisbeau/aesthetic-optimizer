@@ -69,6 +69,12 @@
 		TEST006 /* AppErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST006; };
 		TEST007 /* CoreMLServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST007; };
 		TEST008 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST008; };
+		TEST009 /* AgeGateViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST010; };
+		TEST010 /* DisclaimerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST011; };
+		TEST011 /* DataExportServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST012; };
+		TEST012 /* SettingsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST013; };
+		TEST013 /* CelebrationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST014; };
+		TEST014 /* ErrorAlertModifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST015; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +140,12 @@
 		TST007 /* CoreMLServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLServiceTests.swift; sourceTree = "<group>"; };
 		TST008 /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		TST009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		TST010 /* AgeGateViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGateViewTests.swift; sourceTree = "<group>"; };
+		TST011 /* DisclaimerViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclaimerViewTests.swift; sourceTree = "<group>"; };
+		TST012 /* DataExportServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExportServiceTests.swift; sourceTree = "<group>"; };
+		TST013 /* SettingsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewTests.swift; sourceTree = "<group>"; };
+		TST014 /* CelebrationViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationViewTests.swift; sourceTree = "<group>"; };
+		TST015 /* ErrorAlertModifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertModifierTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +324,12 @@
 				TST006 /* AppErrorTests.swift */,
 				TST007 /* CoreMLServiceTests.swift */,
 				TST008 /* IntegrationTests.swift */,
+				TST010 /* AgeGateViewTests.swift */,
+				TST011 /* DisclaimerViewTests.swift */,
+				TST012 /* DataExportServiceTests.swift */,
+				TST013 /* SettingsViewTests.swift */,
+				TST014 /* CelebrationViewTests.swift */,
+				TST015 /* ErrorAlertModifierTests.swift */,
 				TST009 /* Info.plist */,
 			);
 			path = LooksmaxxingAppTests;
@@ -467,6 +485,12 @@
 				TEST006 /* AppErrorTests.swift in Sources */,
 				TEST007 /* CoreMLServiceTests.swift in Sources */,
 				TEST008 /* IntegrationTests.swift in Sources */,
+				TEST009 /* AgeGateViewTests.swift in Sources */,
+				TEST010 /* DisclaimerViewTests.swift in Sources */,
+				TEST011 /* DataExportServiceTests.swift in Sources */,
+				TEST012 /* SettingsViewTests.swift in Sources */,
+				TEST013 /* CelebrationViewTests.swift in Sources */,
+				TEST014 /* ErrorAlertModifierTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
