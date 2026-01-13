@@ -42,6 +42,20 @@
 		/* Extensions */
 		EXT001 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC018; };
 		
+		/* New Views - Production Readiness */
+		VIEW012 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC024; };
+		VIEW013 /* AgeGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC025; };
+		VIEW014 /* DisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC026; };
+		VIEW015 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC027; };
+		VIEW016 /* CelebrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC028; };
+		VIEW017 /* ErrorAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC029; };
+		
+		/* Config */
+		CFG004 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC030; };
+		
+		/* New Services */
+		SVC004 /* DataExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC031; };
+		
 		/* Resources */
 		RES001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = RSC001; };
 		RES002 /* LooksmaxxingApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = RSC002; };
@@ -96,6 +110,14 @@
 		SRC021 /* ResultsTeaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTeaseView.swift; sourceTree = "<group>"; };
 		SRC022 /* PersonalizedPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedPaywallView.swift; sourceTree = "<group>"; };
 		SRC023 /* HomeViewDark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewDark.swift; sourceTree = "<group>"; };
+		SRC024 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		SRC025 /* AgeGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGateView.swift; sourceTree = "<group>"; };
+		SRC026 /* DisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclaimerView.swift; sourceTree = "<group>"; };
+		SRC027 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		SRC028 /* CelebrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationView.swift; sourceTree = "<group>"; };
+		SRC029 /* ErrorAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertModifier.swift; sourceTree = "<group>"; };
+		SRC030 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		SRC031 /* DataExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExportService.swift; sourceTree = "<group>"; };
 		
 		/* Resources */
 		RSC001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -151,9 +173,18 @@
 				GRP007 /* Services */,
 				GRP008 /* Utilities */,
 				GRP009 /* Resources */,
+				GRP014 /* Config */,
 				RSC003 /* Info.plist */,
 			);
 			path = LooksmaxxingApp;
+			sourceTree = "<group>";
+		};
+		GRP014 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				SRC030 /* Secrets.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		GRP002 /* Products */ = {
@@ -188,8 +219,22 @@
 				SRC021 /* ResultsTeaseView.swift */,
 				SRC022 /* PersonalizedPaywallView.swift */,
 				SRC023 /* HomeViewDark.swift */,
+				SRC024 /* SettingsView.swift */,
+				SRC025 /* AgeGateView.swift */,
+				SRC026 /* DisclaimerView.swift */,
+				SRC027 /* LaunchScreenView.swift */,
+				GRP013 /* Components */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		GRP013 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				SRC028 /* CelebrationView.swift */,
+				SRC029 /* ErrorAlertModifier.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		GRP005 /* ViewModels */ = {
@@ -218,6 +263,7 @@
 				SRC015 /* CoreDataManager.swift */,
 				SRC016 /* CoreMLService.swift */,
 				SRC017 /* NotificationService.swift */,
+				SRC031 /* DataExportService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -387,6 +433,12 @@
 				VIEW009 /* ResultsTeaseView.swift in Sources */,
 				VIEW010 /* PersonalizedPaywallView.swift in Sources */,
 				VIEW011 /* HomeViewDark.swift in Sources */,
+				VIEW012 /* SettingsView.swift in Sources */,
+				VIEW013 /* AgeGateView.swift in Sources */,
+				VIEW014 /* DisclaimerView.swift in Sources */,
+				VIEW015 /* LaunchScreenView.swift in Sources */,
+				VIEW016 /* CelebrationView.swift in Sources */,
+				VIEW017 /* ErrorAlertModifier.swift in Sources */,
 				VM001 /* ScanViewModel.swift in Sources */,
 				VM002 /* StreakViewModel.swift in Sources */,
 				VM003 /* SubscriptionViewModel.swift in Sources */,
@@ -396,7 +448,9 @@
 				SVC001 /* CoreDataManager.swift in Sources */,
 				SVC002 /* CoreMLService.swift in Sources */,
 				SVC003 /* NotificationService.swift in Sources */,
+				SVC004 /* DataExportService.swift in Sources */,
 				EXT001 /* UserDefaults+Extensions.swift in Sources */,
+				CFG004 /* Secrets.swift in Sources */,
 				RES002 /* LooksmaxxingApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
