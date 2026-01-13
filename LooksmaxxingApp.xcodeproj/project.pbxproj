@@ -18,6 +18,11 @@
 		VIEW004 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC006; };
 		VIEW005 /* DailyRoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC007; };
 		VIEW006 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC008; };
+		VIEW007 /* OnboardingQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC019; };
+		VIEW008 /* AnalyzingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC020; };
+		VIEW009 /* ResultsTeaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC021; };
+		VIEW010 /* PersonalizedPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC022; };
+		VIEW011 /* HomeViewDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC023; };
 		
 		/* ViewModels */
 		VM001 /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC009; };
@@ -86,6 +91,11 @@
 		SRC016 /* CoreMLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLService.swift; sourceTree = "<group>"; };
 		SRC017 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		SRC018 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		SRC019 /* OnboardingQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingQuizView.swift; sourceTree = "<group>"; };
+		SRC020 /* AnalyzingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingView.swift; sourceTree = "<group>"; };
+		SRC021 /* ResultsTeaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTeaseView.swift; sourceTree = "<group>"; };
+		SRC022 /* PersonalizedPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedPaywallView.swift; sourceTree = "<group>"; };
+		SRC023 /* HomeViewDark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewDark.swift; sourceTree = "<group>"; };
 		
 		/* Resources */
 		RSC001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -173,6 +183,11 @@
 				SRC006 /* ResultsView.swift */,
 				SRC007 /* DailyRoutineView.swift */,
 				SRC008 /* PaywallView.swift */,
+				SRC019 /* OnboardingQuizView.swift */,
+				SRC020 /* AnalyzingView.swift */,
+				SRC021 /* ResultsTeaseView.swift */,
+				SRC022 /* PersonalizedPaywallView.swift */,
+				SRC023 /* HomeViewDark.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -367,6 +382,11 @@
 				VIEW004 /* ResultsView.swift in Sources */,
 				VIEW005 /* DailyRoutineView.swift in Sources */,
 				VIEW006 /* PaywallView.swift in Sources */,
+				VIEW007 /* OnboardingQuizView.swift in Sources */,
+				VIEW008 /* AnalyzingView.swift in Sources */,
+				VIEW009 /* ResultsTeaseView.swift in Sources */,
+				VIEW010 /* PersonalizedPaywallView.swift in Sources */,
+				VIEW011 /* HomeViewDark.swift in Sources */,
 				VM001 /* ScanViewModel.swift in Sources */,
 				VM002 /* StreakViewModel.swift in Sources */,
 				VM003 /* SubscriptionViewModel.swift in Sources */,

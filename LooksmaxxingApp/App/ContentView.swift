@@ -15,12 +15,13 @@ struct ContentView: View {
     var body: some View {
         Group {
             if hasCompletedOnboarding {
-                HomeView()
+                HomeViewDark()
             } else {
-                OnboardingView()
+                OnboardingQuizView()
             }
         }
         .animation(.easeInOut, value: hasCompletedOnboarding)
+        .preferredColorScheme(.dark)
     }
 }
 
