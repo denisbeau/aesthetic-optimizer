@@ -1,0 +1,674 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		/* App Files */
+		APP001 /* LooksmaxxingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC001; };
+		APP002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC002; };
+		
+		/* Views */
+		VIEW001 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC003; };
+		VIEW002 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC004; };
+		VIEW003 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC005; };
+		VIEW004 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC006; };
+		VIEW005 /* DailyRoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC007; };
+		VIEW006 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC008; };
+		
+		/* ViewModels */
+		VM001 /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC009; };
+		VM002 /* StreakViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC010; };
+		VM003 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC011; };
+		
+		/* Models */
+		MODEL001 /* FaceAnalysisResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC012; };
+		MODEL002 /* CoreDataEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC013; };
+		MODEL003 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC014; };
+		
+		/* Services */
+		SVC001 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC015; };
+		SVC002 /* CoreMLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC016; };
+		SVC003 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC017; };
+		
+		/* Extensions */
+		EXT001 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC018; };
+		
+		/* Resources */
+		RES001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = RSC001; };
+		RES002 /* LooksmaxxingApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = RSC002; };
+		
+		/* Test Files */
+		TEST001 /* FaceAnalysisResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST001; };
+		TEST002 /* UserDefaultsExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST002; };
+		TEST003 /* StreakViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST003; };
+		TEST004 /* SubscriptionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST004; };
+		TEST005 /* ScanViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST005; };
+		TEST006 /* AppErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST006; };
+		TEST007 /* CoreMLServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST007; };
+		TEST008 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST008; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		PROXY001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = PRJ001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = TGT001;
+			remoteInfo = LooksmaxxingApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		/* Product */
+		PROD001 /* LooksmaxxingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LooksmaxxingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		PROD002 /* LooksmaxxingAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LooksmaxxingAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		
+		/* Source Files */
+		SRC001 /* LooksmaxxingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooksmaxxingApp.swift; sourceTree = "<group>"; };
+		SRC002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		SRC003 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		SRC004 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		SRC005 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		SRC006 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		SRC007 /* DailyRoutineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRoutineView.swift; sourceTree = "<group>"; };
+		SRC008 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		SRC009 /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
+		SRC010 /* StreakViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakViewModel.swift; sourceTree = "<group>"; };
+		SRC011 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
+		SRC012 /* FaceAnalysisResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceAnalysisResult.swift; sourceTree = "<group>"; };
+		SRC013 /* CoreDataEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEntities.swift; sourceTree = "<group>"; };
+		SRC014 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		SRC015 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		SRC016 /* CoreMLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLService.swift; sourceTree = "<group>"; };
+		SRC017 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		SRC018 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		
+		/* Resources */
+		RSC001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		RSC002 /* LooksmaxxingApp.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; path = LooksmaxxingApp.xcdatamodeld; sourceTree = "<group>"; };
+		RSC003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		
+		/* Test Files */
+		TST001 /* FaceAnalysisResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceAnalysisResultTests.swift; sourceTree = "<group>"; };
+		TST002 /* UserDefaultsExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensionsTests.swift; sourceTree = "<group>"; };
+		TST003 /* StreakViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakViewModelTests.swift; sourceTree = "<group>"; };
+		TST004 /* SubscriptionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModelTests.swift; sourceTree = "<group>"; };
+		TST005 /* ScanViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModelTests.swift; sourceTree = "<group>"; };
+		TST006 /* AppErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrorTests.swift; sourceTree = "<group>"; };
+		TST007 /* CoreMLServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLServiceTests.swift; sourceTree = "<group>"; };
+		TST008 /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
+		TST009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FRMWK001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FRMWK002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ROOT001 = {
+			isa = PBXGroup;
+			children = (
+				GRP001 /* LooksmaxxingApp */,
+				GRP012 /* LooksmaxxingAppTests */,
+				GRP002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		GRP001 /* LooksmaxxingApp */ = {
+			isa = PBXGroup;
+			children = (
+				GRP003 /* App */,
+				GRP004 /* Views */,
+				GRP005 /* ViewModels */,
+				GRP006 /* Models */,
+				GRP007 /* Services */,
+				GRP008 /* Utilities */,
+				GRP009 /* Resources */,
+				RSC003 /* Info.plist */,
+			);
+			path = LooksmaxxingApp;
+			sourceTree = "<group>";
+		};
+		GRP002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				PROD001 /* LooksmaxxingApp.app */,
+				PROD002 /* LooksmaxxingAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		GRP003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				SRC001 /* LooksmaxxingApp.swift */,
+				SRC002 /* ContentView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		GRP004 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				SRC003 /* OnboardingView.swift */,
+				SRC004 /* HomeView.swift */,
+				SRC005 /* CameraView.swift */,
+				SRC006 /* ResultsView.swift */,
+				SRC007 /* DailyRoutineView.swift */,
+				SRC008 /* PaywallView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		GRP005 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				SRC009 /* ScanViewModel.swift */,
+				SRC010 /* StreakViewModel.swift */,
+				SRC011 /* SubscriptionViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		GRP006 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				SRC012 /* FaceAnalysisResult.swift */,
+				SRC013 /* CoreDataEntities.swift */,
+				SRC014 /* AppError.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		GRP007 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				SRC015 /* CoreDataManager.swift */,
+				SRC016 /* CoreMLService.swift */,
+				SRC017 /* NotificationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		GRP008 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				GRP010 /* Extensions */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		GRP009 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				RSC001 /* Assets.xcassets */,
+				GRP011 /* CoreData */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		GRP010 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				SRC018 /* UserDefaults+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		GRP011 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				RSC002 /* LooksmaxxingApp.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		GRP012 /* LooksmaxxingAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				TST001 /* FaceAnalysisResultTests.swift */,
+				TST002 /* UserDefaultsExtensionsTests.swift */,
+				TST003 /* StreakViewModelTests.swift */,
+				TST004 /* SubscriptionViewModelTests.swift */,
+				TST005 /* ScanViewModelTests.swift */,
+				TST006 /* AppErrorTests.swift */,
+				TST007 /* CoreMLServiceTests.swift */,
+				TST008 /* IntegrationTests.swift */,
+				TST009 /* Info.plist */,
+			);
+			path = LooksmaxxingAppTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		TGT001 /* LooksmaxxingApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFG001 /* Build configuration list for PBXNativeTarget "LooksmaxxingApp" */;
+			buildPhases = (
+				SRC_PHASE /* Sources */,
+				FRMWK001 /* Frameworks */,
+				RES_PHASE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LooksmaxxingApp;
+			packageProductDependencies = (
+			);
+			productName = LooksmaxxingApp;
+			productReference = PROD001 /* LooksmaxxingApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		TGT002 /* LooksmaxxingAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFG003 /* Build configuration list for PBXNativeTarget "LooksmaxxingAppTests" */;
+			buildPhases = (
+				TST_SRC_PHASE /* Sources */,
+				FRMWK002 /* Frameworks */,
+				TST_RES_PHASE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DEP001 /* PBXTargetDependency */,
+			);
+			name = LooksmaxxingAppTests;
+			productName = LooksmaxxingAppTests;
+			productReference = PROD002 /* LooksmaxxingAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		PRJ001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					TGT001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					TGT002 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = TGT001;
+					};
+				};
+			};
+			buildConfigurationList = CFG002 /* Build configuration list for PBXProject "LooksmaxxingApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ROOT001;
+			packageReferences = (
+			);
+			productRefGroup = GRP002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				TGT001 /* LooksmaxxingApp */,
+				TGT002 /* LooksmaxxingAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		RES_PHASE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				RES001 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		TST_RES_PHASE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		SRC_PHASE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				APP001 /* LooksmaxxingApp.swift in Sources */,
+				APP002 /* ContentView.swift in Sources */,
+				VIEW001 /* OnboardingView.swift in Sources */,
+				VIEW002 /* HomeView.swift in Sources */,
+				VIEW003 /* CameraView.swift in Sources */,
+				VIEW004 /* ResultsView.swift in Sources */,
+				VIEW005 /* DailyRoutineView.swift in Sources */,
+				VIEW006 /* PaywallView.swift in Sources */,
+				VM001 /* ScanViewModel.swift in Sources */,
+				VM002 /* StreakViewModel.swift in Sources */,
+				VM003 /* SubscriptionViewModel.swift in Sources */,
+				MODEL001 /* FaceAnalysisResult.swift in Sources */,
+				MODEL002 /* CoreDataEntities.swift in Sources */,
+				MODEL003 /* AppError.swift in Sources */,
+				SVC001 /* CoreDataManager.swift in Sources */,
+				SVC002 /* CoreMLService.swift in Sources */,
+				SVC003 /* NotificationService.swift in Sources */,
+				EXT001 /* UserDefaults+Extensions.swift in Sources */,
+				RES002 /* LooksmaxxingApp.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		TST_SRC_PHASE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				TEST001 /* FaceAnalysisResultTests.swift in Sources */,
+				TEST002 /* UserDefaultsExtensionsTests.swift in Sources */,
+				TEST003 /* StreakViewModelTests.swift in Sources */,
+				TEST004 /* SubscriptionViewModelTests.swift in Sources */,
+				TEST005 /* ScanViewModelTests.swift in Sources */,
+				TEST006 /* AppErrorTests.swift in Sources */,
+				TEST007 /* CoreMLServiceTests.swift in Sources */,
+				TEST008 /* IntegrationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DEP001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = TGT001 /* LooksmaxxingApp */;
+			targetProxy = PROXY001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		DBGCFG001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		RELCFG001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		TGTDBG001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LooksmaxxingApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Aesthetic Optimizer";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need camera access to analyze your face. All processing happens on your device (privacy-first). Your photos are never uploaded to our servers.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.LooksmaxxingApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		TGTREL001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LooksmaxxingApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Aesthetic Optimizer";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need camera access to analyze your face. All processing happens on your device (privacy-first). Your photos are never uploaded to our servers.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.LooksmaxxingApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		TSTDBG001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LooksmaxxingAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.LooksmaxxingAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LooksmaxxingApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LooksmaxxingApp";
+			};
+			name = Debug;
+		};
+		TSTREL001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LooksmaxxingAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.LooksmaxxingAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LooksmaxxingApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LooksmaxxingApp";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CFG001 /* Build configuration list for PBXNativeTarget "LooksmaxxingApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				TGTDBG001 /* Debug */,
+				TGTREL001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFG002 /* Build configuration list for PBXProject "LooksmaxxingApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBGCFG001 /* Debug */,
+				RELCFG001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFG003 /* Build configuration list for PBXNativeTarget "LooksmaxxingAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				TSTDBG001 /* Debug */,
+				TSTREL001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = PRJ001 /* Project object */;
+}

@@ -1,0 +1,81 @@
+name: iOS Build & Test
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  build-and-test:
+    name: Build & Test iOS App
+    runs-on: macos-14
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Select Xcode 15
+      run: sudo xcode-select -s /Applications/Xcode_15.2.app
+
+    - name: Show build environment
+      run: |
+        xcodebuild -version
+        swift --version
+        echo "Available simulators:"
+        xcrun simctl list devices available | head -30
+
+    - name: Build app
+      run: |
+        xcodebuild build \
+          -project LooksmaxxingApp.xcodeproj \
+          -scheme LooksmaxxingApp \
+          -sdk iphonesimulator \
+          -configuration Debug \
+          -derivedDataPath build \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          ONLY_ACTIVE_ARCH=NO
+
+    - name: Run unit tests
+      run: |
+        xcodebuild test \
+          -project LooksmaxxingApp.xcodeproj \
+          -scheme LooksmaxxingApp \
+          -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
+          -configuration Debug \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          | tee test_output.txt || true
+        
+        # Check if tests passed
+        if grep -q "TEST SUCCEEDED" test_output.txt; then
+          echo "✅ All tests passed!"
+        else
+          echo "❌ Some tests failed"
+          exit 1
+        fi
+
+    - name: Package app for Appetize.io
+      if: success()
+      run: |
+        cd build/Build/Products/Debug-iphonesimulator
+        zip -r $GITHUB_WORKSPACE/LooksmaxxingApp-Simulator.zip LooksmaxxingApp.app
+        echo "✅ App packaged for Appetize.io"
+
+    - name: Upload app artifact
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: LooksmaxxingApp-Simulator
+        path: LooksmaxxingApp-Simulator.zip
+        retention-days: 30
+
+    - name: Upload test results on failure
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-failure-logs
+        path: test_output.txt
