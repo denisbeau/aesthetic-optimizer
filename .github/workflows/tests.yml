@@ -59,19 +59,24 @@ jobs:
         fi
 
     - name: Package app for Appetize.io
-      if: success()
+      if: always()
       run: |
-        cd build/Build/Products/Debug-iphonesimulator
-        zip -r $GITHUB_WORKSPACE/LooksmaxxingApp-Simulator.zip LooksmaxxingApp.app
-        echo "✅ App packaged for Appetize.io"
+        if [ -d "build/Build/Products/Debug-iphonesimulator/LooksmaxxingApp.app" ]; then
+          cd build/Build/Products/Debug-iphonesimulator
+          zip -r $GITHUB_WORKSPACE/LooksmaxxingApp-Simulator.zip LooksmaxxingApp.app
+          echo "✅ App packaged for Appetize.io"
+        else
+          echo "⚠️ App not built, skipping packaging"
+        fi
 
     - name: Upload app artifact
-      if: success()
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: LooksmaxxingApp-Simulator
         path: LooksmaxxingApp-Simulator.zip
         retention-days: 30
+        if-no-files-found: ignore
 
     - name: Upload test results on failure
       if: failure()
