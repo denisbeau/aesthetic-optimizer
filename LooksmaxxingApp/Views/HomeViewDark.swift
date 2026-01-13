@@ -14,6 +14,8 @@ struct HomeViewDark: View {
     @State private var showScan = false
     @State private var showDailyRoutine = false
     @State private var showPaywall = false
+    @State private var showSettings = false
+    @State private var incompleteTasks: Int = 3
     
     var body: some View {
         NavigationView {
@@ -65,6 +67,26 @@ struct HomeViewDark: View {
             PaywallView()
                 .environmentObject(subscriptionVM)
         }
+        .sheet(isPresented: $showSettings) {
+            SettingsView()
+                .environmentObject(subscriptionVM)
+                .environmentObject(streakVM)
+        }
+        .onAppear {
+            loadIncompleteTasks()
+        }
+        .onChange(of: showDailyRoutine) { isShowing in
+            if !isShowing {
+                loadIncompleteTasks()
+            }
+        }
+    }
+    
+    // MARK: - Helper Methods
+    
+    private func loadIncompleteTasks() {
+        let completed = CoreDataManager.shared.getCompletedTaskTypes(for: Date())
+        incompleteTasks = max(0, 3 - completed.count)
     }
     
     // MARK: - Header
@@ -85,7 +107,7 @@ struct HomeViewDark: View {
             Spacer()
             
             // Settings/Profile button
-            Button(action: {}) {
+            Button(action: { showSettings = true }) {
                 Image(systemName: "gearshape.fill")
                     .font(.title3)
                     .foregroundColor(Color(hex: "6B7280"))
@@ -153,7 +175,7 @@ struct HomeViewDark: View {
     
     private var scanButton: some View {
         Button(action: {
-            if subscriptionVM.canScanToday {
+            if subscriptionVM.canScanToday() {
                 showScan = true
             } else {
                 showPaywall = true
@@ -180,7 +202,7 @@ struct HomeViewDark: View {
                     .font(.headline.bold())
                     .foregroundColor(.white)
                 
-                if !subscriptionVM.canScanToday {
+                if !subscriptionVM.canScanToday() {
                     Text("Unlock with Pro")
                         .font(.caption)
                         .foregroundColor(Color(hex: "6B7280"))
@@ -214,12 +236,12 @@ struct HomeViewDark: View {
             HStack {
                 ZStack {
                     Circle()
-                        .fill(Color(hex: "10B981").opacity(0.2))
+                        .fill(Color(hex: incompleteTasks == 0 ? "10B981" : "F59E0B").opacity(0.2))
                         .frame(width: 44, height: 44)
                     
-                    Image(systemName: "checkmark.circle")
+                    Image(systemName: incompleteTasks == 0 ? "checkmark.circle.fill" : "checkmark.circle")
                         .font(.title2)
-                        .foregroundColor(Color(hex: "10B981"))
+                        .foregroundColor(Color(hex: incompleteTasks == 0 ? "10B981" : "F59E0B"))
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
@@ -227,12 +249,25 @@ struct HomeViewDark: View {
                         .font(.headline)
                         .foregroundColor(.white)
                     
-                    Text("3 exercises today")
+                    Text(incompleteTasks == 0 ? "All done! ✓" : "\(incompleteTasks) tasks remaining")
                         .font(.caption)
-                        .foregroundColor(Color(hex: "6B7280"))
+                        .foregroundColor(Color(hex: incompleteTasks == 0 ? "10B981" : "EF4444"))
                 }
                 
                 Spacer()
+                
+                // Red badge for incomplete tasks
+                if incompleteTasks > 0 {
+                    ZStack {
+                        Circle()
+                            .fill(Color(hex: "EF4444"))
+                            .frame(width: 24, height: 24)
+                        
+                        Text("\(incompleteTasks)")
+                            .font(.caption.bold())
+                            .foregroundColor(.white)
+                    }
+                }
                 
                 Image(systemName: "chevron.right")
                     .foregroundColor(Color(hex: "6B7280"))
@@ -243,7 +278,7 @@ struct HomeViewDark: View {
                     .fill(Color(hex: "12121A"))
                     .overlay(
                         RoundedRectangle(cornerRadius: 14)
-                            .stroke(Color(hex: "2A2A34"), lineWidth: 1)
+                            .stroke(Color(hex: incompleteTasks > 0 ? "EF4444" : "2A2A34").opacity(incompleteTasks > 0 ? 0.5 : 1), lineWidth: 1)
                     )
             )
         }

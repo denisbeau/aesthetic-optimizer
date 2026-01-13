@@ -1,0 +1,142 @@
+═══════════════════════════════════════════════════════════════
+APP STORE METADATA - AESTHETIC OPTIMIZER
+═══════════════════════════════════════════════════════════════
+
+APP NAME (30 chars max):
+Aesthetic Optimizer
+
+SUBTITLE (30 chars max):
+AI Face Analysis & Glow-Up
+
+PROMOTIONAL TEXT (170 chars max, can be updated without review):
+Transform your look with AI-powered facial analysis. Track your progress, build healthy habits, and optimize your appearance with science-backed routines.
+
+KEYWORDS (100 chars max, comma-separated):
+face,analysis,glow,up,mewing,jawline,skincare,self,improvement,ai,beauty,rating,looksmax,aesthetic
+
+═══════════════════════════════════════════════════════════════
+DESCRIPTION (4000 chars max):
+═══════════════════════════════════════════════════════════════
+
+Unlock your aesthetic potential with Aesthetic Optimizer - the AI-powered app that analyzes your facial features and creates a personalized improvement plan.
+
+🔬 AI FACIAL ANALYSIS
+• Get an objective rating of your facial aesthetics (1-10 scale)
+• Identify your strongest features
+• Discover areas for improvement
+• All analysis happens on your device - your photos never leave your phone
+
+🔥 DAILY STREAK SYSTEM
+• Build healthy habits with our proven streak system
+• Complete 3 simple daily tasks
+• Track your progress over time
+• Get notified before you lose your streak
+
+📊 PERSONALIZED ROUTINES
+• Skincare reminders
+• Posture checks
+• Hydration tracking
+• Customized to your goals
+
+💡 DAILY INSIGHTS
+• Learn science-backed tips
+• Understand facial aesthetics
+• Improve consistently
+
+✨ PRO FEATURES
+• Unlimited facial scans
+• Detailed analysis breakdown
+• Streak freeze protection
+• Priority processing
+
+PRIVACY FIRST
+• All processing on-device
+• No photos uploaded to servers
+• No facial data stored externally
+• Your privacy is our priority
+
+Start your transformation journey today. Build habits that last, track your progress, and optimize your aesthetic potential.
+
+Note: This app provides general wellness suggestions only and is not a medical device. Results may vary.
+
+═══════════════════════════════════════════════════════════════
+WHAT'S NEW (for updates):
+═══════════════════════════════════════════════════════════════
+
+Version 1.0.0:
+• Initial release
+• AI-powered facial analysis
+• Daily streak system
+• Personalized routines
+• Dark mode interface
+
+═══════════════════════════════════════════════════════════════
+URLS (Replace with your actual URLs):
+═══════════════════════════════════════════════════════════════
+
+SUPPORT URL:
+https://yoursite.com/support
+
+PRIVACY POLICY URL:
+https://yoursite.com/privacy
+
+TERMS OF SERVICE URL:
+https://yoursite.com/terms
+
+═══════════════════════════════════════════════════════════════
+APP STORE CONFIGURATION:
+═══════════════════════════════════════════════════════════════
+
+AGE RATING: 17+
+Reason: Body image content
+
+CATEGORIES:
+- Primary: Health & Fitness
+- Secondary: Lifestyle
+
+CONTENT RIGHTS:
+- Does your app contain third-party content? NO
+- Do you have rights to use all content? YES
+
+ENCRYPTION:
+- Does your app use encryption? NO (unless using HTTPS)
+- If YES, select "Only uses standard encryption"
+
+ADVERTISING:
+- Does your app contain ads? NO (for v1.0)
+
+MADE FOR KIDS:
+- Is this app made for kids? NO
+
+═══════════════════════════════════════════════════════════════
+SCREENSHOT REQUIREMENTS:
+═══════════════════════════════════════════════════════════════
+
+Required sizes:
+1. 6.5" Display (iPhone 15 Pro Max): 1290 x 2796 pixels
+2. 5.5" Display (iPhone 8 Plus): 1242 x 2208 pixels
+
+Recommended screenshots (5-10):
+1. Onboarding quiz - "Personalized Assessment"
+2. AI analyzing animation - "AI-Powered Analysis"
+3. Results screen with score - "Your Aesthetic Score"
+4. Daily routine screen - "Build Healthy Habits"
+5. Streak counter - "Stay Motivated with Streaks"
+6. Paywall (optional) - "Unlock Your Potential"
+
+═══════════════════════════════════════════════════════════════
+APP PREVIEW VIDEO (OPTIONAL):
+═══════════════════════════════════════════════════════════════
+
+Duration: 15-30 seconds
+Resolution: Same as screenshots
+Format: H.264, AAC audio
+
+Suggested content:
+- Quick onboarding flow (3 sec)
+- Face scan animation (5 sec)
+- Results reveal (5 sec)
+- Daily tasks completion (5 sec)
+- Streak celebration (3 sec)
+
+═══════════════════════════════════════════════════════════════
