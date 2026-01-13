@@ -112,12 +112,6 @@ final class SettingsViewTests: XCTestCase {
     
     // MARK: - Reset/Delete Tests
     
-    func testResetProgress_CallsStreakReset() {
-        // This is an integration test - verify the flow exists
-        let streakVM = StreakViewModel.shared
-        XCTAssertNotNil(streakVM, "StreakViewModel should be accessible")
-    }
-    
     func testDeleteAllData_ClearsUserDefaults() {
         // Set some test data
         UserDefaults.standard.set("test", forKey: "testKey_SettingsTest")

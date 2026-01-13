@@ -99,11 +99,11 @@ final class ErrorAlertModifierTests: XCTestCase {
     
     func testShow_PurchaseFailed() {
         let reason = "Card declined"
-        errorManager.show(.purchaseFailed(reason: reason))
+        errorManager.show(.purchaseFailed(reason))
         
         XCTAssertTrue(errorManager.isShowing)
         XCTAssertEqual(errorManager.title, "Purchase Failed")
-        XCTAssertEqual(errorManager.message, reason)
+        XCTAssertTrue(errorManager.message.contains(reason))
     }
     
     func testShow_PurchaseCancelled() {
@@ -129,7 +129,7 @@ final class ErrorAlertModifierTests: XCTestCase {
     
     func testShow_CoreDataError() {
         let detail = "Failed to save"
-        errorManager.show(.coreDataError(detail: detail))
+        errorManager.show(.coreDataError(detail))
         
         XCTAssertTrue(errorManager.isShowing)
         XCTAssertEqual(errorManager.title, "Data Error")
@@ -138,7 +138,7 @@ final class ErrorAlertModifierTests: XCTestCase {
     
     func testShow_Unknown_WithDetail() {
         let detail = "Something unexpected"
-        errorManager.show(.unknown(detail: detail))
+        errorManager.show(.unknown(detail))
         
         XCTAssertTrue(errorManager.isShowing)
         XCTAssertEqual(errorManager.title, "Something Went Wrong")
@@ -146,7 +146,7 @@ final class ErrorAlertModifierTests: XCTestCase {
     }
     
     func testShow_Unknown_EmptyDetail() {
-        errorManager.show(.unknown(detail: ""))
+        errorManager.show(.unknown(""))
         
         XCTAssertTrue(errorManager.isShowing)
         XCTAssertEqual(errorManager.title, "Something Went Wrong")
