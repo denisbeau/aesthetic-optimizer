@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FaceAnalysisResult: Identifiable, Codable {
+struct FaceAnalysisResult: Identifiable, Codable, Equatable {
     let id: UUID
     let rating: Double
     let strengths: [String]
