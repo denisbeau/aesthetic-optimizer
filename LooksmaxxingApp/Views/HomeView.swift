@@ -16,7 +16,7 @@ struct HomeView: View {
     @State private var showScanLimit = false
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 VStack(spacing: 25) {
                     // Streak Counter

@@ -323,7 +323,7 @@ struct DailyInsightView: View {
     ]
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack(spacing: 30) {
                 Image(systemName: "lightbulb.fill")
                     .font(.system(size: 60))
@@ -374,7 +374,7 @@ struct StreakFreezeView: View {
     @State private var showError = false
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack(spacing: 30) {
                 Image(systemName: "snowflake")
                     .font(.system(size: 60))
@@ -461,7 +461,7 @@ struct StreakFreezeView: View {
 }
 
 #Preview {
-    NavigationStack {
+    NavigationView {
         DailyRoutineView()
             .environmentObject(StreakViewModel.shared)
             .environmentObject(SubscriptionViewModel.shared)
