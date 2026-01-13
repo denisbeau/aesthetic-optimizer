@@ -2,265 +2,328 @@
 //  OnboardingQuizView.swift
 //  LooksmaxxingApp
 //
-//  Psychological priming onboarding flow - 12 questions
-//  Designed to increase paywall conversion through commitment/consistency
+//  Boiler room style onboarding - psychologically primes users
+//  Includes age verification (COPPA compliance)
 //
 
 import SwiftUI
 
-// MARK: - Quiz Data Model
-
-struct QuizQuestion {
-    let id: Int
-    let question: String
-    let options: [String]
-    let icon: String
-}
-
-class OnboardingQuizData: ObservableObject {
-    @Published var answers: [Int: String] = [:]
-    
-    var primaryGoal: String { answers[1] ?? "Overall improvement" }
-    var age: String { answers[2] ?? "18-25" }
-    var photoConfidence: String { answers[3] ?? "Sometimes" }
-    var struggles: String { answers[4] ?? "" }
-    var hasRoutine: String { answers[5] ?? "None" }
-    var sleepHours: String { answers[6] ?? "6-7" }
-    var willingToCommit: String { answers[7] ?? "Yes" }
-    var timeframe: String { answers[8] ?? "1 month" }
-    var previousBlocker: String { answers[9] ?? "" }
-    var breathingType: String { answers[10] ?? "Nose" }
-    var dedicationLevel: Int { Int(answers[11] ?? "7") ?? 7 }
-}
-
-// MARK: - Main Quiz View
-
 struct OnboardingQuizView: View {
-    @StateObject private var quizData = OnboardingQuizData()
-    @State private var currentQuestion = 0
-    @State private var showAnalyzing = false
-    @State private var selectedOption: String? = nil
+    @AppStorage("hasVerifiedAge") private var hasVerifiedAge = false
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+    @AppStorage("userAgeGroup") private var userAgeGroup = ""
+    @AppStorage("userGoal") private var userGoal = ""
+    @AppStorage("userCommitmentLevel") private var userCommitmentLevel = ""
+    @AppStorage("userTimeframe") private var userTimeframe = ""
     
-    let questions: [QuizQuestion] = [
-        QuizQuestion(id: 1, question: "What is your primary aesthetic goal?", 
-                    options: ["Sharper jawline", "Better skin", "Better facial symmetry", "Overall glow-up"],
-                    icon: "target"),
-        QuizQuestion(id: 2, question: "How old are you?",
-                    options: ["12-16", "16-18", "18-25", "25+"],
-                    icon: "calendar"),
-        QuizQuestion(id: 3, question: "How often do you feel confident in photos?",
-                    options: ["Always", "Sometimes", "Rarely", "I avoid photos"],
-                    icon: "camera"),
-        QuizQuestion(id: 4, question: "Which of these do you struggle with?",
-                    options: ["Mouth breathing", "Poor posture", "Uneven skin", "Receded chin"],
-                    icon: "exclamationmark.triangle"),
-        QuizQuestion(id: 5, question: "Do you currently follow a grooming routine?",
-                    options: ["None", "Basic", "Intermediate", "Advanced"],
-                    icon: "sparkles"),
-        QuizQuestion(id: 6, question: "How many hours of sleep do you average?",
-                    options: ["Less than 6", "6-7 hours", "8+ hours"],
-                    icon: "moon.fill"),
-        QuizQuestion(id: 7, question: "Are you willing to commit 10 mins/day?",
-                    options: ["Yes, I'm ready", "Maybe", "Not sure yet"],
-                    icon: "clock"),
-        QuizQuestion(id: 8, question: "How soon do you want visible results?",
-                    options: ["2 weeks (Intense)", "1 month", "3 months"],
-                    icon: "bolt.fill"),
-        QuizQuestion(id: 9, question: "What has stopped you from improving before?",
-                    options: ["Lack of knowledge", "Consistency issues", "No clear plan", "Just starting"],
-                    icon: "questionmark.circle"),
-        QuizQuestion(id: 10, question: "Do you breathe through your mouth or nose?",
-                    options: ["Nose", "Mouth", "Unsure"],
-                    icon: "wind"),
-        QuizQuestion(id: 11, question: "How dedicated are you to your glow-up?",
-                    options: ["10 - All in", "8-9 - Very dedicated", "6-7 - Motivated", "5 or below"],
-                    icon: "flame.fill"),
-        QuizQuestion(id: 12, question: "Ready to analyze your facial structure?",
-                    options: ["Start AI Analysis"],
-                    icon: "faceid")
-    ]
+    @State private var currentStep = 0
+    @State private var showUnderageAlert = false
+    @State private var selectedAnswer: String?
+    @State private var animateProgress = false
+    
+    private let totalSteps = 5
+    
+    // MARK: - Age Groups (COPPA Compliant)
+    enum AgeGroup: String, CaseIterable {
+        case under13 = "Under 13"
+        case teen13to16 = "13-16"
+        case teen16to18 = "16-18"
+        case youngAdult = "18-25"
+        case adult = "25+"
+        
+        var isAllowed: Bool {
+            self != .under13
+        }
+    }
     
     var body: some View {
         ZStack {
-            // Dark gradient background
-            LinearGradient(
-                colors: [Color(hex: "0A0A0F"), Color(hex: "12121A")],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            // Background
+            Color(hex: "0A0A0F")
+                .ignoresSafeArea()
             
-            if showAnalyzing {
-                AnalyzingView(quizData: quizData)
-            } else {
-                VStack(spacing: 0) {
-                    // Progress bar
-                    progressBar
-                    
-                    Spacer()
-                    
-                    // Question content
-                    questionContent
-                    
-                    Spacer()
-                    
-                    // Options
-                    optionsSection
-                    
-                    Spacer(minLength: 40)
+            VStack(spacing: 0) {
+                // Progress Bar
+                progressBar
+                    .padding(.top, 60)
+                    .padding(.horizontal, 30)
+                
+                // Question Content
+                TabView(selection: $currentStep) {
+                    ageQuestion.tag(0)
+                    goalQuestion.tag(1)
+                    currentStateQuestion.tag(2)
+                    commitmentQuestion.tag(3)
+                    timeframeQuestion.tag(4)
                 }
-                .padding(.horizontal, 24)
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .animation(.easeInOut, value: currentStep)
+                
+                // Continue Button
+                continueButton
+                    .padding(.horizontal, 30)
+                    .padding(.bottom, 50)
+            }
+        }
+        .alert("Age Requirement", isPresented: $showUnderageAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("You must be at least 13 years old to use this app. If you are under 13, please ask a parent or guardian for assistance.")
+        }
+        .onAppear {
+            withAnimation(.easeInOut(duration: 0.8)) {
+                animateProgress = true
             }
         }
     }
     
     // MARK: - Progress Bar
-    
     private var progressBar: some View {
         VStack(spacing: 8) {
             HStack {
-                Text("Question \(currentQuestion + 1) of \(questions.count)")
+                Text("Step \(currentStep + 1) of \(totalSteps)")
                     .font(.caption)
                     .foregroundColor(Color(hex: "6B7280"))
                 Spacer()
-                Text("\(Int((Double(currentQuestion + 1) / Double(questions.count)) * 100))%")
-                    .font(.caption.bold())
-                    .foregroundColor(Color(hex: "00D4FF"))
             }
             
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
-                    Rectangle()
-                        .fill(Color(hex: "1A1A24"))
-                        .frame(height: 4)
-                        .cornerRadius(2)
+                    // Background
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color(hex: "1F1F2E"))
+                        .frame(height: 8)
                     
-                    Rectangle()
+                    // Progress
+                    RoundedRectangle(cornerRadius: 4)
                         .fill(
                             LinearGradient(
-                                colors: [Color(hex: "00D4FF"), Color(hex: "00A3CC")],
+                                colors: [Color(hex: "00D4FF"), Color(hex: "7C3AED")],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
                         )
-                        .frame(width: geo.size.width * (Double(currentQuestion + 1) / Double(questions.count)), height: 4)
-                        .cornerRadius(2)
+                        .frame(width: animateProgress ? geo.size.width * CGFloat(currentStep + 1) / CGFloat(totalSteps) : 0, height: 8)
+                        .animation(.easeInOut(duration: 0.5), value: currentStep)
                 }
             }
-            .frame(height: 4)
-        }
-        .padding(.top, 20)
-    }
-    
-    // MARK: - Question Content
-    
-    private var questionContent: some View {
-        let question = questions[currentQuestion]
-        
-        return VStack(spacing: 20) {
-            // Icon
-            ZStack {
-                Circle()
-                    .fill(Color(hex: "00D4FF").opacity(0.1))
-                    .frame(width: 80, height: 80)
-                
-                Image(systemName: question.icon)
-                    .font(.system(size: 32))
-                    .foregroundColor(Color(hex: "00D4FF"))
-            }
-            
-            // Question text
-            Text(question.question)
-                .font(.title2.bold())
-                .foregroundColor(.white)
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
+            .frame(height: 8)
         }
     }
     
-    // MARK: - Options Section
-    
-    private var optionsSection: some View {
-        let question = questions[currentQuestion]
-        
-        return VStack(spacing: 12) {
-            ForEach(question.options, id: \.self) { option in
-                Button(action: {
-                    selectOption(option)
-                }) {
-                    HStack {
-                        Text(option)
-                            .font(.body.weight(.medium))
-                            .foregroundColor(selectedOption == option ? .white : Color(hex: "E5E7EB"))
-                        
-                        Spacer()
-                        
-                        if selectedOption == option {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(Color(hex: "00D4FF"))
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 18)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(selectedOption == option ? Color(hex: "00D4FF").opacity(0.15) : Color(hex: "1A1A24"))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(selectedOption == option ? Color(hex: "00D4FF") : Color(hex: "2A2A34"), lineWidth: 1)
-                            )
-                    )
-                }
-            }
-        }
-    }
-    
-    // MARK: - Actions
-    
-    private func selectOption(_ option: String) {
-        selectedOption = option
-        quizData.answers[questions[currentQuestion].id] = option
-        
-        // Auto-advance after short delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            withAnimation(.easeInOut(duration: 0.3)) {
-                if currentQuestion < questions.count - 1 {
-                    currentQuestion += 1
-                    selectedOption = nil
-                } else {
-                    // Last question - show analyzing
-                    showAnalyzing = true
-                }
-            }
-        }
-    }
-}
-
-// MARK: - Hex Color Extension
-
-extension Color {
-    init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int: UInt64 = 0
-        Scanner(string: hex).scanHexInt64(&int)
-        let a, r, g, b: UInt64
-        switch hex.count {
-        case 3: // RGB (12-bit)
-            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-        case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
-        case 8: // ARGB (32-bit)
-            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
-        default:
-            (a, r, g, b) = (1, 1, 1, 0)
-        }
-        self.init(
-            .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue: Double(b) / 255,
-            opacity: Double(a) / 255
+    // MARK: - Question 1: Age (COPPA)
+    private var ageQuestion: some View {
+        questionTemplate(
+            icon: "person.crop.circle",
+            title: "How old are you?",
+            subtitle: "We personalize your experience based on age",
+            options: AgeGroup.allCases.map { $0.rawValue }
         )
+    }
+    
+    // MARK: - Question 2: Goal
+    private var goalQuestion: some View {
+        questionTemplate(
+            icon: "target",
+            title: "What's your #1 goal?",
+            subtitle: "We'll create a personalized plan for you",
+            options: [
+                "🔥 Sharper Jawline",
+                "✨ Clearer Skin",
+                "👁️ Better Eye Area",
+                "💪 Overall Attractiveness",
+                "📸 More Photogenic"
+            ]
+        )
+    }
+    
+    // MARK: - Question 3: Current State
+    private var currentStateQuestion: some View {
+        questionTemplate(
+            icon: "chart.bar",
+            title: "How would you rate yourself now?",
+            subtitle: "Be honest - this is your starting point",
+            options: [
+                "1-3: Need major improvement",
+                "4-5: Below average",
+                "6-7: Average",
+                "8-9: Above average",
+                "10: Already peak"
+            ]
+        )
+    }
+    
+    // MARK: - Question 4: Commitment
+    private var commitmentQuestion: some View {
+        questionTemplate(
+            icon: "flame.fill",
+            title: "How committed are you?",
+            subtitle: "Real results require real effort",
+            options: [
+                "🔥 100% - Whatever it takes",
+                "💪 High - Ready to work",
+                "👍 Medium - Will try my best",
+                "🤔 Low - Just exploring"
+            ]
+        )
+    }
+    
+    // MARK: - Question 5: Timeframe
+    private var timeframeQuestion: some View {
+        questionTemplate(
+            icon: "clock.fill",
+            title: "When do you want results?",
+            subtitle: "Realistic expectations = sustainable progress",
+            options: [
+                "⚡ 1-2 weeks",
+                "📅 1 month",
+                "🗓️ 3 months",
+                "📆 6+ months"
+            ]
+        )
+    }
+    
+    // MARK: - Question Template
+    private func questionTemplate(icon: String, title: String, subtitle: String, options: [String]) -> some View {
+        VStack(spacing: 24) {
+            Spacer()
+            
+            // Icon
+            Image(systemName: icon)
+                .font(.system(size: 60))
+                .foregroundColor(Color(hex: "00D4FF"))
+                .padding(.bottom, 10)
+            
+            // Title
+            VStack(spacing: 8) {
+                Text(title)
+                    .font(.title2.bold())
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundColor(Color(hex: "6B7280"))
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.horizontal, 20)
+            
+            // Options
+            VStack(spacing: 12) {
+                ForEach(options, id: \.self) { option in
+                    optionButton(option)
+                }
+            }
+            .padding(.horizontal, 30)
+            
+            Spacer()
+            Spacer()
+        }
+    }
+    
+    // MARK: - Option Button
+    private func optionButton(_ option: String) -> some View {
+        Button(action: { 
+            withAnimation(.easeInOut(duration: 0.2)) {
+                selectedAnswer = option
+            }
+            // Haptic feedback
+            let impact = UIImpactFeedbackGenerator(style: .light)
+            impact.impactOccurred()
+        }) {
+            HStack {
+                Text(option)
+                    .font(.body)
+                    .foregroundColor(.white)
+                
+                Spacer()
+                
+                if selectedAnswer == option {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(Color(hex: "00D4FF"))
+                        .transition(.scale.combined(with: .opacity))
+                }
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(selectedAnswer == option ? Color(hex: "00D4FF").opacity(0.15) : Color(hex: "12121A"))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(selectedAnswer == option ? Color(hex: "00D4FF") : Color(hex: "2A2A34"), lineWidth: 1.5)
+                    )
+            )
+        }
+        .buttonStyle(.plain)
+    }
+    
+    // MARK: - Continue Button
+    private var continueButton: some View {
+        Button(action: handleContinue) {
+            HStack {
+                Text(currentStep == totalSteps - 1 ? "Get Started" : "Continue")
+                    .font(.headline.bold())
+                
+                if currentStep == totalSteps - 1 {
+                    Image(systemName: "arrow.right")
+                }
+            }
+            .foregroundColor(selectedAnswer != nil ? .black : .white)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 14)
+                    .fill(selectedAnswer != nil ? Color(hex: "00D4FF") : Color(hex: "2A2A34"))
+            )
+        }
+        .disabled(selectedAnswer == nil)
+    }
+    
+    // MARK: - Handle Continue
+    private func handleContinue() {
+        guard let answer = selectedAnswer else { return }
+        
+        // Save answer based on step
+        switch currentStep {
+        case 0: // Age
+            // Check COPPA compliance
+            if answer == AgeGroup.under13.rawValue {
+                showUnderageAlert = true
+                return
+            }
+            userAgeGroup = answer
+            hasVerifiedAge = true
+            
+        case 1: // Goal
+            userGoal = answer
+            
+        case 2: // Current state - just informational
+            break
+            
+        case 3: // Commitment
+            userCommitmentLevel = answer
+            
+        case 4: // Timeframe
+            userTimeframe = answer
+            
+        default:
+            break
+        }
+        
+        // Move to next step or complete
+        if currentStep < totalSteps - 1 {
+            withAnimation(.easeInOut) {
+                selectedAnswer = nil
+                currentStep += 1
+            }
+        } else {
+            // Quiz complete
+            hasCompletedOnboarding = true
+        }
+        
+        // Haptic
+        let impact = UIImpactFeedbackGenerator(style: .medium)
+        impact.impactOccurred()
     }
 }
 
