@@ -16,7 +16,7 @@ struct PaywallView: View {
     @State private var errorMessage = ""
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 VStack(spacing: 30) {
                     // Header
@@ -32,8 +32,7 @@ struct PaywallView: View {
                             )
                         
                         Text("Unlock Pro Features")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+                            .font(.largeTitle.bold())
                         
                         Text("Get the most out of your self-improvement journey")
                             .font(.subheadline)
@@ -214,8 +213,7 @@ struct ProFeatureRow: View {
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(.body)
-                    .fontWeight(.semibold)
+                    .font(.body.weight(.semibold))
                 
                 Text(description)
                     .font(.caption)
@@ -244,7 +242,7 @@ struct ComparisonCard: View {
                     .frame(width: 60)
                 Text("Pro")
                     .frame(width: 60)
-                    .fontWeight(.bold)
+                    .font(.caption.bold())
                     .foregroundColor(.blue)
             }
             .font(.caption)
@@ -277,10 +275,9 @@ struct ComparisonRow: View {
                 .frame(width: 60)
                 .foregroundColor(.secondary)
             Text(pro)
-                .font(.caption)
+                .font(.caption.weight(.semibold))
                 .frame(width: 60)
                 .foregroundColor(.blue)
-                .fontWeight(.semibold)
         }
         .padding(.horizontal)
         .padding(.vertical, 10)

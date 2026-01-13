@@ -148,7 +148,8 @@ class StreakViewModel: ObservableObject {
     
     private func startStreakMonitor() {
         timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { [weak self] _ in
-            Task { @MainActor in
+            guard let self = self else { return }
+            Task { @MainActor [weak self] in
                 self?.updateStreakStatus()
             }
         }
