@@ -10,16 +10,23 @@ import SwiftUI
 struct AgeGateView: View {
     @AppStorage("hasVerifiedAge") private var hasVerifiedAge = false
     @AppStorage("userAgeGroup") private var userAgeGroup = ""
+    
     @State private var selectedAge: AgeGroup?
     @State private var showUnderageAlert = false
     
     enum AgeGroup: String, CaseIterable {
         case under13 = "Under 13"
-        case teen = "13-17"
-        case adult = "18+"
+        case teen13to16 = "13-16"
+        case teen16to18 = "16-18"
+        case youngAdult = "18-25"
+        case adult = "25+"
         
         var isAllowed: Bool {
-            self == .adult || self == .teen
+            self != .under13
+        }
+        
+        var displayName: String {
+            return self.rawValue
         }
     }
     
@@ -52,7 +59,7 @@ struct AgeGateView: View {
                     ForEach(AgeGroup.allCases, id: \.self) { age in
                         Button(action: { selectedAge = age }) {
                             HStack {
-                                Text(age.rawValue)
+                                Text(age.displayName)
                                     .font(.headline)
                                     .foregroundColor(.white)
                                 

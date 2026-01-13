@@ -27,30 +27,44 @@ final class AgeGateViewTests: XCTestCase {
     
     func testAgeGroup_Under13_NotAllowed() {
         let ageGroup = AgeGateView.AgeGroup.under13
-        XCTAssertFalse(ageGroup.isAllowed, "Users under 13 should not be allowed")
+        XCTAssertFalse(ageGroup.isAllowed, "Users under 13 should not be allowed (COPPA)")
     }
     
-    func testAgeGroup_Teen_IsAllowed() {
-        let ageGroup = AgeGateView.AgeGroup.teen
-        XCTAssertTrue(ageGroup.isAllowed, "Teens (13-17) should be allowed")
+    func testAgeGroup_Teen13to16_IsAllowed() {
+        let ageGroup = AgeGateView.AgeGroup.teen13to16
+        XCTAssertTrue(ageGroup.isAllowed, "Teens (13-16) should be allowed")
+    }
+    
+    func testAgeGroup_Teen16to18_IsAllowed() {
+        let ageGroup = AgeGateView.AgeGroup.teen16to18
+        XCTAssertTrue(ageGroup.isAllowed, "Teens (16-18) should be allowed")
+    }
+    
+    func testAgeGroup_YoungAdult_IsAllowed() {
+        let ageGroup = AgeGateView.AgeGroup.youngAdult
+        XCTAssertTrue(ageGroup.isAllowed, "Young adults (18-25) should be allowed")
     }
     
     func testAgeGroup_Adult_IsAllowed() {
         let ageGroup = AgeGateView.AgeGroup.adult
-        XCTAssertTrue(ageGroup.isAllowed, "Adults (18+) should be allowed")
+        XCTAssertTrue(ageGroup.isAllowed, "Adults (25+) should be allowed")
     }
     
     func testAgeGroup_RawValues() {
         XCTAssertEqual(AgeGateView.AgeGroup.under13.rawValue, "Under 13")
-        XCTAssertEqual(AgeGateView.AgeGroup.teen.rawValue, "13-17")
-        XCTAssertEqual(AgeGateView.AgeGroup.adult.rawValue, "18+")
+        XCTAssertEqual(AgeGateView.AgeGroup.teen13to16.rawValue, "13-16")
+        XCTAssertEqual(AgeGateView.AgeGroup.teen16to18.rawValue, "16-18")
+        XCTAssertEqual(AgeGateView.AgeGroup.youngAdult.rawValue, "18-25")
+        XCTAssertEqual(AgeGateView.AgeGroup.adult.rawValue, "25+")
     }
     
     func testAgeGroup_CaseIterable() {
         let allCases = AgeGateView.AgeGroup.allCases
-        XCTAssertEqual(allCases.count, 3, "Should have exactly 3 age groups")
+        XCTAssertEqual(allCases.count, 5, "Should have exactly 5 age groups")
         XCTAssertTrue(allCases.contains(.under13))
-        XCTAssertTrue(allCases.contains(.teen))
+        XCTAssertTrue(allCases.contains(.teen13to16))
+        XCTAssertTrue(allCases.contains(.teen16to18))
+        XCTAssertTrue(allCases.contains(.youngAdult))
         XCTAssertTrue(allCases.contains(.adult))
     }
     
@@ -91,6 +105,23 @@ final class AgeGateViewTests: XCTestCase {
     
     func testCOPPA_AllowedAgeGroupsCount() {
         let allowedGroups = AgeGateView.AgeGroup.allCases.filter { $0.isAllowed }
-        XCTAssertEqual(allowedGroups.count, 2, "Only teen and adult should be allowed")
+        XCTAssertEqual(allowedGroups.count, 4, "All groups except under13 should be allowed")
+    }
+    
+    func testCOPPA_OnlyUnder13Blocked() {
+        for ageGroup in AgeGateView.AgeGroup.allCases {
+            if ageGroup == .under13 {
+                XCTAssertFalse(ageGroup.isAllowed, "Under 13 must be blocked for COPPA")
+            } else {
+                XCTAssertTrue(ageGroup.isAllowed, "\(ageGroup.rawValue) should be allowed")
+            }
+        }
+    }
+    
+    func testAgeGroup_NoTwelveYearOlds() {
+        // COPPA requires blocking under 13 - verify no "12" appears in any allowed age group
+        for ageGroup in AgeGateView.AgeGroup.allCases where ageGroup.isAllowed {
+            XCTAssertFalse(ageGroup.rawValue.contains("12"), "No age group should include 12-year-olds (COPPA violation)")
+        }
     }
 }
