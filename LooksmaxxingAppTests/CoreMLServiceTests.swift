@@ -67,7 +67,7 @@ final class CoreMLServiceTests: XCTestCase {
     
     func testAnalyzeFace_ValidImage() async throws {
         // Create a test image with a face-like pattern
-        // Note: This may or may not detect a face depending on Vision
+        // Note: This may or may not detect a face depending on Vision framework
         let testImage = createFaceImage()
         
         do {
@@ -80,8 +80,8 @@ final class CoreMLServiceTests: XCTestCase {
             XCTAssertFalse(result.weaknesses.isEmpty)
             XCTAssertGreaterThan(result.processingTime, 0)
             
-        } catch let error as AppError {
-            // No face detected is acceptable for synthetic image
+        } catch {
+            // No face detected is acceptable for synthetic image - test passes
             if error != .noFaceDetected {
                 throw error
             }
@@ -241,12 +241,12 @@ final class RatingAlgorithmTests: XCTestCase {
         }
         
         // Perfect symmetry (1.0)
-        XCTAssertEqual(calculateSymmetryBonus(1.0), 1.5)
+        XCTAssertEqual(calculateSymmetryBonus(1.0), 1.5, accuracy: 0.001)
         
         // Average symmetry (0.5)
-        XCTAssertEqual(calculateSymmetryBonus(0.5), 0.0)
+        XCTAssertEqual(calculateSymmetryBonus(0.5), 0.0, accuracy: 0.001)
         
         // Below average (0.3)
-        XCTAssertEqual(calculateSymmetryBonus(0.3), -0.6)
+        XCTAssertEqual(calculateSymmetryBonus(0.3), -0.6, accuracy: 0.001)
     }
 }

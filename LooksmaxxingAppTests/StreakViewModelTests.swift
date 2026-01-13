@@ -199,14 +199,21 @@ final class StreakLogicTests: XCTestCase {
     
     func testSameDayCheck() {
         let calendar = Calendar.current
-        let now = Date()
         
-        // Same day
-        let earlier = calendar.date(byAdding: .hour, value: -5, to: now)!
-        XCTAssertTrue(calendar.isDate(earlier, inSameDayAs: now))
+        // Create a fixed date to avoid midnight edge cases
+        var components = DateComponents()
+        components.year = 2026
+        components.month = 1
+        components.day = 15
+        components.hour = 12  // Noon - safe from midnight edge cases
+        let fixedDate = calendar.date(from: components)!
+        
+        // Same day (1 hour earlier)
+        let earlier = calendar.date(byAdding: .hour, value: -1, to: fixedDate)!
+        XCTAssertTrue(calendar.isDate(earlier, inSameDayAs: fixedDate))
         
         // Yesterday
-        let yesterday = calendar.date(byAdding: .day, value: -1, to: now)!
-        XCTAssertFalse(calendar.isDate(yesterday, inSameDayAs: now))
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: fixedDate)!
+        XCTAssertFalse(calendar.isDate(yesterday, inSameDayAs: fixedDate))
     }
 }
