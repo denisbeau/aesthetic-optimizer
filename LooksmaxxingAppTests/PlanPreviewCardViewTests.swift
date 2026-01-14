@@ -16,12 +16,19 @@ final class PlanPreviewCardViewTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        clearQuizDataDefaults()
         quizData = OnboardingQuizData()
     }
     
     override func tearDown() {
         quizData = nil
+        clearQuizDataDefaults()
         super.tearDown()
+    }
+    
+    private func clearQuizDataDefaults() {
+        let keys = ["selectedSymptoms", "selectedGoals", "commitmentSignature", "userName"]
+        keys.forEach { UserDefaults.standard.removeObject(forKey: $0) }
     }
     
     // MARK: - Date Formatting Tests

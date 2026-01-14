@@ -48,6 +48,11 @@ final class IntegrationTests: XCTestCase {
     }
     
     func testNewOnboardingFlow_SymptomsToGoalsToSignature() {
+        // Clear UserDefaults first
+        UserDefaults.standard.removeObject(forKey: "selectedSymptoms")
+        UserDefaults.standard.removeObject(forKey: "selectedGoals")
+        UserDefaults.standard.removeObject(forKey: "commitmentSignature")
+        
         let quizData = OnboardingQuizData()
         
         // Test symptoms selection
@@ -71,9 +76,19 @@ final class IntegrationTests: XCTestCase {
         XCTAssertEqual(loaded.selectedSymptoms.count, 2)
         XCTAssertEqual(loaded.selectedGoals.count, 2)
         XCTAssertNotNil(loaded.commitmentSignature)
+        
+        // Clean up
+        UserDefaults.standard.removeObject(forKey: "selectedSymptoms")
+        UserDefaults.standard.removeObject(forKey: "selectedGoals")
+        UserDefaults.standard.removeObject(forKey: "commitmentSignature")
     }
     
     func testNewOnboardingFlow_DataFlowsToPaywall() {
+        // Clear UserDefaults first
+        UserDefaults.standard.removeObject(forKey: "selectedSymptoms")
+        UserDefaults.standard.removeObject(forKey: "selectedGoals")
+        UserDefaults.standard.removeObject(forKey: "commitmentSignature")
+        
         let quizData = OnboardingQuizData()
         
         // Set up complete flow data
@@ -103,6 +118,11 @@ final class IntegrationTests: XCTestCase {
         // Should be 60 days, allow 1 day tolerance
         XCTAssertGreaterThanOrEqual(days, 59)
         XCTAssertLessThanOrEqual(days, 61)
+        
+        // Clean up
+        UserDefaults.standard.removeObject(forKey: "selectedSymptoms")
+        UserDefaults.standard.removeObject(forKey: "selectedGoals")
+        UserDefaults.standard.removeObject(forKey: "commitmentSignature")
     }
     
     // MARK: - Scan + Subscription Integration

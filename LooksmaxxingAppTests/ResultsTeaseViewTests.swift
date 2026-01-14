@@ -16,12 +16,19 @@ final class ResultsTeaseViewTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        clearQuizDataDefaults()
         quizData = OnboardingQuizData()
     }
     
     override func tearDown() {
         quizData = nil
+        clearQuizDataDefaults()
         super.tearDown()
+    }
+    
+    private func clearQuizDataDefaults() {
+        let keys = ["selectedSymptoms", "selectedGoals", "commitmentSignature", "userRoutineLevel"]
+        keys.forEach { UserDefaults.standard.removeObject(forKey: $0) }
     }
     
     // MARK: - Comparison Chart Tests

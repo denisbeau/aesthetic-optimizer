@@ -16,12 +16,19 @@ final class PersonalizedPaywallViewTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        clearQuizDataDefaults()
         quizData = OnboardingQuizData()
     }
     
     override func tearDown() {
         quizData = nil
+        clearQuizDataDefaults()
         super.tearDown()
+    }
+    
+    private func clearQuizDataDefaults() {
+        let keys = ["selectedSymptoms", "selectedGoals", "commitmentSignature"]
+        keys.forEach { UserDefaults.standard.removeObject(forKey: $0) }
     }
     
     // MARK: - Transformation Date Banner Tests
@@ -103,7 +110,8 @@ final class PersonalizedPaywallViewTests: XCTestCase {
     func testBenefitBadges_TitleFormatting_ReplacesUnderscores() {
         let goalId = "sharper_jawline"
         let formatted = goalId.replacingOccurrences(of: "_", with: " ").capitalized
-        XCTAssertEqual(formatted, "Sharper jawline")
+        // Swift's .capitalized capitalizes every word
+        XCTAssertEqual(formatted, "Sharper Jawline")
     }
     
     // MARK: - Free Trial CTA Tests
