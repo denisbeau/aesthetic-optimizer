@@ -51,6 +51,11 @@
 		VIEW015 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC027; };
 		VIEW016 /* CelebrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC028; };
 		VIEW017 /* ErrorAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC029; };
+		VIEW018 /* PreQuizOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC034; };
+		VIEW019 /* SymptomsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC035; };
+		VIEW020 /* GoalsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC036; };
+		VIEW021 /* CommitmentSignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC037; };
+		VIEW022 /* PlanPreviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC038; };
 		
 		/* Config */
 		CFG004 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC030; };
@@ -77,6 +82,16 @@
 		TEST012 /* SettingsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST013; };
 		TEST013 /* CelebrationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST014; };
 		TEST014 /* ErrorAlertModifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST015; };
+		TEST015 /* OnboardingQuizDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST016; };
+		TEST016 /* PreQuizOnboardingViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST017; };
+		TEST017 /* SymptomsSelectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST018; };
+		TEST018 /* GoalsSelectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST019; };
+		TEST019 /* CommitmentSignatureViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST020; };
+		TEST020 /* PlanPreviewCardViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST021; };
+		TEST021 /* AnalyzingViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST022; };
+		TEST022 /* ResultsTeaseViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST023; };
+		TEST023 /* PersonalizedPaywallViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST024; };
+		TEST024 /* OnboardingFlowIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST025; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +143,11 @@
 		SRC031 /* DataExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExportService.swift; sourceTree = "<group>"; };
 		SRC032 /* OnboardingQuizData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingQuizData.swift; sourceTree = "<group>"; };
 		SRC033 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		SRC034 /* PreQuizOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreQuizOnboardingView.swift; sourceTree = "<group>"; };
+		SRC035 /* SymptomsSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsSelectionView.swift; sourceTree = "<group>"; };
+		SRC036 /* GoalsSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsSelectionView.swift; sourceTree = "<group>"; };
+		SRC037 /* CommitmentSignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentSignatureView.swift; sourceTree = "<group>"; };
+		SRC038 /* PlanPreviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanPreviewCardView.swift; sourceTree = "<group>"; };
 		
 		/* Resources */
 		RSC001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -150,6 +170,16 @@
 		TST013 /* SettingsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewTests.swift; sourceTree = "<group>"; };
 		TST014 /* CelebrationViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationViewTests.swift; sourceTree = "<group>"; };
 		TST015 /* ErrorAlertModifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertModifierTests.swift; sourceTree = "<group>"; };
+		TST016 /* OnboardingQuizDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingQuizDataTests.swift; sourceTree = "<group>"; };
+		TST017 /* PreQuizOnboardingViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreQuizOnboardingViewTests.swift; sourceTree = "<group>"; };
+		TST018 /* SymptomsSelectionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsSelectionViewTests.swift; sourceTree = "<group>"; };
+		TST019 /* GoalsSelectionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsSelectionViewTests.swift; sourceTree = "<group>"; };
+		TST020 /* CommitmentSignatureViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentSignatureViewTests.swift; sourceTree = "<group>"; };
+		TST021 /* PlanPreviewCardViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanPreviewCardViewTests.swift; sourceTree = "<group>"; };
+		TST022 /* AnalyzingViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingViewTests.swift; sourceTree = "<group>"; };
+		TST023 /* ResultsTeaseViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTeaseViewTests.swift; sourceTree = "<group>"; };
+		TST024 /* PersonalizedPaywallViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedPaywallViewTests.swift; sourceTree = "<group>"; };
+		TST025 /* OnboardingFlowIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowIntegrationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +269,11 @@
 				SRC025 /* AgeGateView.swift */,
 				SRC026 /* DisclaimerView.swift */,
 				SRC027 /* LaunchScreenView.swift */,
+				SRC034 /* PreQuizOnboardingView.swift */,
+				SRC035 /* SymptomsSelectionView.swift */,
+				SRC036 /* GoalsSelectionView.swift */,
+				SRC037 /* CommitmentSignatureView.swift */,
+				SRC038 /* PlanPreviewCardView.swift */,
 				GRP013 /* Components */,
 			);
 			path = Views;
@@ -336,6 +371,16 @@
 				TST013 /* SettingsViewTests.swift */,
 				TST014 /* CelebrationViewTests.swift */,
 				TST015 /* ErrorAlertModifierTests.swift */,
+				TST016 /* OnboardingQuizDataTests.swift */,
+				TST017 /* PreQuizOnboardingViewTests.swift */,
+				TST018 /* SymptomsSelectionViewTests.swift */,
+				TST019 /* GoalsSelectionViewTests.swift */,
+				TST020 /* CommitmentSignatureViewTests.swift */,
+				TST021 /* PlanPreviewCardViewTests.swift */,
+				TST022 /* AnalyzingViewTests.swift */,
+				TST023 /* ResultsTeaseViewTests.swift */,
+				TST024 /* PersonalizedPaywallViewTests.swift */,
+				TST025 /* OnboardingFlowIntegrationTests.swift */,
 				TST009 /* Info.plist */,
 			);
 			path = LooksmaxxingAppTests;
@@ -463,6 +508,11 @@
 				VIEW015 /* LaunchScreenView.swift in Sources */,
 				VIEW016 /* CelebrationView.swift in Sources */,
 				VIEW017 /* ErrorAlertModifier.swift in Sources */,
+				VIEW018 /* PreQuizOnboardingView.swift in Sources */,
+				VIEW019 /* SymptomsSelectionView.swift in Sources */,
+				VIEW020 /* GoalsSelectionView.swift in Sources */,
+				VIEW021 /* CommitmentSignatureView.swift in Sources */,
+				VIEW022 /* PlanPreviewCardView.swift in Sources */,
 				VM001 /* ScanViewModel.swift in Sources */,
 				VM002 /* StreakViewModel.swift in Sources */,
 				VM003 /* SubscriptionViewModel.swift in Sources */,
@@ -499,6 +549,16 @@
 				TEST012 /* SettingsViewTests.swift in Sources */,
 				TEST013 /* CelebrationViewTests.swift in Sources */,
 				TEST014 /* ErrorAlertModifierTests.swift in Sources */,
+				TEST015 /* OnboardingQuizDataTests.swift in Sources */,
+				TEST016 /* PreQuizOnboardingViewTests.swift in Sources */,
+				TEST017 /* SymptomsSelectionViewTests.swift in Sources */,
+				TEST018 /* GoalsSelectionViewTests.swift in Sources */,
+				TEST019 /* CommitmentSignatureViewTests.swift in Sources */,
+				TEST020 /* PlanPreviewCardViewTests.swift in Sources */,
+				TEST021 /* AnalyzingViewTests.swift in Sources */,
+				TEST022 /* ResultsTeaseViewTests.swift in Sources */,
+				TEST023 /* PersonalizedPaywallViewTests.swift in Sources */,
+				TEST024 /* OnboardingFlowIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
