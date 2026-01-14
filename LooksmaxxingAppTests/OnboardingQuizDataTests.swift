@@ -65,12 +65,15 @@ final class OnboardingQuizDataTests: XCTestCase {
     // MARK: - Transformation Date Tests
     
     func testTransformationDate_Is60DaysFromNow() {
-        let expectedDate = Calendar.current.date(byAdding: .day, value: 60, to: Date())!
         let actualDate = quizData.transformationDate
         
         let calendar = Calendar.current
         let components = calendar.dateComponents([.day], from: Date(), to: actualDate)
-        XCTAssertEqual(components.day, 60, accuracy: 1) // Allow 1 day tolerance
+        let days = components.day ?? 0
+        
+        // Should be 60 days, allow 1 day tolerance
+        XCTAssertGreaterThanOrEqual(days, 59)
+        XCTAssertLessThanOrEqual(days, 61)
     }
     
     func testTransformationDateFormatted_ValidFormat() {

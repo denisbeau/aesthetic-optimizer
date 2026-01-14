@@ -140,8 +140,11 @@ final class OnboardingFlowIntegrationTests: XCTestCase {
         let date = quizData.transformationDate
         let calendar = Calendar.current
         let components = calendar.dateComponents([.day], from: Date(), to: date)
+        let days = components.day ?? 0
         
-        XCTAssertEqual(components.day, 60, accuracy: 1)
+        // Should be 60 days, allow 1 day tolerance
+        XCTAssertGreaterThanOrEqual(days, 59)
+        XCTAssertLessThanOrEqual(days, 61)
     }
     
     func testOnboardingFlow_TransformationDateFormatted_ValidFormat() {
