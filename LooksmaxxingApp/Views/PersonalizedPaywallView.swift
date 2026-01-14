@@ -16,8 +16,7 @@ struct PersonalizedPaywallView: View {
     @State private var selectedPlan = 1 // 0 = weekly, 1 = monthly, 2 = yearly
     
     var potentialScore: String {
-        let base = quizData.dedicationLevel >= 8 ? 8.5 : 7.8
-        return String(format: "%.1f", base)
+        return quizData.potentialScoreFormatted
     }
     
     var body: some View {
@@ -65,8 +64,8 @@ struct PersonalizedPaywallView: View {
                 .font(.title3.bold())
                 .foregroundColor(Color(hex: "00D4FF"))
             
-            // Personalized subhead
-            Text("Your \(quizData.timeframe.lowercased()) plan for \(quizData.primaryGoal.lowercased()) is ready.")
+            // Personalized subhead referencing their answers
+            Text("Based on your \(quizData.breathingStatus) and \(quizData.primaryGoal.lowercased()) goals, your \(quizData.improvementTimeframe) plan is ready.")
                 .font(.subheadline)
                 .foregroundColor(Color(hex: "9CA3AF"))
                 .multilineTextAlignment(.center)
@@ -243,17 +242,27 @@ struct PersonalizedPaywallView: View {
     
     private var featuresSection: some View {
         VStack(alignment: .leading, spacing: 12) {
+            // Social proof
+            HStack(spacing: 6) {
+                Image(systemName: "person.3.fill")
+                    .foregroundColor(Color(hex: "00D4FF"))
+                Text("Join 12,000+ men optimizing their aesthetics")
+                    .font(.caption.bold())
+                    .foregroundColor(Color(hex: "00D4FF"))
+            }
+            .padding(.bottom, 8)
+            
             Text("WHAT'S INCLUDED")
                 .font(.caption.bold())
                 .foregroundColor(Color(hex: "6B7280"))
                 .tracking(1.5)
             
             featureRow("Unlimited AI facial scans")
-            featureRow("Full analysis with all metrics")
-            featureRow("Personalized \(quizData.timeframe.lowercased()) plan")
+            featureRow("Full analysis with all \(quizData.criticalAreasCount) critical areas")
+            featureRow("Personalized \(quizData.improvementTimeframe) transformation plan")
             featureRow("Daily exercises for \(quizData.primaryGoal.lowercased())")
-            featureRow("Progress tracking & streaks")
-            featureRow("Streak freeze protection")
+            featureRow("\(quizData.breathingStatus.capitalized) correction protocols")
+            featureRow("Progress tracking & streak protection")
         }
         .padding(20)
         .background(

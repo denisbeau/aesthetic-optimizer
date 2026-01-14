@@ -291,7 +291,7 @@ struct ResultsTeaseView: View {
                     .background(Capsule().fill(Color(hex: "1A1A24")))
             }
             
-            Text("Based on your \(quizData.primaryGoal.lowercased()) goal and current routine level, we've created a custom plan.")
+            Text("Based on your \(quizData.breathingStatus) status and \(quizData.primaryGoal.lowercased()) goal, we've built your custom routine.")
                 .font(.subheadline)
                 .foregroundColor(Color(hex: "9CA3AF"))
             
