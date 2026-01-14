@@ -99,7 +99,10 @@ final class IntegrationTests: XCTestCase {
         let date = quizData.transformationDate
         let calendar = Calendar.current
         let days = calendar.dateComponents([.day], from: Date(), to: date).day ?? 0
-        XCTAssertEqual(days, 60, accuracy: 1)
+        
+        // Should be 60 days, allow 1 day tolerance
+        XCTAssertGreaterThanOrEqual(days, 59)
+        XCTAssertLessThanOrEqual(days, 61)
     }
     
     // MARK: - Scan + Subscription Integration
