@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import SwiftUI
 @testable import LooksmaxxingApp
 
 @MainActor
