@@ -42,6 +42,7 @@
 		
 		/* Extensions */
 		EXT001 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC018; };
+		EXT002 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC033; };
 		
 		/* New Views - Production Readiness */
 		VIEW012 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC024; };
@@ -126,6 +127,7 @@
 		SRC030 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		SRC031 /* DataExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExportService.swift; sourceTree = "<group>"; };
 		SRC032 /* OnboardingQuizData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingQuizData.swift; sourceTree = "<group>"; };
+		SRC033 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		
 		/* Resources */
 		RSC001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				SRC018 /* UserDefaults+Extensions.swift */,
+				SRC033 /* Color+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				SVC003 /* NotificationService.swift in Sources */,
 				SVC004 /* DataExportService.swift in Sources */,
 				EXT001 /* UserDefaults+Extensions.swift in Sources */,
+				EXT002 /* Color+Extensions.swift in Sources */,
 				CFG004 /* Secrets.swift in Sources */,
 				RES002 /* LooksmaxxingApp.xcdatamodeld in Sources */,
 			);

@@ -39,6 +39,13 @@ class OnboardingQuizData: ObservableObject {
         }
     }
     
+    // Alias for goal (used by PersonalizedPaywallView)
+    var primaryGoal: String {
+        // Strip emoji prefix if present for cleaner display
+        let stripped = goal.components(separatedBy: " ").dropFirst().joined(separator: " ")
+        return stripped.isEmpty ? goal : stripped
+    }
+    
     // Initialize from UserDefaults (synced with OnboardingQuizView)
     init() {
         loadFromUserDefaults()
