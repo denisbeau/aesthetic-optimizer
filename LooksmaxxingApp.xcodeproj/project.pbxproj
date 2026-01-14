@@ -33,6 +33,7 @@
 		MODEL001 /* FaceAnalysisResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC012; };
 		MODEL002 /* CoreDataEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC013; };
 		MODEL003 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC014; };
+		MODEL004 /* OnboardingQuizData.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC032; };
 		
 		/* Services */
 		SVC001 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC015; };
@@ -124,6 +125,7 @@
 		SRC029 /* ErrorAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertModifier.swift; sourceTree = "<group>"; };
 		SRC030 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		SRC031 /* DataExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExportService.swift; sourceTree = "<group>"; };
+		SRC032 /* OnboardingQuizData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingQuizData.swift; sourceTree = "<group>"; };
 		
 		/* Resources */
 		RSC001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				SRC012 /* FaceAnalysisResult.swift */,
 				SRC013 /* CoreDataEntities.swift */,
 				SRC014 /* AppError.swift */,
+				SRC032 /* OnboardingQuizData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				MODEL001 /* FaceAnalysisResult.swift in Sources */,
 				MODEL002 /* CoreDataEntities.swift in Sources */,
 				MODEL003 /* AppError.swift in Sources */,
+				MODEL004 /* OnboardingQuizData.swift in Sources */,
 				SVC001 /* CoreDataManager.swift in Sources */,
 				SVC002 /* CoreMLService.swift in Sources */,
 				SVC003 /* NotificationService.swift in Sources */,
