@@ -27,7 +27,8 @@ final class ResultsTeaseViewTests: XCTestCase {
     }
     
     private func clearQuizDataDefaults() {
-        let keys = ["selectedSymptoms", "selectedGoals", "commitmentSignature", "userRoutineLevel"]
+        let keys = ["selectedSymptoms", "selectedGoals", "commitmentSignature", 
+                    "userRoutineLevel", "userBreathingType", "userSleepHours"]
         keys.forEach { UserDefaults.standard.removeObject(forKey: $0) }
     }
     
@@ -108,22 +109,35 @@ final class ResultsTeaseViewTests: XCTestCase {
     }
     
     // MARK: - Critical Areas Tests
+    // criticalAreasCount: base 2 + (hasRoutine="None": +1) + (breathingType="Mouth": +1) + (sleepHours="Less than 6": +1)
     
-    func testCriticalAreas_NoRoutine_Returns4() {
+    func testCriticalAreas_NoRoutine_Returns3() {
         quizData.hasRoutine = "None"
-        let count = quizData.criticalAreasCount
-        XCTAssertEqual(count, 4)
-    }
-    
-    func testCriticalAreas_BasicRoutine_Returns3() {
-        quizData.hasRoutine = "Basic"
+        // Base 2 + 1 (None) = 3
         let count = quizData.criticalAreasCount
         XCTAssertEqual(count, 3)
     }
     
-    func testCriticalAreas_AdvancedRoutine_Returns2() {
-        quizData.hasRoutine = "Advanced"
+    func testCriticalAreas_BasicRoutine_Returns2() {
+        quizData.hasRoutine = "Basic"
+        // Base 2 + 0 = 2
         let count = quizData.criticalAreasCount
         XCTAssertEqual(count, 2)
+    }
+    
+    func testCriticalAreas_AdvancedRoutine_Returns2() {
+        quizData.hasRoutine = "Advanced"
+        // Base 2 + 0 = 2
+        let count = quizData.criticalAreasCount
+        XCTAssertEqual(count, 2)
+    }
+    
+    func testCriticalAreas_MultipleIssues_Returns5Max() {
+        quizData.hasRoutine = "None"
+        quizData.breathingType = "Mouth breathing"
+        quizData.sleepHours = "Less than 6 hours"
+        // Base 2 + 1 + 1 + 1 = 5 (max)
+        let count = quizData.criticalAreasCount
+        XCTAssertEqual(count, 5)
     }
 }
