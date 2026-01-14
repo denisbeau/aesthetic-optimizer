@@ -17,6 +17,7 @@ final class IntegrationTests: XCTestCase {
     func testOnboardingCompletion_SetsFlag() {
         // Save original
         let original = UserDefaults.standard.hasCompletedOnboarding
+        let originalPreQuiz = UserDefaults.standard.bool(forKey: "hasSeenPreQuiz")
         
         // Simulate completing onboarding
         UserDefaults.standard.hasCompletedOnboarding = true
@@ -25,6 +26,80 @@ final class IntegrationTests: XCTestCase {
         
         // Restore
         UserDefaults.standard.hasCompletedOnboarding = original
+        UserDefaults.standard.set(originalPreQuiz, forKey: "hasSeenPreQuiz")
+    }
+    
+    func testNewOnboardingFlow_PreQuizToQuiz() {
+        // Save originals
+        let originalPreQuiz = UserDefaults.standard.bool(forKey: "hasSeenPreQuiz")
+        let originalOnboarding = UserDefaults.standard.hasCompletedOnboarding
+        
+        // Test pre-quiz flow
+        UserDefaults.standard.set(false, forKey: "hasSeenPreQuiz")
+        UserDefaults.standard.hasCompletedOnboarding = false
+        
+        // After seeing pre-quiz
+        UserDefaults.standard.set(true, forKey: "hasSeenPreQuiz")
+        XCTAssertTrue(UserDefaults.standard.bool(forKey: "hasSeenPreQuiz"))
+        
+        // Restore
+        UserDefaults.standard.set(originalPreQuiz, forKey: "hasSeenPreQuiz")
+        UserDefaults.standard.hasCompletedOnboarding = originalOnboarding
+    }
+    
+    func testNewOnboardingFlow_SymptomsToGoalsToSignature() {
+        let quizData = OnboardingQuizData()
+        
+        // Test symptoms selection
+        quizData.selectedSymptoms = ["avoid_photos", "mouth_breathing"]
+        quizData.saveToUserDefaults()
+        XCTAssertEqual(quizData.selectedSymptoms.count, 2)
+        
+        // Test goals selection
+        quizData.selectedGoals = ["sharper_jawline", "better_skin"]
+        quizData.saveToUserDefaults()
+        XCTAssertEqual(quizData.selectedGoals.count, 2)
+        
+        // Test signature
+        let testSignature = Data("test signature".utf8)
+        quizData.commitmentSignature = testSignature
+        quizData.saveToUserDefaults()
+        XCTAssertTrue(quizData.hasSignedCommitment)
+        
+        // Verify all data persists
+        let loaded = OnboardingQuizData()
+        XCTAssertEqual(loaded.selectedSymptoms.count, 2)
+        XCTAssertEqual(loaded.selectedGoals.count, 2)
+        XCTAssertNotNil(loaded.commitmentSignature)
+    }
+    
+    func testNewOnboardingFlow_DataFlowsToPaywall() {
+        let quizData = OnboardingQuizData()
+        
+        // Set up complete flow data
+        quizData.selectedSymptoms = ["avoid_photos"]
+        quizData.selectedGoals = ["sharper_jawline", "better_skin"]
+        quizData.commitmentSignature = Data("signature".utf8)
+        quizData.dedicationLevel = 8
+        quizData.saveToUserDefaults()
+        
+        // Verify paywall can access all data
+        XCTAssertFalse(quizData.selectedSymptoms.isEmpty)
+        XCTAssertFalse(quizData.selectedGoals.isEmpty)
+        XCTAssertTrue(quizData.hasSignedCommitment)
+        XCTAssertGreaterThan(quizData.potentialScore, 7.0)
+        
+        // Verify goal badges are generated
+        let badges = quizData.goalBadges
+        XCTAssertEqual(badges.count, 2)
+        XCTAssertEqual(badges[0].id, "sharper_jawline")
+        XCTAssertEqual(badges[1].id, "better_skin")
+        
+        // Verify transformation date
+        let date = quizData.transformationDate
+        let calendar = Calendar.current
+        let days = calendar.dateComponents([.day], from: Date(), to: date).day ?? 0
+        XCTAssertEqual(days, 60, accuracy: 1)
     }
     
     // MARK: - Scan + Subscription Integration

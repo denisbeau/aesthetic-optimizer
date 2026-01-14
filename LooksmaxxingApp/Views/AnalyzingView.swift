@@ -13,6 +13,8 @@ struct AnalyzingView: View {
     @State private var currentStep = 0
     @State private var showResults = false
     @State private var progress: CGFloat = 0
+    @State private var currentLabelIndex = 0
+    @State private var labelTimer: Timer?
     
     let steps = [
         ("Analyzing facial architecture", "faceid"),
@@ -21,6 +23,13 @@ struct AnalyzingView: View {
         ("Evaluating skin texture", "sparkles"),
         ("Comparing to 50,000+ data points", "chart.bar.fill"),
         ("Building your personalized plan", "doc.text.fill")
+    ]
+    
+    let processingLabels = [
+        "Analyzing facial architecture...",
+        "Comparing to 50,000+ data points...",
+        "Synthesizing your transformation plan...",
+        "Calculating potential improvements..."
     ]
     
     var body: some View {
@@ -44,9 +53,17 @@ struct AnalyzingView: View {
                             .font(.title.bold())
                             .foregroundColor(.white)
                         
-                        Text("This takes about 10 seconds...")
-                            .font(.subheadline)
-                            .foregroundColor(Color(hex: "6B7280"))
+                        // Rotating label
+                        Text(processingLabels[currentLabelIndex])
+                            .font(.system(size: 16, weight: .regular))
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .frame(height: 24)
+                            .id(currentLabelIndex)
+                            .transition(.asymmetric(
+                                insertion: .opacity.combined(with: .move(edge: .bottom)),
+                                removal: .opacity.combined(with: .move(edge: .top))
+                            ))
                     }
                     
                     // Progress steps
@@ -62,6 +79,10 @@ struct AnalyzingView: View {
         }
         .onAppear {
             startAnalysis()
+            startLabelRotation()
+        }
+        .onDisappear {
+            labelTimer?.invalidate()
         }
     }
     
@@ -218,6 +239,18 @@ struct AnalyzingView: View {
             withAnimation(.easeInOut(duration: 0.5)) {
                 showResults = true
             }
+        }
+    }
+    
+    private func startLabelRotation() {
+        labelTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true) { _ in
+            withAnimation(.easeInOut(duration: 0.5)) {
+                currentLabelIndex = (currentLabelIndex + 1) % processingLabels.count
+            }
+            
+            // Optional: Light haptic on label change
+            let impact = UIImpactFeedbackGenerator(style: .light)
+            impact.impactOccurred()
         }
     }
 }

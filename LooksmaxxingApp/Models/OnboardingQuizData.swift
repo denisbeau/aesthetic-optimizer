@@ -22,6 +22,12 @@ class OnboardingQuizData: ObservableObject {
     @Published var breathingType: String = ""
     @Published var dedicationLevel: Int = 5
     
+    // MARK: - New Quittr-Inspired Properties
+    
+    @Published var selectedSymptoms: [String] = []
+    @Published var selectedGoals: [String] = []
+    @Published var commitmentSignature: Data?
+    
     // MARK: - Computed Properties for Personalization
     
     var isHighlyDedicated: Bool {
@@ -87,6 +93,68 @@ class OnboardingQuizData: ObservableObject {
         return "steady"
     }
     
+    // MARK: - New Computed Properties for Paywall
+    
+    var transformationDate: Date {
+        Calendar.current.date(byAdding: .day, value: 60, to: Date()) ?? Date()
+    }
+    
+    var transformationDateFormatted: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        return formatter.string(from: transformationDate)
+    }
+    
+    var hasSignedCommitment: Bool {
+        commitmentSignature != nil
+    }
+    
+    struct GoalBadge {
+        let id: String
+        let title: String
+        let icon: String
+        let color: String
+    }
+    
+    var goalBadges: [GoalBadge] {
+        selectedGoals.compactMap { goalId in
+            GoalBadge(
+                id: goalId,
+                title: goalId.replacingOccurrences(of: "_", with: " ").capitalized,
+                icon: getGoalIcon(goalId),
+                color: getGoalColor(goalId)
+            )
+        }
+    }
+    
+    private func getGoalIcon(_ goalId: String) -> String {
+        let icons: [String: String] = [
+            "sharper_jawline": "🔥",
+            "better_skin": "✨",
+            "improved_symmetry": "⚖️",
+            "increased_confidence": "💪",
+            "fix_breathing": "👃",
+            "better_posture": "🧍",
+            "overall_transformation": "💎",
+            "specific_feature": "🎯"
+        ]
+        return icons[goalId] ?? "🎯"
+    }
+    
+    private func getGoalColor(_ goalId: String) -> String {
+        let colors: [String: String] = [
+            "sharper_jawline": "#F59E0B",
+            "better_skin": "#3B82F6",
+            "improved_symmetry": "#8B5CF6",
+            "increased_confidence": "#F43F5E",
+            "fix_breathing": "#8B5CF6",
+            "better_posture": "#10B981",
+            "overall_transformation": "#00D4FF",
+            "specific_feature": "#F59E0B"
+        ]
+        return colors[goalId] ?? "#00D4FF"
+    }
+    
     // MARK: - Initialization
     
     init() {
@@ -110,5 +178,40 @@ class OnboardingQuizData: ObservableObject {
         
         // Default dedication if not set
         if dedicationLevel == 0 { dedicationLevel = 5 }
+        
+        // Load new fields
+        if let symptoms = defaults.array(forKey: "selectedSymptoms") as? [String] {
+            selectedSymptoms = symptoms
+        }
+        if let goals = defaults.array(forKey: "selectedGoals") as? [String] {
+            selectedGoals = goals
+        }
+        if let signature = defaults.data(forKey: "commitmentSignature") {
+            commitmentSignature = signature
+        }
+    }
+    
+    func saveToUserDefaults() {
+        let defaults = UserDefaults.standard
+        
+        // Save existing fields
+        defaults.set(goal, forKey: "userGoal")
+        defaults.set(ageGroup, forKey: "userAgeGroup")
+        defaults.set(photoConfidence, forKey: "userPhotoConfidence")
+        defaults.set(struggles, forKey: "userStruggles")
+        defaults.set(hasRoutine, forKey: "userRoutineLevel")
+        defaults.set(sleepHours, forKey: "userSleepHours")
+        defaults.set(dailyCommitment, forKey: "userDailyCommitment")
+        defaults.set(timeframe, forKey: "userTimeframe")
+        defaults.set(blockers, forKey: "userBlockers")
+        defaults.set(breathingType, forKey: "userBreathingType")
+        defaults.set(dedicationLevel, forKey: "userDedicationLevel")
+        
+        // Save new fields
+        defaults.set(selectedSymptoms, forKey: "selectedSymptoms")
+        defaults.set(selectedGoals, forKey: "selectedGoals")
+        if let signature = commitmentSignature {
+            defaults.set(signature, forKey: "commitmentSignature")
+        }
     }
 }

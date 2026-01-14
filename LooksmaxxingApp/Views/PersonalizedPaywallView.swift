@@ -30,6 +30,14 @@ struct PersonalizedPaywallView: View {
                     // Personalized headline
                     headlineSection
                     
+                    // Transformation Date Banner (CRITICAL)
+                    TransformationDateBanner()
+                    
+                    // Benefit Badges
+                    if !quizData.selectedGoals.isEmpty {
+                        BenefitBadges(selectedGoals: quizData.selectedGoals)
+                    }
+                    
                     // Before/After potential
                     transformationCard
                     
@@ -39,8 +47,8 @@ struct PersonalizedPaywallView: View {
                     // What's included
                     featuresSection
                     
-                    // Purchase button
-                    purchaseButton
+                    // Free Trial CTA
+                    FreeTrialCTA(onPurchase: purchase)
                     
                     // Guarantee & terms
                     guaranteeSection
@@ -284,7 +292,7 @@ struct PersonalizedPaywallView: View {
         }
     }
     
-    // MARK: - Purchase Button
+    // MARK: - Purchase Button (kept for compatibility, but FreeTrialCTA is primary)
     
     private var purchaseButton: some View {
         Button(action: purchase) {
@@ -365,6 +373,140 @@ struct PersonalizedPaywallView: View {
             }
             isPurchasing = false
         }
+    }
+}
+
+// MARK: - Transformation Date Banner
+
+struct TransformationDateBanner: View {
+    var successDate: String {
+        let calendar = Calendar.current
+        if let date = calendar.date(byAdding: .day, value: 60, to: Date()) {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM d, yyyy"
+            return formatter.string(from: date)
+        }
+        return "Mar 14, 2026" // Fallback
+    }
+    
+    var body: some View {
+        VStack(spacing: 10) {
+            Text("You will maximize your aesthetics by:")
+                .font(.body)
+                .foregroundColor(.white.opacity(0.9))
+            
+            Text(successDate)
+                .font(.system(size: 20, weight: .black, design: .rounded))
+                .foregroundColor(Color(hex: "081630"))
+                .padding(.horizontal, 24)
+                .padding(.vertical, 12)
+                .background(Color.white)
+                .cornerRadius(50)
+                .shadow(color: .white.opacity(0.2), radius: 10)
+        }
+        .padding(.vertical, 20)
+    }
+}
+
+// MARK: - Benefit Badges
+
+struct BenefitBadges: View {
+    let selectedGoals: [String]
+    
+    let goalConfig: [String: (icon: String, color: String)] = [
+        "sharper_jawline": ("🔥", "#F59E0B"),
+        "better_skin": ("✨", "#3B82F6"),
+        "improved_symmetry": ("⚖️", "#8B5CF6"),
+        "increased_confidence": ("💪", "#F43F5E"),
+        "fix_breathing": ("👃", "#8B5CF6"),
+        "better_posture": ("🧍", "#10B981"),
+        "overall_transformation": ("💎", "#00D4FF"),
+        "specific_feature": ("🎯", "#F59E0B")
+    ]
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("YOUR PLAN INCLUDES")
+                .font(.caption.bold())
+                .foregroundColor(Color(hex: "6B7280"))
+                .tracking(1.5)
+            
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))], spacing: 12) {
+                ForEach(selectedGoals, id: \.self) { goalId in
+                    if let config = goalConfig[goalId] {
+                        HStack(spacing: 6) {
+                            Text(config.icon)
+                                .font(.caption)
+                            Text(goalId.replacingOccurrences(of: "_", with: " ").capitalized)
+                                .font(.caption)
+                                .foregroundColor(.white)
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(
+                            Capsule()
+                                .fill(Color(hex: "081630").opacity(0.8))
+                                .overlay(
+                                    Capsule()
+                                        .stroke(Color(hex: config.color), lineWidth: 1.5)
+                                )
+                        )
+                    }
+                }
+            }
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(hex: "12121A"))
+        )
+    }
+}
+
+// MARK: - Free Trial CTA
+
+struct FreeTrialCTA: View {
+    let onPurchase: () -> Void
+    @State private var isPurchasing = false
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            // Safety signal
+            HStack(spacing: 8) {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(Color(hex: "10B981"))
+                    .font(.title3)
+                Text("No Payment Due Now")
+                    .font(.body.bold())
+                    .foregroundColor(.white)
+            }
+            
+            // CTA Button
+            Button(action: {
+                isPurchasing = true
+                onPurchase()
+            }) {
+                HStack {
+                    Text("Try For ")
+                        .font(.system(size: 18, weight: .bold))
+                    Text("$0.00")
+                        .font(.system(size: 22, weight: .black))
+                }
+                .foregroundColor(Color(hex: "081630"))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 20)
+                .background(Color.white)
+                .cornerRadius(50)
+                .shadow(color: .white.opacity(0.3), radius: 10)
+            }
+            .disabled(isPurchasing)
+            
+            // Privacy sub-label (CRITICAL)
+            Text("Purchase appears Discretely")
+                .font(.caption)
+                .foregroundColor(Color(hex: "9CA3AF"))
+        }
+        .padding(20)
     }
 }
 

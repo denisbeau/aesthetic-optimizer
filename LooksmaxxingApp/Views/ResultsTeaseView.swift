@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ResultsTeaseView: View {
     @ObservedObject var quizData: OnboardingQuizData
-    @State private var showPaywall = false
+    @State private var showSymptoms = false
     @State private var animateIn = false
     
     // Personalized based on quiz answers
@@ -37,13 +37,16 @@ struct ResultsTeaseView: View {
             Color(hex: "0A0A0F")
                 .ignoresSafeArea()
             
-            if showPaywall {
-                PersonalizedPaywallView(quizData: quizData)
+            if showSymptoms {
+                SymptomsSelectionView(quizData: quizData)
             } else {
                 ScrollView {
                     VStack(spacing: 24) {
                         // Success header
                         headerSection
+                        
+                        // Comparison chart
+                        comparisonChart
                         
                         // Potential score card
                         potentialScoreCard
@@ -339,12 +342,20 @@ struct ResultsTeaseView: View {
         .frame(maxWidth: .infinity)
     }
     
+    // MARK: - Comparison Chart
+    
+    private var comparisonChart: some View {
+        ComparisonChart()
+            .offset(y: animateIn ? 0 : 20)
+            .opacity(animateIn ? 1 : 0)
+    }
+    
     // MARK: - CTA Button
     
     private var ctaButton: some View {
         Button(action: {
             withAnimation {
-                showPaywall = true
+                showSymptoms = true
             }
         }) {
             HStack {
@@ -391,6 +402,105 @@ struct ResultsTeaseView: View {
                 .foregroundColor(Color(hex: "6B7280"))
         }
         .frame(maxWidth: .infinity)
+    }
+}
+
+// MARK: - Comparison Chart Component
+
+struct ComparisonChart: View {
+    @State private var averageHeight: CGFloat = 0
+    @State private var userHeight: CGFloat = 0
+    @State private var showGapText = false
+    
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("INDICATIVE ASSESSMENT")
+                .font(.caption.bold())
+                .foregroundColor(Color(hex: "9CA3AF"))
+                .tracking(1.5)
+            
+            HStack(alignment: .bottom, spacing: 40) {
+                // Average Bar
+                VStack(spacing: 8) {
+                    Text("65%")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color(hex: "6B7280"))
+                        .frame(width: 80, height: 130) // 65% of 200
+                    
+                    Text("Average User")
+                        .font(.caption)
+                        .foregroundColor(Color(hex: "D1D5DB"))
+                }
+                
+                // User Bar
+                VStack(spacing: 8) {
+                    Text("82%")
+                        .font(.title.bold())
+                        .foregroundColor(.white)
+                    
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(
+                            LinearGradient(
+                                colors: [Color(hex: "00D4FF"), Color(hex: "10B981")],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                        .frame(width: 80, height: userHeight)
+                        .shadow(color: Color(hex: "00D4FF").opacity(0.4), radius: 8)
+                        .scaleEffect(showGapText ? 1.05 : 1.0)
+                        .animation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true), value: showGapText)
+                    
+                    Text("Your Potential")
+                        .font(.caption)
+                        .foregroundColor(.white)
+                }
+            }
+            
+            if showGapText {
+                Text("You're 24% above average potential")
+                    .font(.subheadline.bold())
+                    .foregroundColor(Color(hex: "10B981"))
+                    .transition(.opacity.combined(with: .move(edge: .bottom)))
+            }
+            
+            Text("Based on general population data")
+                .font(.caption2)
+                .foregroundColor(Color(hex: "6B7280"))
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(hex: "12121A"))
+        )
+        .onAppear {
+            // Average bar appears immediately
+            averageHeight = 130
+            
+            // User bar animates after delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                withAnimation(.easeOutBack(duration: 1.5)) {
+                    userHeight = 164 // 82% of 200
+                }
+            }
+            
+            // Gap text appears after bar animation
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
+                withAnimation(.easeOut(duration: 0.5)) {
+                    showGapText = true
+                }
+            }
+        }
+    }
+}
+
+// Custom easing for ease-out-back
+extension Animation {
+    static func easeOutBack(duration: Double) -> Animation {
+        Animation.timingCurve(0.34, 1.56, 0.64, 1, duration: duration)
     }
 }
 
