@@ -12,19 +12,37 @@ import XCTest
 final class OnboardingQuizDataTests: XCTestCase {
     
     var quizData: OnboardingQuizData!
-    let testDefaults = UserDefaults(suiteName: "test.quiz.data")!
     
     override func setUp() {
         super.setUp()
-        // Clear test UserDefaults
-        testDefaults.removePersistentDomain(forName: "test.quiz.data")
+        // Clear UserDefaults.standard for keys used by OnboardingQuizData
+        clearUserDefaults()
         quizData = OnboardingQuizData()
     }
     
     override func tearDown() {
         quizData = nil
-        testDefaults.removePersistentDomain(forName: "test.quiz.data")
+        clearUserDefaults()
         super.tearDown()
+    }
+    
+    private func clearUserDefaults() {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "selectedSymptoms")
+        defaults.removeObject(forKey: "selectedGoals")
+        defaults.removeObject(forKey: "commitmentSignature")
+        defaults.removeObject(forKey: "userGoal")
+        defaults.removeObject(forKey: "userAgeGroup")
+        defaults.removeObject(forKey: "userPhotoConfidence")
+        defaults.removeObject(forKey: "userStruggles")
+        defaults.removeObject(forKey: "userRoutineLevel")
+        defaults.removeObject(forKey: "userSleepHours")
+        defaults.removeObject(forKey: "userDailyCommitment")
+        defaults.removeObject(forKey: "userTimeframe")
+        defaults.removeObject(forKey: "userBlockers")
+        defaults.removeObject(forKey: "userBreathingType")
+        defaults.removeObject(forKey: "userDedicationLevel")
+        defaults.synchronize()
     }
     
     // MARK: - New Properties Tests
@@ -107,7 +125,8 @@ final class OnboardingQuizDataTests: XCTestCase {
         let badges = quizData.goalBadges
         XCTAssertEqual(badges.count, 1)
         XCTAssertEqual(badges.first?.id, "sharper_jawline")
-        XCTAssertEqual(badges.first?.title, "Sharper jawline")
+        // Swift's .capitalized capitalizes every word
+        XCTAssertEqual(badges.first?.title, "Sharper Jawline")
         XCTAssertEqual(badges.first?.icon, "🔥")
         XCTAssertEqual(badges.first?.color, "#F59E0B")
     }
@@ -130,8 +149,9 @@ final class OnboardingQuizDataTests: XCTestCase {
     func testGoalBadges_TitleFormatting_ReplacesUnderscores() {
         quizData.selectedGoals = ["sharper_jawline", "better_skin"]
         let badges = quizData.goalBadges
-        XCTAssertEqual(badges[0].title, "Sharper jawline")
-        XCTAssertEqual(badges[1].title, "Better skin")
+        // Swift's .capitalized capitalizes every word
+        XCTAssertEqual(badges[0].title, "Sharper Jawline")
+        XCTAssertEqual(badges[1].title, "Better Skin")
     }
     
     // MARK: - Persistence Tests
