@@ -80,8 +80,10 @@ struct PersonalizedPaywallView: View {
                     Spacer()
                         .frame(height: 20)
                     
-                    // CTA Button with pulse
+                    // CTA Button with pulse and shimmer
                     Button(action: {
+                        let impact = UIImpactFeedbackGenerator(style: .medium)
+                        impact.impactOccurred()
                         withAnimation(.easeInOut(duration: 0.3)) {
                             currentScreen = 27
                         }
@@ -93,10 +95,12 @@ struct PersonalizedPaywallView: View {
                             .padding(.vertical, 20)
                             .background(Color.white)
                             .clipShape(Capsule())
+                            .shadow(color: Color.white.opacity(0.3), radius: 15, x: 0, y: 0)
                     }
                     .scaleEffect(pulseScale)
                     .padding(.horizontal, 24)
                     .opacity(showContent ? 1 : 0)
+                    .scaleButtonStyle()
                     
                     // Discrete billing note
                     Text("Purchase appears discretely on statement")

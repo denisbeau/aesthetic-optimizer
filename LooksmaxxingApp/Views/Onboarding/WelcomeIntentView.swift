@@ -65,6 +65,8 @@ struct WelcomeIntentView: View {
                 
                 // Start Quiz CTA
                 Button(action: {
+                    let impact = UIImpactFeedbackGenerator(style: .medium)
+                    impact.impactOccurred()
                     withAnimation(.easeInOut(duration: 0.3)) {
                         currentScreen = 3
                     }
@@ -94,6 +96,7 @@ struct WelcomeIntentView: View {
                 .padding(.horizontal, 32)
                 .opacity(showButton ? 1 : 0)
                 .offset(y: showButton ? 0 : 20)
+                .scaleButtonStyle()
                 
                 Spacer()
                     .frame(height: 50)

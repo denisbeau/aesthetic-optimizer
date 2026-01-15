@@ -9,9 +9,14 @@ struct QuizView: View {
     @State private var isTransitioning = false
     @State private var opacity: Double = 1
     @State private var scale: CGFloat = 1
+    @State private var progressWidth: CGFloat = 0
     
     private var currentQuestion: QuizQuestion {
         quizQuestions[currentQuestionIndex]
+    }
+    
+    private var progress: CGFloat {
+        CGFloat(currentQuestionIndex + 1) / CGFloat(quizQuestions.count)
     }
     
     var body: some View {
@@ -21,19 +26,38 @@ struct QuizView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 24) {
+                // Progress Bar
+                GeometryReader { geo in
+                    ZStack(alignment: .leading) {
+                        // Track
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(Color.white.opacity(0.1))
+                            .frame(height: 4)
+                        
+                        // Progress
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(
+                                LinearGradient(
+                                    colors: [Color(hex: "10B981"), Color(hex: "34D399")],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .frame(width: geo.size.width * progress, height: 4)
+                            .animation(.easeInOut(duration: 0.3), value: progress)
+                    }
+                }
+                .frame(height: 4)
+                .padding(.horizontal, 24)
+                .padding(.top, 60)
+                
                 // Header
                 VStack(spacing: 8) {
-                    Text("QUESTION #\(currentQuestionIndex + 1)")
+                    Text("QUESTION \(currentQuestionIndex + 1) OF \(quizQuestions.count)")
                         .font(.system(size: 12, weight: .semibold))
                         .tracking(2)
                         .foregroundColor(.white.opacity(0.6))
-                    
-                    Rectangle()
-                        .fill(Color.white.opacity(0.3))
-                        .frame(height: 2)
-                        .frame(maxWidth: 60)
                 }
-                .padding(.top, 60)
                 
                 // Question Text
                 Text(currentQuestion.question)

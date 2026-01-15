@@ -7,6 +7,8 @@ struct PlanPreviewCardView: View {
     @State private var showCard = false
     @State private var cardOffset: CGFloat = 100
     @State private var glintOffset: CGFloat = -200
+    @State private var floatOffset: CGFloat = 0
+    @State private var cardRotation: Double = 0
     
     private var displayName: String {
         onboardingData.userName.isEmpty ? "Member" : onboardingData.userName.uppercased()
@@ -156,8 +158,9 @@ struct PlanPreviewCardView: View {
                     .padding(24)
                     .frame(width: 340, height: 210)
                 }
-                .shadow(color: .black.opacity(0.4), radius: 20, x: 0, y: 15)
-                .offset(y: cardOffset)
+                .shadow(color: .black.opacity(0.4), radius: 20, x: 0, y: 15 + floatOffset/2)
+                .offset(y: cardOffset + floatOffset)
+                .rotation3DEffect(.degrees(cardRotation), axis: (x: 1, y: 0, z: 0))
                 .opacity(showCard ? 1 : 0)
                 
                 Spacer()
@@ -175,6 +178,16 @@ struct PlanPreviewCardView: View {
                 glintOffset = 200
             }
             
+            // Start floating animation after entrance
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                withAnimation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true)) {
+                    floatOffset = -8 // ±8px float (slightly more than spec for visibility)
+                }
+                withAnimation(.easeInOut(duration: 3.0).repeatForever(autoreverses: true)) {
+                    cardRotation = 1.5 // Subtle 3D tilt
+                }
+            }
+            
             // Repeat glint every 2.5 seconds
             Timer.scheduledTimer(withTimeInterval: 2.5, repeats: true) { _ in
                 glintOffset = -200
@@ -183,8 +196,8 @@ struct PlanPreviewCardView: View {
                 }
             }
             
-            // Auto-transition after 2.2 seconds
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
+            // Auto-transition after 2.5 seconds (slightly longer to enjoy the card)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation(.easeInOut(duration: 0.4)) {
                     currentScreen = 26
                 }

@@ -133,8 +133,10 @@ struct FreeTrialOfferView: View {
                 }
                 .opacity(showContent ? 1 : 0)
                 
-                // CTA Button
+                // CTA Button with glow effect
                 Button(action: {
+                    let impact = UIImpactFeedbackGenerator(style: .heavy)
+                    impact.impactOccurred()
                     onComplete()
                 }) {
                     HStack {
@@ -148,6 +150,7 @@ struct FreeTrialOfferView: View {
                     .padding(.vertical, 20)
                     .background(Color.white)
                     .clipShape(Capsule())
+                    .shadow(color: Color(hex: "10B981").opacity(0.4), radius: 20, x: 0, y: 0)
                 }
                 .padding(.horizontal, 24)
                 .opacity(showContent ? 1 : 0)

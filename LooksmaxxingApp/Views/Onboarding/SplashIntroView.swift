@@ -93,15 +93,30 @@ struct SplashIntroView: View {
 
 // MARK: - Star Field Background
 struct StarFieldView: View {
+    // Pre-computed star positions for consistency
+    private let stars: [(x: CGFloat, y: CGFloat, opacity: Double, size: CGFloat)] = {
+        var result: [(CGFloat, CGFloat, Double, CGFloat)] = []
+        for i in 0..<50 {
+            // Use deterministic pseudo-random based on index
+            let seed = Double(i)
+            let x = CGFloat(((seed * 7919) .truncatingRemainder(dividingBy: 100)) / 100)
+            let y = CGFloat(((seed * 104729) .truncatingRemainder(dividingBy: 100)) / 100)
+            let opacity = 0.1 + (((seed * 15485863) .truncatingRemainder(dividingBy: 100)) / 100) * 0.3
+            let size = 1 + CGFloat(((seed * 32452843) .truncatingRemainder(dividingBy: 100)) / 100) * 2
+            result.append((x, y, opacity, size))
+        }
+        return result
+    }()
+    
     var body: some View {
         GeometryReader { geometry in
-            ForEach(0..<50, id: \.self) { i in
+            ForEach(0..<stars.count, id: \.self) { i in
                 Circle()
-                    .fill(Color.white.opacity(Double.random(in: 0.1...0.4)))
-                    .frame(width: CGFloat.random(in: 1...3))
+                    .fill(Color.white.opacity(stars[i].opacity))
+                    .frame(width: stars[i].size, height: stars[i].size)
                     .position(
-                        x: CGFloat.random(in: 0...geometry.size.width),
-                        y: CGFloat.random(in: 0...geometry.size.height)
+                        x: stars[i].x * geometry.size.width,
+                        y: stars[i].y * geometry.size.height
                     )
             }
         }
