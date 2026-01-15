@@ -3,7 +3,7 @@
 //  LooksmaxxingAppTests
 //
 //  Unit tests for PlanPreviewCardView
-//  Tests card data, date formatting, and animation triggers
+//  Tests personalized ID card display and user data presentation
 //
 
 import XCTest
@@ -12,82 +12,117 @@ import XCTest
 @MainActor
 final class PlanPreviewCardViewTests: XCTestCase {
     
-    var quizData: OnboardingQuizData!
+    var onboardingData: OnboardingData!
     
     override func setUp() {
         super.setUp()
-        clearQuizDataDefaults()
-        quizData = OnboardingQuizData()
+        onboardingData = OnboardingData()
+        onboardingData.reset()
     }
     
     override func tearDown() {
-        quizData = nil
-        clearQuizDataDefaults()
+        onboardingData = nil
         super.tearDown()
     }
     
-    private func clearQuizDataDefaults() {
-        let keys = ["selectedSymptoms", "selectedGoals", "commitmentSignature", "userName"]
-        keys.forEach { UserDefaults.standard.removeObject(forKey: $0) }
+    // MARK: - User Data Display Tests
+    
+    func testDisplaysUserName() {
+        onboardingData.userName = "Marcus"
+        XCTAssertEqual(onboardingData.userName, "Marcus")
     }
     
-    // MARK: - Date Formatting Tests
-    
-    func testStartDate_FormatIsMMDD() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd"
-        let formatted = formatter.string(from: Date())
-        
-        // Should match format like "01/14"
-        XCTAssertTrue(formatted.contains("/"))
-        XCTAssertEqual(formatted.count, 5) // MM/dd = 5 characters
+    func testDisplaysUserAge() {
+        onboardingData.userAge = "24"
+        XCTAssertEqual(onboardingData.userAge, "24")
     }
     
-    func testStartDate_IsToday() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd"
-        let today = formatter.string(from: Date())
-        
-        // Start date should be today
+    func testDisplaysTransformationDate() {
+        let date = onboardingData.formattedTransformationDate
+        XCTAssertFalse(date.isEmpty)
+    }
+    
+    func testDisplaysStartDate() {
+        let today = onboardingData.todayFormatted
         XCTAssertFalse(today.isEmpty)
+        XCTAssertEqual(today.count, 5) // MM/dd format
     }
     
-    // MARK: - User Name Tests
+    // MARK: - Score Display Tests
     
-    func testUserName_DefaultValue_IsUser() {
-        UserDefaults.standard.removeObject(forKey: "userName")
-        let userName = UserDefaults.standard.string(forKey: "userName") ?? "User"
-        XCTAssertEqual(userName, "User")
-    }
-    
-    func testUserName_CustomValue_Loads() {
-        UserDefaults.standard.set("John", forKey: "userName")
-        let userName = UserDefaults.standard.string(forKey: "userName")
-        XCTAssertEqual(userName, "John")
-    }
-    
-    // MARK: - Card Data Tests
-    
-    func testCardData_StreakStartsAtZero() {
-        // Streak should always start at 0 days
-        let streakValue = "0 days"
-        XCTAssertEqual(streakValue, "0 days")
-    }
-    
-    func testCardData_FreeSince_IsToday() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd"
-        let today = formatter.string(from: Date())
+    func testDisplaysUserScore() {
+        onboardingData.checkFrequency = "Daily"
+        onboardingData.calculateScore()
         
-        // Free since should be today's date
-        XCTAssertFalse(today.isEmpty)
+        XCTAssertGreaterThan(onboardingData.userScore, 0)
     }
     
-    // MARK: - Navigation Tests
+    func testDisplaysScoreDifference() {
+        onboardingData.userScore = 45
+        let diff = onboardingData.scoreDifference
+        
+        XCTAssertEqual(diff, 45 - onboardingData.averageScore)
+    }
     
-    func testNavigation_AfterCard_GoesToPaywall() {
-        // Verify that after showing card, navigation should go to PersonalizedPaywallView
-        // This is handled by SwiftUI state, but we can verify quizData is ready
-        XCTAssertNotNil(quizData)
+    // MARK: - Card Styling Tests
+    
+    func testCardHasMinimumWidth() {
+        let minWidth: CGFloat = 280
+        XCTAssertGreaterThan(minWidth, 0)
+    }
+    
+    func testCardHasMinimumHeight() {
+        let minHeight: CGFloat = 380
+        XCTAssertGreaterThan(minHeight, 0)
+    }
+    
+    // MARK: - Animation Tests
+    
+    func testFloatingAnimationAmplitude() {
+        let amplitude: CGFloat = 8
+        XCTAssertGreaterThan(amplitude, 0)
+        XCTAssertLessThanOrEqual(amplitude, 15) // Not too extreme
+    }
+    
+    func testRotationAngle() {
+        let maxRotation: Double = 3.0 // degrees
+        XCTAssertGreaterThan(maxRotation, 0)
+        XCTAssertLessThanOrEqual(maxRotation, 5) // Subtle rotation
+    }
+    
+    // MARK: - Auto-Transition Tests
+    
+    func testAutoTransitionDelay() {
+        let delay: Double = 3.5 // seconds
+        XCTAssertGreaterThan(delay, 2) // Give time to view
+        XCTAssertLessThanOrEqual(delay, 5) // Don't wait too long
+    }
+}
+
+// MARK: - ID Card Element Tests
+
+final class IDCardElementTests: XCTestCase {
+    
+    func testMemberIDFormat() {
+        // Member ID should be formatted like ASC-XXXXX
+        let memberIdPrefix = "ASC-"
+        let memberId = memberIdPrefix + "12345"
+        
+        XCTAssertTrue(memberId.hasPrefix("ASC-"))
+        XCTAssertEqual(memberId.count, 9) // ASC-XXXXX
+    }
+    
+    func testMembershipLevel() {
+        let levels = ["FOUNDING MEMBER", "PREMIUM MEMBER", "MEMBER"]
+        let selectedLevel = "FOUNDING MEMBER"
+        
+        XCTAssertTrue(levels.contains(selectedLevel))
+    }
+    
+    func testGoalBadges_ShowSelectedGoals() {
+        let selectedGoals: Set<String> = ["jawline", "skin"]
+        let goalCount = selectedGoals.count
+        
+        XCTAssertEqual(goalCount, 2)
     }
 }

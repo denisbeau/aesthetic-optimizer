@@ -100,14 +100,31 @@
 		TEST014 /* ErrorAlertModifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST015; };
 		TEST015 /* OnboardingQuizDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST016; };
 		TEST016 /* PreQuizOnboardingViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST017; };
-		TEST017 /* SymptomsSelectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST018; };
-		TEST018 /* GoalsSelectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST019; };
+		TEST017 /* SymptomChecklistViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST018; };
+		TEST018 /* GoalSelectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST019; };
 		TEST019 /* CommitmentSignatureViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST020; };
 		TEST020 /* PlanPreviewCardViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST021; };
 		TEST021 /* AnalyzingViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST022; };
 		TEST022 /* ResultsTeaseViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST023; };
 		TEST023 /* PersonalizedPaywallViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST024; };
 		TEST024 /* OnboardingFlowIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST025; };
+		TEST025 /* OnboardingDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST026; };
+		TEST026 /* QuizViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST027; };
+		TEST027 /* SplashIntroViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST028; };
+		TEST028 /* WelcomeIntentViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST029; };
+		TEST029 /* LaborIllusionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST030; };
+		TEST030 /* ResultsDashboardViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST031; };
+		TEST031 /* TestimonialsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST032; };
+		TEST032 /* ProblemCarouselViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST033; };
+		TEST033 /* FeatureValuePropsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST034; };
+		TEST034 /* ProgressTimelineViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST035; };
+		TEST035 /* SocialProofGridViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST036; };
+		TEST036 /* PersonalizedWelcomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST037; };
+		TEST037 /* FreeTrialOfferViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST038; };
+		TEST038 /* UserProfileInputViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST039; };
+		TEST039 /* ContentViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST040; };
+		TEST040 /* NotificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST041; };
+		TEST041 /* ColorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST042; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,14 +221,31 @@
 		TST015 /* ErrorAlertModifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertModifierTests.swift; sourceTree = "<group>"; };
 		TST016 /* OnboardingQuizDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingQuizDataTests.swift; sourceTree = "<group>"; };
 		TST017 /* PreQuizOnboardingViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreQuizOnboardingViewTests.swift; sourceTree = "<group>"; };
-		TST018 /* SymptomsSelectionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsSelectionViewTests.swift; sourceTree = "<group>"; };
-		TST019 /* GoalsSelectionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsSelectionViewTests.swift; sourceTree = "<group>"; };
+		TST018 /* SymptomChecklistViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomChecklistViewTests.swift; sourceTree = "<group>"; };
+		TST019 /* GoalSelectionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSelectionViewTests.swift; sourceTree = "<group>"; };
 		TST020 /* CommitmentSignatureViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentSignatureViewTests.swift; sourceTree = "<group>"; };
 		TST021 /* PlanPreviewCardViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanPreviewCardViewTests.swift; sourceTree = "<group>"; };
 		TST022 /* AnalyzingViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingViewTests.swift; sourceTree = "<group>"; };
 		TST023 /* ResultsTeaseViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTeaseViewTests.swift; sourceTree = "<group>"; };
 		TST024 /* PersonalizedPaywallViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedPaywallViewTests.swift; sourceTree = "<group>"; };
 		TST025 /* OnboardingFlowIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowIntegrationTests.swift; sourceTree = "<group>"; };
+		TST026 /* OnboardingDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDataTests.swift; sourceTree = "<group>"; };
+		TST027 /* QuizViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewTests.swift; sourceTree = "<group>"; };
+		TST028 /* SplashIntroViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashIntroViewTests.swift; sourceTree = "<group>"; };
+		TST029 /* WelcomeIntentViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeIntentViewTests.swift; sourceTree = "<group>"; };
+		TST030 /* LaborIllusionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaborIllusionViewTests.swift; sourceTree = "<group>"; };
+		TST031 /* ResultsDashboardViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsDashboardViewTests.swift; sourceTree = "<group>"; };
+		TST032 /* TestimonialsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestimonialsViewTests.swift; sourceTree = "<group>"; };
+		TST033 /* ProblemCarouselViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemCarouselViewTests.swift; sourceTree = "<group>"; };
+		TST034 /* FeatureValuePropsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureValuePropsViewTests.swift; sourceTree = "<group>"; };
+		TST035 /* ProgressTimelineViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTimelineViewTests.swift; sourceTree = "<group>"; };
+		TST036 /* SocialProofGridViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProofGridViewTests.swift; sourceTree = "<group>"; };
+		TST037 /* PersonalizedWelcomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedWelcomeViewTests.swift; sourceTree = "<group>"; };
+		TST038 /* FreeTrialOfferViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTrialOfferViewTests.swift; sourceTree = "<group>"; };
+		TST039 /* UserProfileInputViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInputViewTests.swift; sourceTree = "<group>"; };
+		TST040 /* ContentViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewTests.swift; sourceTree = "<group>"; };
+		TST041 /* NotificationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceTests.swift; sourceTree = "<group>"; };
+		TST042 /* ColorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -427,14 +461,31 @@
 				TST015 /* ErrorAlertModifierTests.swift */,
 				TST016 /* OnboardingQuizDataTests.swift */,
 				TST017 /* PreQuizOnboardingViewTests.swift */,
-				TST018 /* SymptomsSelectionViewTests.swift */,
-				TST019 /* GoalsSelectionViewTests.swift */,
+				TST018 /* SymptomChecklistViewTests.swift */,
+				TST019 /* GoalSelectionViewTests.swift */,
 				TST020 /* CommitmentSignatureViewTests.swift */,
 				TST021 /* PlanPreviewCardViewTests.swift */,
 				TST022 /* AnalyzingViewTests.swift */,
 				TST023 /* ResultsTeaseViewTests.swift */,
 				TST024 /* PersonalizedPaywallViewTests.swift */,
 				TST025 /* OnboardingFlowIntegrationTests.swift */,
+				TST026 /* OnboardingDataTests.swift */,
+				TST027 /* QuizViewTests.swift */,
+				TST028 /* SplashIntroViewTests.swift */,
+				TST029 /* WelcomeIntentViewTests.swift */,
+				TST030 /* LaborIllusionViewTests.swift */,
+				TST031 /* ResultsDashboardViewTests.swift */,
+				TST032 /* TestimonialsViewTests.swift */,
+				TST033 /* ProblemCarouselViewTests.swift */,
+				TST034 /* FeatureValuePropsViewTests.swift */,
+				TST035 /* ProgressTimelineViewTests.swift */,
+				TST036 /* SocialProofGridViewTests.swift */,
+				TST037 /* PersonalizedWelcomeViewTests.swift */,
+				TST038 /* FreeTrialOfferViewTests.swift */,
+				TST039 /* UserProfileInputViewTests.swift */,
+				TST040 /* ContentViewTests.swift */,
+				TST041 /* NotificationServiceTests.swift */,
+				TST042 /* ColorExtensionsTests.swift */,
 				TST009 /* Info.plist */,
 			);
 			path = LooksmaxxingAppTests;
@@ -627,6 +678,23 @@
 				TEST022 /* ResultsTeaseViewTests.swift in Sources */,
 				TEST023 /* PersonalizedPaywallViewTests.swift in Sources */,
 				TEST024 /* OnboardingFlowIntegrationTests.swift in Sources */,
+				TEST025 /* OnboardingDataTests.swift in Sources */,
+				TEST026 /* QuizViewTests.swift in Sources */,
+				TEST027 /* SplashIntroViewTests.swift in Sources */,
+				TEST028 /* WelcomeIntentViewTests.swift in Sources */,
+				TEST029 /* LaborIllusionViewTests.swift in Sources */,
+				TEST030 /* ResultsDashboardViewTests.swift in Sources */,
+				TEST031 /* TestimonialsViewTests.swift in Sources */,
+				TEST032 /* ProblemCarouselViewTests.swift in Sources */,
+				TEST033 /* FeatureValuePropsViewTests.swift in Sources */,
+				TEST034 /* ProgressTimelineViewTests.swift in Sources */,
+				TEST035 /* SocialProofGridViewTests.swift in Sources */,
+				TEST036 /* PersonalizedWelcomeViewTests.swift in Sources */,
+				TEST037 /* FreeTrialOfferViewTests.swift in Sources */,
+				TEST038 /* UserProfileInputViewTests.swift in Sources */,
+				TEST039 /* ContentViewTests.swift in Sources */,
+				TEST040 /* NotificationServiceTests.swift in Sources */,
+				TEST041 /* ColorExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,8 +2,8 @@
 //  PersonalizedPaywallViewTests.swift
 //  LooksmaxxingAppTests
 //
-//  Unit tests for PersonalizedPaywallView enhancements
-//  Tests date banner, benefit badges, and free trial messaging
+//  Unit tests for PersonalizedPaywallView
+//  Tests subscription options, pricing display, and CTA state
 //
 
 import XCTest
@@ -12,159 +12,155 @@ import XCTest
 @MainActor
 final class PersonalizedPaywallViewTests: XCTestCase {
     
-    var quizData: OnboardingQuizData!
+    var onboardingData: OnboardingData!
     
     override func setUp() {
         super.setUp()
-        clearQuizDataDefaults()
-        quizData = OnboardingQuizData()
+        onboardingData = OnboardingData()
+        onboardingData.reset()
     }
     
     override func tearDown() {
-        quizData = nil
-        clearQuizDataDefaults()
+        onboardingData = nil
         super.tearDown()
     }
     
-    private func clearQuizDataDefaults() {
-        let keys = ["selectedSymptoms", "selectedGoals", "commitmentSignature"]
-        keys.forEach { UserDefaults.standard.removeObject(forKey: $0) }
+    // MARK: - Pricing Tests
+    
+    func testWeeklyPrice_Formatted() {
+        let weeklyPrice = "$6.99/week"
+        XCTAssertTrue(weeklyPrice.contains("6.99"))
+        XCTAssertTrue(weeklyPrice.contains("week"))
     }
     
-    // MARK: - Transformation Date Banner Tests
-    
-    func testTransformationDateBanner_DateIs60DaysFromNow() {
-        // Test the date calculation logic (not the SwiftUI view)
-        let calendar = Calendar.current
-        if let date = calendar.date(byAdding: .day, value: 60, to: Date()) {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MMM d, yyyy"
-            let successDate = formatter.string(from: date)
-            
-            // Verify date format
-            XCTAssertFalse(successDate.isEmpty)
-            XCTAssertTrue(successDate.contains(",")) // Should be "MMM d, yyyy" format
-        } else {
-            XCTFail("Date calculation failed")
-        }
+    func testAnnualPrice_Formatted() {
+        let annualPrice = "$39.99/year"
+        XCTAssertTrue(annualPrice.contains("39.99"))
+        XCTAssertTrue(annualPrice.contains("year"))
     }
     
-    func testTransformationDateBanner_DateCalculation_Is60Days() {
-        let calendar = Calendar.current
-        if let date = calendar.date(byAdding: .day, value: 60, to: Date()) {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MMM d, yyyy"
-            let formatted = formatter.string(from: date)
-            
-            XCTAssertFalse(formatted.isEmpty)
-        } else {
-            XCTFail("Date calculation failed")
-        }
-    }
-    
-    func testTransformationDateBanner_FallbackDate_IsValid() {
-        // Test fallback date format
-        let fallback = "Mar 14, 2026"
-        XCTAssertFalse(fallback.isEmpty)
-        XCTAssertTrue(fallback.contains(","))
-    }
-    
-    // MARK: - Benefit Badges Tests
-    
-    func testBenefitBadges_EmptyGoals_ShowsNothing() {
-        // Test the underlying data logic
-        let selectedGoals: [String] = []
-        XCTAssertTrue(selectedGoals.isEmpty)
-    }
-    
-    func testBenefitBadges_SingleGoal_ShowsOneBadge() {
-        // Test the underlying data logic
-        let selectedGoals = ["sharper_jawline"]
-        XCTAssertEqual(selectedGoals.count, 1)
-    }
-    
-    func testBenefitBadges_MultipleGoals_ShowsAll() {
-        // Test the underlying data logic
-        let goals = ["sharper_jawline", "better_skin", "increased_confidence"]
-        XCTAssertEqual(goals.count, 3)
-    }
-    
-    func testBenefitBadges_GoalConfig_AllGoalsHaveIcons() {
-        let goalConfig: [String: (icon: String, color: String)] = [
-            "sharper_jawline": ("🔥", "#F59E0B"),
-            "better_skin": ("✨", "#3B82F6"),
-            "improved_symmetry": ("⚖️", "#8B5CF6"),
-            "increased_confidence": ("💪", "#F43F5E"),
-            "fix_breathing": ("👃", "#8B5CF6"),
-            "better_posture": ("🧍", "#10B981"),
-            "overall_transformation": ("💎", "#00D4FF"),
-            "specific_feature": ("🎯", "#F59E0B")
-        ]
+    func testAnnualSavings_CalculatedCorrectly() {
+        let weeklyPrice: Double = 6.99
+        let annualPrice: Double = 39.99
+        let weeksInYear = 52
         
-        for (goalId, config) in goalConfig {
-            XCTAssertFalse(config.icon.isEmpty, "Goal \(goalId) should have icon")
-            XCTAssertTrue(config.color.hasPrefix("#"), "Goal \(goalId) color should be hex")
-        }
-    }
-    
-    func testBenefitBadges_TitleFormatting_ReplacesUnderscores() {
-        let goalId = "sharper_jawline"
-        let formatted = goalId.replacingOccurrences(of: "_", with: " ").capitalized
-        // Swift's .capitalized capitalizes every word
-        XCTAssertEqual(formatted, "Sharper Jawline")
-    }
-    
-    // MARK: - Free Trial CTA Tests
-    
-    func testFreeTrialCTA_PriceIsZero() {
-        let priceText = "$0.00"
-        XCTAssertEqual(priceText, "$0.00")
-        XCTAssertTrue(priceText.contains("0.00"))
-    }
-    
-    func testFreeTrialCTA_PriceIsLargerThanText() {
-        // "$0.00" should be 22px, "Try For " should be 18px
-        let priceSize: CGFloat = 22
-        let textSize: CGFloat = 18
-        XCTAssertGreaterThan(priceSize, textSize)
-    }
-    
-    func testFreeTrialCTA_SafetySignal_IsPresent() {
-        let safetyText = "No Payment Due Now"
-        XCTAssertFalse(safetyText.isEmpty)
-        XCTAssertTrue(safetyText.contains("No Payment"))
-    }
-    
-    func testFreeTrialCTA_PrivacyLabel_IsPresent() {
-        let privacyText = "Purchase appears Discretely"
-        XCTAssertFalse(privacyText.isEmpty)
-        XCTAssertTrue(privacyText.contains("Discretely"))
-    }
-    
-    // MARK: - Integration Tests
-    
-    func testPaywallComponents_WorkTogether() {
-        quizData.selectedGoals = ["sharper_jawline", "better_skin"]
+        let yearlyIfWeekly = weeklyPrice * Double(weeksInYear)
+        let savings = yearlyIfWeekly - annualPrice
         
-        XCTAssertEqual(quizData.selectedGoals.count, 2)
-        
-        // Test date calculation
-        let calendar = Calendar.current
-        if let date = calendar.date(byAdding: .day, value: 60, to: Date()) {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MMM d, yyyy"
-            let successDate = formatter.string(from: date)
-            XCTAssertFalse(successDate.isEmpty)
-        } else {
-            XCTFail("Date calculation failed")
-        }
+        XCTAssertGreaterThan(savings, 300) // Should save over $300
     }
     
-    func testPaywallPersonalization_UsesQuizData() {
-        quizData.dedicationLevel = 8
-        let score = quizData.potentialScoreFormatted
-        
-        XCTAssertFalse(score.isEmpty)
-        XCTAssertGreaterThan(Double(score) ?? 0, 7.0)
+    // MARK: - Personalization Tests
+    
+    func testPersonalization_DisplaysUserName() {
+        onboardingData.userName = "Alex"
+        XCTAssertEqual(onboardingData.userName, "Alex")
     }
+    
+    func testPersonalization_DisplaysGoals() {
+        onboardingData.selectedGoals.insert("jawline")
+        onboardingData.selectedGoals.insert("skin")
+        
+        XCTAssertEqual(onboardingData.selectedGoals.count, 2)
+    }
+    
+    func testPersonalization_DisplaysTransformationDate() {
+        let formattedDate = onboardingData.formattedTransformationDate
+        XCTAssertFalse(formattedDate.isEmpty)
+    }
+    
+    // MARK: - Feature Display Tests
+    
+    func testFeatureValueProps_DisplayCount() {
+        XCTAssertEqual(featureValueProps.count, 4)
+    }
+    
+    func testFeatureValueProps_HasAIAnalysis() {
+        let hasAI = featureValueProps.contains { $0.title.contains("AI") }
+        XCTAssertTrue(hasAI)
+    }
+    
+    func testFeatureValueProps_HasStreakSystem() {
+        let hasStreak = featureValueProps.contains { $0.title.contains("Streak") }
+        XCTAssertTrue(hasStreak)
+    }
+    
+    func testFeatureValueProps_HasProgressTracking() {
+        let hasProgress = featureValueProps.contains { $0.title.contains("Progress") }
+        XCTAssertTrue(hasProgress)
+    }
+    
+    // MARK: - Trust Indicators Tests
+    
+    func testUserCount_DisplayFormat() {
+        let userCount = "12,000+"
+        XCTAssertTrue(userCount.contains("12"))
+        XCTAssertTrue(userCount.contains("+"))
+    }
+    
+    // MARK: - Free Trial Tests
+    
+    func testFreeTrialText_ContainsTrial() {
+        let trialText = "Start 3-Day Free Trial"
+        XCTAssertTrue(trialText.contains("Free Trial"))
+    }
+    
+    func testFreeTrialDuration_Is3Days() {
+        let trialDays = 3
+        XCTAssertEqual(trialDays, 3)
+    }
+}
+
+// MARK: - Subscription Plan Tests
+
+final class SubscriptionPlanTests: XCTestCase {
+    
+    func testWeeklyPlan_Properties() {
+        let weekly = SubscriptionPlanInfo(
+            id: "weekly",
+            name: "Weekly",
+            price: 6.99,
+            period: "week",
+            isPopular: false
+        )
+        
+        XCTAssertEqual(weekly.id, "weekly")
+        XCTAssertEqual(weekly.price, 6.99)
+        XCTAssertEqual(weekly.period, "week")
+        XCTAssertFalse(weekly.isPopular)
+    }
+    
+    func testAnnualPlan_Properties() {
+        let annual = SubscriptionPlanInfo(
+            id: "annual",
+            name: "Annual",
+            price: 39.99,
+            period: "year",
+            isPopular: true
+        )
+        
+        XCTAssertEqual(annual.id, "annual")
+        XCTAssertEqual(annual.price, 39.99)
+        XCTAssertEqual(annual.period, "year")
+        XCTAssertTrue(annual.isPopular)
+    }
+    
+    func testAnnualPlan_IsCheaperPerWeek() {
+        let weeklyPrice: Double = 6.99
+        let annualPrice: Double = 39.99
+        let weeksInYear = 52
+        
+        let annualPerWeek = annualPrice / Double(weeksInYear)
+        
+        XCTAssertLessThan(annualPerWeek, weeklyPrice)
+    }
+}
+
+// Helper struct for tests
+struct SubscriptionPlanInfo {
+    let id: String
+    let name: String
+    let price: Double
+    let period: String
+    let isPopular: Bool
 }

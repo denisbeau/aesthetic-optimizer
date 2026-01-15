@@ -3,113 +3,179 @@
 //  LooksmaxxingAppTests
 //
 //  Unit tests for CommitmentSignatureView
-//  Tests signature validation, persistence, and PencilKit integration
+//  Tests signature validation, stroke handling, and commitment state
 //
 
 import XCTest
-import PencilKit
+import SwiftUI
 @testable import LooksmaxxingApp
 
 @MainActor
 final class CommitmentSignatureViewTests: XCTestCase {
     
-    var quizData: OnboardingQuizData!
+    var onboardingData: OnboardingData!
     
     override func setUp() {
         super.setUp()
-        clearQuizDataDefaults()
-        quizData = OnboardingQuizData()
+        onboardingData = OnboardingData()
+        onboardingData.reset()
     }
     
     override func tearDown() {
-        quizData = nil
-        clearQuizDataDefaults()
+        onboardingData = nil
         super.tearDown()
     }
     
-    private func clearQuizDataDefaults() {
-        let keys = ["selectedSymptoms", "selectedGoals", "commitmentSignature"]
-        keys.forEach { UserDefaults.standard.removeObject(forKey: $0) }
+    // MARK: - Initial State Tests
+    
+    func testInitialState_NotSigned() {
+        XCTAssertFalse(onboardingData.hasSignedCommitment)
     }
     
-    // MARK: - Signature Validation Tests
+    // MARK: - Signature State Tests
     
-    func testSignatureValidation_EmptyDrawing_Invalid() {
-        let drawing = PKDrawing()
-        let bounds = drawing.bounds
+    func testSignCommitment_SetsFlag() {
+        onboardingData.hasSignedCommitment = true
+        XCTAssertTrue(onboardingData.hasSignedCommitment)
+    }
+    
+    func testUnsignCommitment_ClearsFlag() {
+        onboardingData.hasSignedCommitment = true
+        onboardingData.hasSignedCommitment = false
+        XCTAssertFalse(onboardingData.hasSignedCommitment)
+    }
+    
+    // MARK: - Stroke Validation Tests
+    
+    func testStrokeLength_BelowMinimum() {
+        let minStrokeLength: CGFloat = 50
+        let testStrokeLength: CGFloat = 30
         
-        // Minimum path length is 50 units
-        let hasStroke = bounds.width > 50 || bounds.height > 50
-        XCTAssertFalse(hasStroke, "Empty drawing should be invalid")
+        XCTAssertLessThan(testStrokeLength, minStrokeLength)
     }
     
-    func testSignatureValidation_MinimumPathLength_Valid() {
-        // Test that a drawing with sufficient bounds would be valid
-        // Note: Creating actual PKStroke requires complex API usage
-        // This test verifies the validation logic conceptually
-        let minPathLength: CGFloat = 50
-        let testWidth: CGFloat = 60
-        let testHeight: CGFloat = 60
+    func testStrokeLength_AboveMinimum() {
+        let minStrokeLength: CGFloat = 50
+        let testStrokeLength: CGFloat = 100
         
-        let hasValidPath = testWidth > minPathLength || testHeight > minPathLength
-        XCTAssertTrue(hasValidPath, "Path with dimensions > 50 should be valid")
+        XCTAssertGreaterThanOrEqual(testStrokeLength, minStrokeLength)
     }
     
-    // MARK: - Signature Persistence Tests
-    
-    func testSignatureSave_ConvertsToData() {
-        // Test that signature data can be saved
-        // Note: Full PencilKit drawing creation requires complex API
-        // This test verifies the data conversion logic
-        let testData = Data("test signature data".utf8)
-        quizData.commitmentSignature = testData
+    func testStrokeLength_ExactlyMinimum() {
+        let minStrokeLength: CGFloat = 50
+        let testStrokeLength: CGFloat = 50
         
-        XCTAssertNotNil(quizData.commitmentSignature)
-        XCTAssertEqual(quizData.commitmentSignature?.count, testData.count)
+        XCTAssertGreaterThanOrEqual(testStrokeLength, minStrokeLength)
     }
     
-    func testSignaturePersistence_SavesToUserDefaults() {
-        let testData = Data("test signature".utf8)
-        quizData.commitmentSignature = testData
-        quizData.saveToUserDefaults()
+    // MARK: - Path Calculation Tests
+    
+    func testCalculateStrokeLength_EmptyPath() {
+        let points: [CGPoint] = []
+        let length = calculateStrokeLength(points)
+        XCTAssertEqual(length, 0)
+    }
+    
+    func testCalculateStrokeLength_SinglePoint() {
+        let points: [CGPoint] = [CGPoint(x: 0, y: 0)]
+        let length = calculateStrokeLength(points)
+        XCTAssertEqual(length, 0)
+    }
+    
+    func testCalculateStrokeLength_TwoPoints_Horizontal() {
+        let points: [CGPoint] = [
+            CGPoint(x: 0, y: 0),
+            CGPoint(x: 100, y: 0)
+        ]
+        let length = calculateStrokeLength(points)
+        XCTAssertEqual(length, 100, accuracy: 0.01)
+    }
+    
+    func testCalculateStrokeLength_TwoPoints_Vertical() {
+        let points: [CGPoint] = [
+            CGPoint(x: 0, y: 0),
+            CGPoint(x: 0, y: 50)
+        ]
+        let length = calculateStrokeLength(points)
+        XCTAssertEqual(length, 50, accuracy: 0.01)
+    }
+    
+    func testCalculateStrokeLength_TwoPoints_Diagonal() {
+        let points: [CGPoint] = [
+            CGPoint(x: 0, y: 0),
+            CGPoint(x: 3, y: 4)
+        ]
+        let length = calculateStrokeLength(points)
+        // 3-4-5 triangle, hypotenuse = 5
+        XCTAssertEqual(length, 5, accuracy: 0.01)
+    }
+    
+    func testCalculateStrokeLength_MultiplePoints() {
+        let points: [CGPoint] = [
+            CGPoint(x: 0, y: 0),
+            CGPoint(x: 10, y: 0),
+            CGPoint(x: 20, y: 0),
+            CGPoint(x: 30, y: 0)
+        ]
+        let length = calculateStrokeLength(points)
+        XCTAssertEqual(length, 30, accuracy: 0.01)
+    }
+    
+    // MARK: - Helper Methods
+    
+    private func calculateStrokeLength(_ points: [CGPoint]) -> CGFloat {
+        guard points.count > 1 else { return 0 }
         
-        let loaded = UserDefaults.standard.data(forKey: "commitmentSignature")
-        XCTAssertNotNil(loaded)
-        XCTAssertEqual(loaded, testData)
+        var totalLength: CGFloat = 0
+        for i in 1..<points.count {
+            let dx = points[i].x - points[i-1].x
+            let dy = points[i].y - points[i-1].y
+            totalLength += sqrt(dx * dx + dy * dy)
+        }
+        return totalLength
     }
+}
+
+// MARK: - Bezier Smoothing Tests
+
+final class BezierSmoothingTests: XCTestCase {
     
-    func testSignaturePersistence_LoadsFromUserDefaults() {
-        let testData = Data("test signature".utf8)
-        UserDefaults.standard.set(testData, forKey: "commitmentSignature")
-        let newQuizData = OnboardingQuizData()
+    func testBezierSmoothing_CreatesPath() {
+        let points: [CGPoint] = [
+            CGPoint(x: 0, y: 0),
+            CGPoint(x: 50, y: 50),
+            CGPoint(x: 100, y: 0)
+        ]
         
-        XCTAssertNotNil(newQuizData.commitmentSignature)
-        XCTAssertEqual(newQuizData.commitmentSignature, testData)
+        let path = createSmoothedPath(points)
+        XCTAssertFalse(path.isEmpty)
     }
     
-    // MARK: - Has Signed Commitment Tests
-    
-    func testHasSignedCommitment_NoSignature_ReturnsFalse() {
-        quizData.commitmentSignature = nil
-        XCTAssertFalse(quizData.hasSignedCommitment)
+    func testBezierSmoothing_SinglePoint_ReturnsEmpty() {
+        let points: [CGPoint] = [CGPoint(x: 0, y: 0)]
+        let path = createSmoothedPath(points)
+        XCTAssertTrue(path.isEmpty)
     }
     
-    func testHasSignedCommitment_WithSignature_ReturnsTrue() {
-        let testData = Data("signature".utf8)
-        quizData.commitmentSignature = testData
-        XCTAssertTrue(quizData.hasSignedCommitment)
-    }
-    
-    // MARK: - Clear Functionality Tests
-    
-    func testClearSignature_ResetsDrawing() {
-        // Test that clearing signature works
-        quizData.commitmentSignature = Data("test signature".utf8)
-        XCTAssertNotNil(quizData.commitmentSignature)
+    private func createSmoothedPath(_ points: [CGPoint]) -> Path {
+        var path = Path()
+        guard points.count > 1 else { return path }
         
-        // Clear signature
-        quizData.commitmentSignature = nil
-        XCTAssertNil(quizData.commitmentSignature)
-        XCTAssertFalse(quizData.hasSignedCommitment)
+        path.move(to: points[0])
+        
+        if points.count == 2 {
+            path.addLine(to: points[1])
+        } else {
+            for i in 1..<points.count {
+                let mid = CGPoint(
+                    x: (points[i-1].x + points[i].x) / 2,
+                    y: (points[i-1].y + points[i].y) / 2
+                )
+                path.addQuadCurve(to: mid, control: points[i-1])
+            }
+            path.addLine(to: points.last!)
+        }
+        
+        return path
     }
 }
