@@ -1,8 +1,16 @@
-# Aesthetic Optimizer: Clean Project Specification
+# Ascend: Clean Project Specification
 
-**Version:** 2.0 (Unified from 25+ source documents)  
-**Date:** January 12, 2026  
+**Version:** 2.1 (Unified from 25+ source documents)  
+**Date:** January 14, 2026  
 **Status:** MVP BUILT → Testing Phase
+
+---
+
+## BRANDING
+
+**App Name:** Ascend  
+**Tagline:** Face Your Potential  
+**Previous Working Title:** Aesthetic Optimizer, Looksmaxxing App
 
 ---
 
@@ -101,7 +109,7 @@ MVP code is built. Xcode project exists. Ready for compilation and testing on re
 ## 5. CLEAN MVP-READY SPEC (FOR AI CODING AGENTS)
 
 ```
-=== AESTHETIC OPTIMIZER iOS MVP ===
+=== ASCEND iOS MVP ===
 
 PLATFORM: iOS 15+, SwiftUI, MVVM architecture
 STORAGE: Core Data (local only - no cloud)
@@ -281,4 +289,4 @@ Transfer project to Mac → Open in Xcode → Build → Run on device/simulator 
 
 **This document is the single source of truth.**  
 **All prior specifications are superseded.**  
-**Last Updated:** January 12, 2026
+**Last Updated:** January 14, 2026
