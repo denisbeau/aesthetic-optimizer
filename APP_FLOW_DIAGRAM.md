@@ -1,163 +1,245 @@
-# Aesthetic Optimizer - App Flow Diagram
+# Ascend - App Flow Diagram
 
-## Full Application Flow (Mermaid)
+**App Name:** Ascend  
+**Tagline:** Face Your Potential
+
+**Based on:** QUITTR 27-screen onboarding flow
+
+---
+
+## Complete Application Flow (27 Screens)
 
 ```mermaid
 flowchart TD
-    subgraph Launch["🚀 App Launch"]
-        A[LaunchScreenView] --> B{hasCompletedOnboarding?}
+    subgraph PreQuiz["PRE-QUIZ (2 screens)"]
+        S1[1. Splash/Intro<br/>Logo + Captions<br/>Auto-transition]
+        S1 --> S2[2. Welcome/Intent<br/>Start Quiz CTA]
     end
 
-    subgraph Onboarding["📋 12-Question Clinical Assessment (~3 min)"]
-        B -->|No| Q1[Q1: Primary Goal<br/>🎯 Jawline/Skin/Symmetry/Glow-up]
-        Q1 --> Q2[Q2: Age<br/>👤 COPPA Verification]
-        Q2 -->|Under 13| BLOCK[❌ Age Blocked<br/>COPPA Compliance]
-        Q2 -->|13+| Q3[Q3: Photo Confidence<br/>📸 Always/Sometimes/Rarely/Avoid]
-        Q3 --> Q4[Q4: Struggles<br/>⚠️ Mouth breathing/Posture/Skin/Chin]
-        Q4 --> Q5[Q5: Current Routine<br/>✨ None/Basic/Intermediate/Advanced]
-        Q5 --> Q6[Q6: Sleep Hours<br/>🌙 <6/6-7/8+]
-        Q6 --> Q7[Q7: Daily Commitment<br/>⏰ 10 min/day? Yes/Maybe/No]
-        Q7 --> Q8[Q8: Timeframe<br/>📅 2 weeks/1 month/3 months]
-        Q8 --> Q9[Q9: Previous Blockers<br/>🚧 Knowledge/Consistency/No plan/Time]
-        Q9 --> Q10[Q10: Breathing Type<br/>💨 Nose/Mouth/Unsure]
-        Q10 --> Q11[Q11: Dedication Level<br/>🔥 1-10 Slider]
-        Q11 --> Q12[Q12: Start AI Scan<br/>🤖 Final Action Button]
+    subgraph Quiz["QUIZ (10 questions)"]
+        S2 --> Q1[Q1: Primary Goal<br/>Jawline/Skin/Symmetry/Glow-up]
+        Q1 --> Q2[Q2: Frequency<br/>How often do you check appearance?]
+        Q2 --> Q3[Q3: Source<br/>Where do you compare yourself?]
+        Q3 --> Q4[Q4: Progression<br/>Has it gotten worse?]
+        Q4 --> Q5[Q5: Onset<br/>When did concerns start?]
+        Q5 --> Q6[Q6: Physical Impact<br/>Posture/Breathing habits]
+        Q6 --> Q7[Q7: Emotional Impact<br/>Photo avoidance frequency]
+        Q7 --> Q8[Q8: Stress Response<br/>Check mirror when stressed?]
+        Q8 --> Q9[Q9: Trigger<br/>Boredom/Social media?]
+        Q9 --> Q10[Q10: Investment<br/>Spent money on products?]
     end
 
-    subgraph Conversion["💰 Conversion Funnel"]
-        Q12 --> ANALYZE[AnalyzingView<br/>⏳ Fake Processing Animation<br/>• Scanning mandible...<br/>• Assessing symmetry...<br/>• Comparing 50K+ data points...]
-        ANALYZE --> TEASE[ResultsTeaseView<br/>🔒 Blurred Results Tease<br/>• X Critical Areas Found<br/>• Potential Score: X.X/10]
-        TEASE --> PAYWALL[PersonalizedPaywallView<br/>💳 Dynamic Pricing<br/>• References quiz answers<br/>• Social proof: 12K+ users<br/>• From 6.5 to X.X roadmap]
+    subgraph Profile["PROFILE INPUT"]
+        Q10 --> S13[13. User Profile<br/>Name + Age<br/>Complete Quiz CTA]
     end
 
-    subgraph PostPurchase["✅ Subscribed User Flow"]
-        PAYWALL -->|Subscribe| DISCLAIMER[DisclaimerView<br/>⚖️ Legal Disclaimer]
-        PAYWALL -->|Skip/Later| HOME_FREE[HomeViewDark<br/>🏠 Limited Features]
-        DISCLAIMER --> HOME[HomeViewDark<br/>🏠 Main Dashboard]
+    subgraph Processing["LABOR ILLUSION"]
+        S13 --> S14[14. Processing<br/>Circular Progress 0-100%<br/>Analyzing patterns...]
     end
 
-    subgraph MainApp["📱 Core App Experience"]
-        B -->|Yes + Subscribed| HOME
-        HOME --> CAMERA[CameraView<br/>📷 AI Facial Scan]
-        CAMERA --> RESULTS[ResultsView<br/>📊 Full Analysis<br/>• Symmetry Score<br/>• Jaw Definition<br/>• Skin Quality<br/>• Eye Area<br/>• Overall Rating]
-        HOME --> ROUTINE[DailyRoutineView<br/>📝 Daily Exercises<br/>• Mewing<br/>• Posture<br/>• Skincare]
-        HOME --> SETTINGS[SettingsView<br/>⚙️ Preferences<br/>• Notifications<br/>• Data Export<br/>• Subscription]
-        RESULTS --> ROUTINE
-        ROUTINE --> HOME
+    subgraph Results["RESULTS + DIAGNOSIS"]
+        S14 --> S15[15. Results Dashboard<br/>Your Score vs Average<br/>Bar Chart Comparison]
+        S15 --> S16[16. Symptom Checklist<br/>Mental/Physical/Social<br/>Multi-select]
     end
 
-    subgraph Retention["🔄 Retention Loops"]
-        HOME --> STREAK[StreakViewModel<br/>🔥 Streak Counter]
-        STREAK --> CELEBRATION[CelebrationView<br/>🎉 Milestone Rewards]
-        CELEBRATION --> HOME
+    subgraph Education["PROBLEM AGITATION"]
+        S16 --> S17[17. Problem Carousel<br/>5 slides: Dopamine/Habits/Impact]
+        S17 --> S18[18. Feature Value Props<br/>Illustrations + Media Logos]
     end
 
-    %% Styling
-    style Launch fill:#1a1a2e,stroke:#00d4ff,color:#fff
-    style Onboarding fill:#0f0f1a,stroke:#7c3aed,color:#fff
-    style Conversion fill:#1a0a1a,stroke:#ff6b6b,color:#fff
-    style PostPurchase fill:#0a1a0a,stroke:#10b981,color:#fff
-    style MainApp fill:#1a1a1a,stroke:#00d4ff,color:#fff
-    style Retention fill:#1a1a0a,stroke:#f59e0b,color:#fff
-    
-    style BLOCK fill:#7f1d1d,stroke:#ef4444,color:#fff
-    style PAYWALL fill:#4c1d95,stroke:#a855f7,color:#fff
-    style ANALYZE fill:#1e3a5f,stroke:#3b82f6,color:#fff
-    style TEASE fill:#3f1e5f,stroke:#8b5cf6,color:#fff
+    subgraph SocialProof["SOCIAL PROOF"]
+        S18 --> S19[19. Testimonials<br/>Verified Reviews Scroll]
+        S19 --> S20[20. Progress Timeline<br/>Your Path vs Old Way Graph]
+    end
+
+    subgraph Goals["GOAL COMMITMENT"]
+        S20 --> S21[21. Goal Selection<br/>Multi-select Aspirations]
+        S21 --> S22[22. Social Proof Grid<br/>More Testimonials]
+        S22 --> S23[23. Commitment Signature<br/>Sign Your Promise]
+    end
+
+    subgraph Personalization["PERSONALIZED PLAN"]
+        S23 --> S24[24. Welcome Screen<br/>Hey Name, Welcome...]
+        S24 --> S25[25. Plan Preview Card<br/>Virtual ID Card<br/>Streak: 0 days]
+    end
+
+    subgraph Paywall["CONVERSION"]
+        S25 --> S26[26. Personalized Paywall<br/>Quit Date Banner<br/>Benefit Badges<br/>Become a Member CTA]
+        S26 --> S27[27. Free Trial Offer<br/>Try For $0.00<br/>App Mockup Preview]
+    end
+
+    subgraph MainApp["MAIN APP"]
+        S27 -->|Subscribe| HOME[Home Dashboard]
+        S27 -->|Skip| HOME_FREE[Home - Limited]
+        HOME --> SCAN[Camera Scan]
+        SCAN --> FULL_RESULTS[Full Results]
+        HOME --> ROUTINE[Daily Routine]
+        HOME --> SETTINGS[Settings]
+    end
 ```
 
 ---
 
-## Screen Inventory
+## Screen-by-Screen Breakdown
 
-| Screen | File | Purpose | Key Elements |
-|--------|------|---------|--------------|
-| LaunchScreenView | `LaunchScreenView.swift` | App launch animation | Logo, gradient background |
-| OnboardingQuizView | `OnboardingQuizView.swift` | 12-question assessment | Progress bar, option buttons, slider |
-| AnalyzingView | `AnalyzingView.swift` | Fake processing animation | Progress bars, technical copy |
-| ResultsTeaseView | `ResultsTeaseView.swift` | Blurred results tease | Potential score, critical areas count |
-| PersonalizedPaywallView | `PersonalizedPaywallView.swift` | Conversion paywall | Pricing, features, social proof |
-| DisclaimerView | `DisclaimerView.swift` | Legal disclaimer | Terms acceptance |
-| HomeViewDark | `HomeViewDark.swift` | Main dashboard | Streak, scan button, quick actions |
-| CameraView | `CameraView.swift` | AI facial scan | Camera preview, capture button |
-| ResultsView | `ResultsView.swift` | Full analysis display | Scores, metrics, recommendations |
-| DailyRoutineView | `DailyRoutineView.swift` | Exercise checklist | Tasks, completion tracking |
-| SettingsView | `SettingsView.swift` | App settings | Notifications, export, subscription |
-| CelebrationView | `CelebrationView.swift` | Streak milestones | Confetti, achievements |
+### PRE-QUIZ (2 screens only)
 
----
+| # | Screen | Elements | Action | Duration |
+|---|--------|----------|--------|----------|
+| 1 | Splash/Intro | Logo, "Embrace this pause", 5-star rating | Auto | 2-3s |
+| 2 | Welcome/Intent | Header, Subheader, "Start Quiz" CTA | Tap button | - |
 
-## Quiz Question Flow Detail
+### QUIZ (10 questions, auto-advance)
 
-```mermaid
-flowchart LR
-    subgraph Phase1["🎯 Commitment Phase"]
-        Q1[Goal] --> Q2[Age]
-    end
-    
-    subgraph Phase2["😰 Problem Amplification"]
-        Q2 --> Q3[Photo Confidence]
-        Q3 --> Q4[Struggles]
-    end
-    
-    subgraph Phase3["📊 Gap Analysis"]
-        Q4 --> Q5[Routine Level]
-        Q5 --> Q6[Sleep]
-    end
-    
-    subgraph Phase4["✅ Micro-Commitment"]
-        Q6 --> Q7[Daily Commitment]
-        Q7 --> Q8[Timeframe]
-    end
-    
-    subgraph Phase5["🚀 Objection Handling"]
-        Q8 --> Q9[Previous Blockers]
-        Q9 --> Q10[Breathing Type]
-    end
-    
-    subgraph Phase6["🔥 Self-Labeling"]
-        Q10 --> Q11[Dedication 1-10]
-        Q11 --> Q12[Start Scan]
-    end
+| # | Screen | Question | Options | Action |
+|---|--------|----------|---------|--------|
+| 3 | Q1 | Primary goal? | Jawline / Skin / Symmetry / Overall glow-up | Single-tap |
+| 4 | Q2 | How often check appearance? | Multiple times daily / Daily / Weekly / Rarely | Single-tap |
+| 5 | Q3 | Where compare yourself? | Social media / Mirror / Photos / Dating apps | Single-tap |
+| 6 | Q4 | Has it gotten worse over time? | Yes / No | Single-tap |
+| 7 | Q5 | When did concerns start? | Age brackets | Single-tap |
+| 8 | Q6 | Physical habits? | Mouth breathing / Poor posture / Both / Neither | Single-tap |
+| 9 | Q7 | Avoid photos of yourself? | Always / Sometimes / Rarely / Never | Single-tap |
+| 10 | Q8 | Check mirror when stressed? | Frequently / Sometimes / Rarely | Single-tap |
+| 11 | Q9 | Triggered by boredom/social media? | Yes / No | Single-tap |
+| 12 | Q10 | Spent money on appearance products? | Yes / No | Single-tap |
 
-    style Phase1 fill:#1e40af,stroke:#3b82f6,color:#fff
-    style Phase2 fill:#7f1d1d,stroke:#ef4444,color:#fff
-    style Phase3 fill:#166534,stroke:#22c55e,color:#fff
-    style Phase4 fill:#854d0e,stroke:#eab308,color:#fff
-    style Phase5 fill:#581c87,stroke:#a855f7,color:#fff
-    style Phase6 fill:#9a3412,stroke:#f97316,color:#fff
-```
+### PROFILE + PROCESSING
 
----
+| # | Screen | Elements | Action |
+|---|--------|----------|--------|
+| 13 | User Profile | Name input, Age input, "Complete Quiz" CTA | Text + Tap |
+| 14 | Labor Illusion | Circular progress 0-100%, "Analyzing patterns...", "Processing data..." | Auto 5-6s |
 
-## Psychological Principles by Question
+### RESULTS + DIAGNOSIS
 
-| Question | Principle | Effect |
-|----------|-----------|--------|
-| Q1: Goal | Commitment/Consistency | Sets "North Star" - user commits to a direction |
-| Q2: Age | Personalization | Implies AI adjusts for developmental stage |
-| Q3: Photo Confidence | Problem Amplification | Reminds them of pain they want to solve |
-| Q4: Struggles | Specific Identification | Validates app understands looksmaxxing terms |
-| Q5: Routine | Gap Analysis | Positions app as "missing piece" |
-| Q6: Sleep | Variables of Success | Increases "scientific" perception |
-| Q7: Daily Commitment | Micro-Commitment | Gets agreement before showing price |
-| Q8: Timeframe | Urgency | Frames subscription as "fast track" |
-| Q9: Blockers | Objection Pre-emption | Promises to solve specific hurdles |
-| Q10: Breathing | Authority (Mewing) | Targets core looksmaxxing demographic |
-| Q11: Dedication | Self-Labeling | High scores = higher payment intent |
-| Q12: Start Scan | Momentum | Transitions survey → active feature |
+| # | Screen | Elements | Action |
+|---|--------|----------|--------|
+| 15 | Results Dashboard | Bar chart (Your Score vs Average), "X% higher concern than average", "Check your symptoms" CTA | Tap CTA |
+| 16 | Symptom Checklist | Multi-select list: Mental (unmotivated, low confidence), Physical (posture, skin), Social (avoid photos, compare constantly) | Multi-tap + Continue |
+
+### EDUCATION (Problem Agitation)
+
+| # | Screen | Elements | Action |
+|---|--------|----------|--------|
+| 17 | Problem Carousel | 5 slides with icons: "Your brain is wired for comparison", "Social media hijacks dopamine", "The cycle destroys confidence", "Most don't realize the damage", "Recovery is possible" | Swipe/Auto |
+| 18 | Feature Value Props | Illustrations, Media logos (if applicable), Benefit text | Swipe |
+
+### SOCIAL PROOF
+
+| # | Screen | Elements | Action |
+|---|--------|----------|--------|
+| 19 | Testimonials | Scrollable cards: Avatar, Name, Verified badge, 5 stars, Quote | Scroll |
+| 20 | Progress Timeline | Dual-line graph: "The old way" (spiky relapses) vs "With Ascend" (smooth progress), "76% faster results" caption | Scroll |
+
+### GOAL COMMITMENT
+
+| # | Screen | Elements | Action |
+|---|--------|----------|--------|
+| 21 | Goal Selection | Multi-select pills: Stronger jawline, Clear skin, Better symmetry, More confidence, Consistent routine | Multi-tap |
+| 22 | Social Proof Grid | 2-column masonry testimonials | Scroll |
+| 23 | Commitment Signature | "Sign your commitment", White signature canvas, "Clear" button | Draw signature |
+
+### PERSONALIZED PLAN
+
+| # | Screen | Elements | Action |
+|---|--------|----------|--------|
+| 24 | Welcome Screen | "Hey [Name], Welcome to Ascend, your path to transformation." | Auto 1.8s |
+| 25 | Plan Preview Card | Virtual ID card with: Logo, "Active Streak: 0 days", Name, "Started: [Today's date]" | Auto 2.2s |
+
+### CONVERSION (Paywall)
+
+| # | Screen | Elements | Action |
+|---|--------|----------|--------|
+| 26 | Personalized Paywall | Target date banner ("Transform by: [Date+60days]"), Benefit badges from goals, Star rating, "Become a Member" CTA, Feature list | Scroll + Tap |
+| 27 | Free Trial Offer | App mockup preview, Green checkmark, "No Payment Due Now", "Try For $0.00" CTA | Tap |
 
 ---
 
-## Conversion Funnel Metrics (Target)
+## Simplified Linear Flow
 
 ```
-Quiz Start:     100%
-Quiz Complete:  80-90% (10-20% drop-off is acceptable)
-Analyze View:   80-90%
-Results Tease:  80-90%
-Paywall View:   75-85%
-Conversion:     30-50% of paywall viewers (vs ~10-15% for quick flows)
+Splash → Welcome → Q1-Q10 → Profile → Processing → Results → Symptoms → 
+Education Carousel → Features → Testimonials → Timeline → Goals → 
+More Proof → Signature → Welcome → Plan Card → Paywall → Trial → Home
 ```
 
-**Key Insight:** Losing 10-20% during quiz is acceptable because remaining users are 5x more likely to convert due to sunk cost effect.
+**Total: 27 screens before main app**
+
+---
+
+## Key Differences from Current Implementation
+
+| Current App | QUITTR Flow | Fix Required |
+|-------------|-------------|--------------|
+| 7 pre-quiz screens | 2 pre-quiz screens | Remove 5 screens |
+| 12 quiz questions | 10 quiz questions | Reduce to 10 |
+| No profile input | Name + Age before processing | Add profile screen |
+| Basic processing | Variable velocity progress bar | Enhance animation |
+| No symptom checklist | Multi-select symptoms | Add screen |
+| No education carousel | 5-slide problem agitation | Add carousel |
+| No testimonials scroll | Verified testimonials | Add screen |
+| No progress timeline | Dual-line comparison graph | Add screen |
+| No signature | Commitment signature canvas | Add screen |
+| No plan preview card | Virtual ID card | Add screen |
+| Basic paywall | Date banner + badges + $0.00 | Enhance paywall |
+
+---
+
+## Technical Animation Specs
+
+### Splash Screen
+- Caption entrance: Staggered fade-in, 500ms per line, ease-out
+- Text offset: Slide from y:+10px to y:0
+- Auto-transition after 2.5s
+
+### Quiz Auto-Advance
+- Selection highlight: 350ms green fill
+- Transition: Crossfade with scale 0.98→1.0
+- Easing: cubic-bezier(0.4, 0, 0.2, 1)
+
+### Labor Illusion Progress
+- Variable velocity: 0-25% fast, 25-65% slow, 65-100% fast
+- Total duration: 5.5-6.5 seconds
+- Status text changes at 5%, 70%, 100%
+
+### Results Bar Chart
+- Staggered growth: Average bar first (600ms), User bar second (1200ms)
+- User bar overshoots visually to amplify concern
+
+### Signature Canvas
+- Ink: 4px black stroke with Bezier smoothing
+- Minimum stroke length for validation: 50 units
+- Auto-advance on touchEnd after valid stroke
+
+### Plan Card
+- Entrance: SlideUp + Spring damping (0.7, stiffness 120)
+- Idle: Light glint sweep every 2.5s, subtle Y-axis float ±5px
+
+---
+
+## Psychological Flow
+
+```
+PASSIVE INVESTMENT (Splash/Welcome)
+    ↓
+ACTIVE INVESTMENT (10 Quiz Questions)
+    ↓
+IDENTITY CAPTURE (Name/Age)
+    ↓
+LABOR ILLUSION (Processing)
+    ↓
+PROBLEM AMPLIFICATION (Results + Symptoms)
+    ↓
+EDUCATION (Carousel + Features)
+    ↓
+SOCIAL PROOF (Testimonials + Timeline)
+    ↓
+ASPIRATION (Goals)
+    ↓
+COMMITMENT (Signature)
+    ↓
+OWNERSHIP (Plan Card)
+    ↓
+CONVERSION (Paywall + $0.00 Trial)
+```

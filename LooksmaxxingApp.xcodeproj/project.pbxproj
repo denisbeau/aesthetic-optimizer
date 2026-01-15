@@ -57,6 +57,23 @@
 		VIEW021 /* CommitmentSignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC037; };
 		VIEW022 /* PlanPreviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC038; };
 		
+		/* New Onboarding Views - QUITTR Flow */
+		OB001 /* OnboardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC039; };
+		OB002 /* SplashIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC040; };
+		OB003 /* WelcomeIntentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC041; };
+		OB004 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC042; };
+		OB005 /* UserProfileInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC043; };
+		OB006 /* LaborIllusionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC044; };
+		OB007 /* ResultsDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC045; };
+		OB008 /* SymptomChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC046; };
+		OB009 /* ProblemCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC047; };
+		OB010 /* FeatureValuePropsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC048; };
+		OB011 /* TestimonialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC049; };
+		OB012 /* ProgressTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC050; };
+		OB013 /* SocialProofGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC051; };
+		OB014 /* PersonalizedWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC052; };
+		OB015 /* FreeTrialOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC053; };
+		
 		/* Config */
 		CFG004 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC030; };
 		
@@ -148,6 +165,23 @@
 		SRC036 /* GoalsSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsSelectionView.swift; sourceTree = "<group>"; };
 		SRC037 /* CommitmentSignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentSignatureView.swift; sourceTree = "<group>"; };
 		SRC038 /* PlanPreviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanPreviewCardView.swift; sourceTree = "<group>"; };
+		
+		/* New Onboarding Files */
+		SRC039 /* OnboardingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingData.swift; sourceTree = "<group>"; };
+		SRC040 /* SplashIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashIntroView.swift; sourceTree = "<group>"; };
+		SRC041 /* WelcomeIntentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeIntentView.swift; sourceTree = "<group>"; };
+		SRC042 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		SRC043 /* UserProfileInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInputView.swift; sourceTree = "<group>"; };
+		SRC044 /* LaborIllusionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaborIllusionView.swift; sourceTree = "<group>"; };
+		SRC045 /* ResultsDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsDashboardView.swift; sourceTree = "<group>"; };
+		SRC046 /* SymptomChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomChecklistView.swift; sourceTree = "<group>"; };
+		SRC047 /* ProblemCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemCarouselView.swift; sourceTree = "<group>"; };
+		SRC048 /* FeatureValuePropsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureValuePropsView.swift; sourceTree = "<group>"; };
+		SRC049 /* TestimonialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestimonialsView.swift; sourceTree = "<group>"; };
+		SRC050 /* ProgressTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTimelineView.swift; sourceTree = "<group>"; };
+		SRC051 /* SocialProofGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProofGridView.swift; sourceTree = "<group>"; };
+		SRC052 /* PersonalizedWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedWelcomeView.swift; sourceTree = "<group>"; };
+		SRC053 /* FreeTrialOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTrialOfferView.swift; sourceTree = "<group>"; };
 		
 		/* Resources */
 		RSC001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -254,6 +288,7 @@
 		GRP004 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				GRP015 /* Onboarding */,
 				SRC003 /* OnboardingView.swift */,
 				SRC004 /* HomeView.swift */,
 				SRC005 /* CameraView.swift */,
@@ -277,6 +312,27 @@
 				GRP013 /* Components */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		GRP015 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				SRC040 /* SplashIntroView.swift */,
+				SRC041 /* WelcomeIntentView.swift */,
+				SRC042 /* QuizView.swift */,
+				SRC043 /* UserProfileInputView.swift */,
+				SRC044 /* LaborIllusionView.swift */,
+				SRC045 /* ResultsDashboardView.swift */,
+				SRC046 /* SymptomChecklistView.swift */,
+				SRC047 /* ProblemCarouselView.swift */,
+				SRC048 /* FeatureValuePropsView.swift */,
+				SRC049 /* TestimonialsView.swift */,
+				SRC050 /* ProgressTimelineView.swift */,
+				SRC051 /* SocialProofGridView.swift */,
+				SRC052 /* PersonalizedWelcomeView.swift */,
+				SRC053 /* FreeTrialOfferView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		GRP013 /* Components */ = {
@@ -305,6 +361,7 @@
 				SRC013 /* CoreDataEntities.swift */,
 				SRC014 /* AppError.swift */,
 				SRC032 /* OnboardingQuizData.swift */,
+				SRC039 /* OnboardingData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -528,6 +585,21 @@
 				EXT002 /* Color+Extensions.swift in Sources */,
 				CFG004 /* Secrets.swift in Sources */,
 				RES002 /* LooksmaxxingApp.xcdatamodeld in Sources */,
+				OB001 /* OnboardingData.swift in Sources */,
+				OB002 /* SplashIntroView.swift in Sources */,
+				OB003 /* WelcomeIntentView.swift in Sources */,
+				OB004 /* QuizView.swift in Sources */,
+				OB005 /* UserProfileInputView.swift in Sources */,
+				OB006 /* LaborIllusionView.swift in Sources */,
+				OB007 /* ResultsDashboardView.swift in Sources */,
+				OB008 /* SymptomChecklistView.swift in Sources */,
+				OB009 /* ProblemCarouselView.swift in Sources */,
+				OB010 /* FeatureValuePropsView.swift in Sources */,
+				OB011 /* TestimonialsView.swift in Sources */,
+				OB012 /* ProgressTimelineView.swift in Sources */,
+				OB013 /* SocialProofGridView.swift in Sources */,
+				OB014 /* PersonalizedWelcomeView.swift in Sources */,
+				OB015 /* FreeTrialOfferView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

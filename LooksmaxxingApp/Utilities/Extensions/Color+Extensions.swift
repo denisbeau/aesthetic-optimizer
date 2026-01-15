@@ -1,19 +1,10 @@
-//
-//  Color+Extensions.swift
-//  LooksmaxxingApp
-//
-//  Hex color initializer for SwiftUI Color
-//
-
 import SwiftUI
 
 extension Color {
-    /// Initialize a Color from a hex string (e.g., "FF5733" or "#FF5733")
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
         Scanner(string: hex).scanHexInt64(&int)
-        
         let a, r, g, b: UInt64
         switch hex.count {
         case 3: // RGB (12-bit)
@@ -23,9 +14,9 @@ extension Color {
         case 8: // ARGB (32-bit)
             (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
         default:
-            (a, r, g, b) = (255, 0, 0, 0)
+            (a, r, g, b) = (1, 1, 1, 0)
         }
-        
+
         self.init(
             .sRGB,
             red: Double(r) / 255,
@@ -34,4 +25,13 @@ extension Color {
             opacity: Double(a) / 255
         )
     }
+    
+    // App color palette
+    static let appBackground = Color(hex: "050914")
+    static let appBackgroundLight = Color(hex: "081630")
+    static let appAccent = Color(hex: "4ADE80")
+    static let appDanger = Color(hex: "F13644")
+    static let appSuccess = Color(hex: "10B981")
+    static let appWarning = Color(hex: "FACC15")
+    static let appGold = Color(hex: "FFD700")
 }
