@@ -37,9 +37,8 @@ struct ResultsTeaseView: View {
             Color(hex: "0A0A0F")
                 .ignoresSafeArea()
             
-            if showSymptoms {
-                SymptomChecklistView(onboardingData: OnboardingData(), onContinue: {})
-            } else {
+            // Note: This view is deprecated - new onboarding uses Views/Onboarding flow
+            if !showSymptoms {
                 ScrollView {
                     VStack(spacing: 24) {
                         // Success header
