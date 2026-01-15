@@ -38,7 +38,7 @@ struct ResultsTeaseView: View {
                 .ignoresSafeArea()
             
             if showSymptoms {
-                SymptomsSelectionView(quizData: quizData)
+                SymptomChecklistView(onboardingData: OnboardingData(), onContinue: {})
             } else {
                 ScrollView {
                     VStack(spacing: 24) {
