@@ -21,7 +21,6 @@
 		VIEW007 /* OnboardingQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC019; };
 		VIEW008 /* AnalyzingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC020; };
 		VIEW009 /* ResultsTeaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC021; };
-		VIEW010 /* PersonalizedPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC022; };
 		VIEW011 /* HomeViewDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC023; };
 		
 		/* ViewModels */
@@ -52,10 +51,6 @@
 		VIEW016 /* CelebrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC028; };
 		VIEW017 /* ErrorAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC029; };
 		VIEW018 /* PreQuizOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC034; };
-		VIEW019 /* SymptomsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC035; };
-		VIEW020 /* GoalsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC036; };
-		VIEW021 /* CommitmentSignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC037; };
-		VIEW022 /* PlanPreviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC038; };
 		
 		/* New Onboarding Views - QUITTR Flow */
 		OB001 /* OnboardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC039; };
@@ -73,6 +68,10 @@
 		OB013 /* SocialProofGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC051; };
 		OB014 /* PersonalizedWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC052; };
 		OB015 /* FreeTrialOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC053; };
+		OB016 /* GoalSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC054; };
+		OB017 /* CommitmentSignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC055; };
+		OB018 /* PersonalizedPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC056; };
+		OB019 /* PlanPreviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC057; };
 		
 		/* Config */
 		CFG004 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC030; };
@@ -148,7 +147,6 @@
 		SRC019 /* OnboardingQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingQuizView.swift; sourceTree = "<group>"; };
 		SRC020 /* AnalyzingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingView.swift; sourceTree = "<group>"; };
 		SRC021 /* ResultsTeaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTeaseView.swift; sourceTree = "<group>"; };
-		SRC022 /* PersonalizedPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedPaywallView.swift; sourceTree = "<group>"; };
 		SRC023 /* HomeViewDark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewDark.swift; sourceTree = "<group>"; };
 		SRC024 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		SRC025 /* AgeGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGateView.swift; sourceTree = "<group>"; };
@@ -161,10 +159,6 @@
 		SRC032 /* OnboardingQuizData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingQuizData.swift; sourceTree = "<group>"; };
 		SRC033 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		SRC034 /* PreQuizOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreQuizOnboardingView.swift; sourceTree = "<group>"; };
-		SRC035 /* SymptomsSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsSelectionView.swift; sourceTree = "<group>"; };
-		SRC036 /* GoalsSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsSelectionView.swift; sourceTree = "<group>"; };
-		SRC037 /* CommitmentSignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentSignatureView.swift; sourceTree = "<group>"; };
-		SRC038 /* PlanPreviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanPreviewCardView.swift; sourceTree = "<group>"; };
 		
 		/* New Onboarding Files */
 		SRC039 /* OnboardingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingData.swift; sourceTree = "<group>"; };
@@ -182,6 +176,10 @@
 		SRC051 /* SocialProofGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProofGridView.swift; sourceTree = "<group>"; };
 		SRC052 /* PersonalizedWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedWelcomeView.swift; sourceTree = "<group>"; };
 		SRC053 /* FreeTrialOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTrialOfferView.swift; sourceTree = "<group>"; };
+		SRC054 /* GoalSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSelectionView.swift; sourceTree = "<group>"; };
+		SRC055 /* CommitmentSignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentSignatureView.swift; sourceTree = "<group>"; };
+		SRC056 /* PersonalizedPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedPaywallView.swift; sourceTree = "<group>"; };
+		SRC057 /* PlanPreviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanPreviewCardView.swift; sourceTree = "<group>"; };
 		
 		/* Resources */
 		RSC001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -298,17 +296,12 @@
 				SRC019 /* OnboardingQuizView.swift */,
 				SRC020 /* AnalyzingView.swift */,
 				SRC021 /* ResultsTeaseView.swift */,
-				SRC022 /* PersonalizedPaywallView.swift */,
 				SRC023 /* HomeViewDark.swift */,
 				SRC024 /* SettingsView.swift */,
 				SRC025 /* AgeGateView.swift */,
 				SRC026 /* DisclaimerView.swift */,
 				SRC027 /* LaunchScreenView.swift */,
 				SRC034 /* PreQuizOnboardingView.swift */,
-				SRC035 /* SymptomsSelectionView.swift */,
-				SRC036 /* GoalsSelectionView.swift */,
-				SRC037 /* CommitmentSignatureView.swift */,
-				SRC038 /* PlanPreviewCardView.swift */,
 				GRP013 /* Components */,
 			);
 			path = Views;
@@ -331,6 +324,10 @@
 				SRC051 /* SocialProofGridView.swift */,
 				SRC052 /* PersonalizedWelcomeView.swift */,
 				SRC053 /* FreeTrialOfferView.swift */,
+				SRC054 /* GoalSelectionView.swift */,
+				SRC055 /* CommitmentSignatureView.swift */,
+				SRC056 /* PersonalizedPaywallView.swift */,
+				SRC057 /* PlanPreviewCardView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -557,7 +554,6 @@
 				VIEW007 /* OnboardingQuizView.swift in Sources */,
 				VIEW008 /* AnalyzingView.swift in Sources */,
 				VIEW009 /* ResultsTeaseView.swift in Sources */,
-				VIEW010 /* PersonalizedPaywallView.swift in Sources */,
 				VIEW011 /* HomeViewDark.swift in Sources */,
 				VIEW012 /* SettingsView.swift in Sources */,
 				VIEW013 /* AgeGateView.swift in Sources */,
@@ -566,10 +562,6 @@
 				VIEW016 /* CelebrationView.swift in Sources */,
 				VIEW017 /* ErrorAlertModifier.swift in Sources */,
 				VIEW018 /* PreQuizOnboardingView.swift in Sources */,
-				VIEW019 /* SymptomsSelectionView.swift in Sources */,
-				VIEW020 /* GoalsSelectionView.swift in Sources */,
-				VIEW021 /* CommitmentSignatureView.swift in Sources */,
-				VIEW022 /* PlanPreviewCardView.swift in Sources */,
 				VM001 /* ScanViewModel.swift in Sources */,
 				VM002 /* StreakViewModel.swift in Sources */,
 				VM003 /* SubscriptionViewModel.swift in Sources */,
@@ -600,6 +592,10 @@
 				OB013 /* SocialProofGridView.swift in Sources */,
 				OB014 /* PersonalizedWelcomeView.swift in Sources */,
 				OB015 /* FreeTrialOfferView.swift in Sources */,
+				OB016 /* GoalSelectionView.swift in Sources */,
+				OB017 /* CommitmentSignatureView.swift in Sources */,
+				OB018 /* PersonalizedPaywallView.swift in Sources */,
+				OB019 /* PlanPreviewCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
