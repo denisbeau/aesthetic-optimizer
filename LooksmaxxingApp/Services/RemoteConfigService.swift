@@ -106,13 +106,23 @@ class RemoteConfigService: ObservableObject {
     
     func getDouble(for key: ConfigKey, fallback: Double) -> Double {
         let remoteConfig = RemoteConfig.remoteConfig()
-        let numberValue = remoteConfig.configValue(forKey: key.rawValue).numberValue
-        return numberValue?.doubleValue ?? fallback
+        let configValue = remoteConfig.configValue(forKey: key.rawValue)
+        if configValue.source != .static {
+            let numberValue = configValue.numberValue
+            if numberValue != nil {
+                return numberValue.doubleValue
+            }
+        }
+        return fallback
     }
     
     func getBool(for key: ConfigKey, fallback: Bool) -> Bool {
         let remoteConfig = RemoteConfig.remoteConfig()
-        return remoteConfig.configValue(forKey: key.rawValue).boolValue
+        let configValue = remoteConfig.configValue(forKey: key.rawValue)
+        if configValue.source != .static {
+            return configValue.boolValue
+        }
+        return fallback
     }
     
     // MARK: - Convenience Methods for Key Messages
