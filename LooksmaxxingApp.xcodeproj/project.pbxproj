@@ -38,6 +38,7 @@
 		SVC001 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC015; };
 		SVC002 /* CoreMLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC016; };
 		SVC003 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC017; };
+		SVC005 /* RemoteConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC038; };
 		
 		/* Extensions */
 		EXT001 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = SRC018; };
@@ -177,6 +178,7 @@
 		SRC032 /* OnboardingQuizData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingQuizData.swift; sourceTree = "<group>"; };
 		SRC033 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		SRC034 /* PreQuizOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreQuizOnboardingView.swift; sourceTree = "<group>"; };
+		SRC038 /* RemoteConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigService.swift; sourceTree = "<group>"; };
 		
 		/* New Onboarding Files */
 		SRC039 /* OnboardingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingData.swift; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 				SRC016 /* CoreMLService.swift */,
 				SRC017 /* NotificationService.swift */,
 				SRC031 /* DataExportService.swift */,
+				SRC038 /* RemoteConfigService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				SVC002 /* CoreMLService.swift in Sources */,
 				SVC003 /* NotificationService.swift in Sources */,
 				SVC004 /* DataExportService.swift in Sources */,
+				SVC005 /* RemoteConfigService.swift in Sources */,
 				EXT001 /* UserDefaults+Extensions.swift in Sources */,
 				EXT002 /* Color+Extensions.swift in Sources */,
 				CFG004 /* Secrets.swift in Sources */,
