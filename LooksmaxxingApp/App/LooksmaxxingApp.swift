@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct LooksmaxxingApp: App {
@@ -15,6 +16,8 @@ struct LooksmaxxingApp: App {
     @StateObject private var streakVM = StreakViewModel.shared
     
     init() {
+        // Initialize Firebase (must be called before any Firebase services)
+        FirebaseApp.configure()
         setupApp()
     }
     
@@ -30,6 +33,9 @@ struct LooksmaxxingApp: App {
     private func setupApp() {
         // Initialize device ID if not exists
         _ = UserDefaults.standard.deviceID
+        
+        // Load Remote Config for A/B testing (non-blocking)
+        _ = RemoteConfigService.shared
         
         // RevenueCat is configured in SubscriptionViewModel.init()
         // Notifications are requested after first scan, not on launch

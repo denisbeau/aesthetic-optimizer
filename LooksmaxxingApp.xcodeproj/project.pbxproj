@@ -81,6 +81,7 @@
 		
 		/* Resources */
 		RES001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = RSC001; };
+		RES004 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = RSC004; };
 		RES002 /* LooksmaxxingApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = RSC002; };
 		
 		/* Test Files */
@@ -202,6 +203,7 @@
 		RSC001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		RSC002 /* LooksmaxxingApp.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; path = LooksmaxxingApp.xcdatamodeld; sourceTree = "<group>"; };
 		RSC003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		RSC004 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		
 		/* Test Files */
 		TST001 /* FaceAnalysisResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceAnalysisResultTests.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 			children = (
 				RSC001 /* Assets.xcassets */,
 				GRP011 /* CoreData */,
+				RSC004 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -508,6 +511,9 @@
 			);
 			name = LooksmaxxingApp;
 			packageProductDependencies = (
+				FIREBASE_PKG001 /* FirebaseRemoteConfig */,
+				FIREBASE_PKG002 /* FirebaseAnalytics */,
+				FIREBASE_PKG003 /* FirebaseCore */,
 			);
 			productName = LooksmaxxingApp;
 			productReference = PROD001 /* LooksmaxxingApp.app */;
@@ -560,6 +566,7 @@
 			);
 			mainGroup = ROOT001;
 			packageReferences = (
+				FIREBASE_REF001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = GRP002 /* Products */;
 			projectDirPath = "";
@@ -577,6 +584,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				RES001 /* Assets.xcassets in Resources */,
+				RES004 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,6 +715,35 @@
 			targetProxy = PROXY001 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FIREBASE_REF001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FIREBASE_PKG001 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FIREBASE_REF001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		FIREBASE_PKG002 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FIREBASE_REF001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		FIREBASE_PKG003 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FIREBASE_REF001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCBuildConfiguration section */
 		DBGCFG001 /* Debug */ = {
