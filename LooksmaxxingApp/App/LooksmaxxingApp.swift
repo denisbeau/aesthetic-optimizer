@@ -16,8 +16,11 @@ struct LooksmaxxingApp: App {
     @StateObject private var streakVM = StreakViewModel.shared
     
     init() {
-        // Initialize Firebase (must be called before any Firebase services)
-        FirebaseApp.configure()
+        // Initialize Firebase only if GoogleService-Info.plist exists
+        // This allows builds to succeed in CI where the file is gitignored
+        if Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil {
+            FirebaseApp.configure()
+        }
         setupApp()
     }
     
