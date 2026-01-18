@@ -69,7 +69,11 @@ class RemoteConfigService: ObservableObject {
         
         let remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
+        #if DEBUG
+        settings.minimumFetchInterval = 0 // faster iteration when testing
+        #else
         settings.minimumFetchInterval = 3600 // 1 hour cache
+        #endif
         remoteConfig.configSettings = settings
         
         // Set default values (fallback if Firebase not configured)

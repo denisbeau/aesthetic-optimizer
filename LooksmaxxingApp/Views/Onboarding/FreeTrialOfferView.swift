@@ -4,6 +4,7 @@ struct FreeTrialOfferView: View {
     @Binding var currentScreen: Int
     @ObservedObject var onboardingData: OnboardingData
     var onComplete: () -> Void
+    @ObservedObject private var remoteConfig = RemoteConfigService.shared
     
     @State private var showContent = false
     
@@ -142,7 +143,7 @@ struct FreeTrialOfferView: View {
                     HStack {
                         Text("Try For ")
                             .font(.system(size: 18, weight: .semibold))
-                        Text("$0.00")
+                        Text(remoteConfig.getString(for: .paywallFreeTrialText, fallback: "$0.00"))
                             .font(.system(size: 22, weight: .heavy))
                     }
                     .foregroundColor(Color(hex: "081630"))

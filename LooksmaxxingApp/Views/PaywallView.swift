@@ -11,6 +11,7 @@ import SwiftUI
 struct PaywallView: View {
     @EnvironmentObject var subscriptionVM: SubscriptionViewModel
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var remoteConfig = RemoteConfigService.shared
     @State private var isPurchasing = false
     @State private var showError = false
     @State private var errorMessage = ""
@@ -85,7 +86,7 @@ struct PaywallView: View {
                     
                     // Pricing
                     VStack(spacing: 10) {
-                        Text(String(format: "$%.2f", RemoteConfigService.shared.getMonthlyPrice()))
+                        Text(String(format: "$%.2f", remoteConfig.getMonthlyPrice()))
                             .font(.system(size: 50, weight: .bold, design: .rounded))
                         
                         Text("per month")

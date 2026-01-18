@@ -3,6 +3,7 @@ import SwiftUI
 struct PersonalizedPaywallView: View {
     @Binding var currentScreen: Int
     @ObservedObject var onboardingData: OnboardingData
+    @ObservedObject private var remoteConfig = RemoteConfigService.shared
     
     @State private var showContent = false
     @State private var pulseScale: CGFloat = 1.0
@@ -80,7 +81,7 @@ struct PersonalizedPaywallView: View {
                     Spacer()
                         .frame(height: 20)
                     
-                    // CTA Button with pulse and shimmer
+                    // CTA Button with pulse and shimmer (A/B tested via Remote Config)
                     Button(action: {
                         let impact = UIImpactFeedbackGenerator(style: .medium)
                         impact.impactOccurred()
@@ -88,7 +89,7 @@ struct PersonalizedPaywallView: View {
                             currentScreen = 27
                         }
                     }) {
-                        Text("Become a Member")
+                        Text(remoteConfig.getString(for: .paywallCTAText, fallback: "Become a Member"))
                             .font(.system(size: 20, weight: .bold))
                             .foregroundColor(Color(hex: "081630"))
                             .frame(maxWidth: .infinity)

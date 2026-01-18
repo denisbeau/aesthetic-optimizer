@@ -11,6 +11,7 @@ struct SettingsView: View {
     @EnvironmentObject var subscriptionVM: SubscriptionViewModel
     @EnvironmentObject var streakVM: StreakViewModel
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var remoteConfig = RemoteConfigService.shared
     
     @AppStorage("notificationHour") private var notificationHour = 9
     @AppStorage("notificationMinute") private var notificationMinute = 0
@@ -122,25 +123,25 @@ struct SettingsView: View {
                 #if DEBUG
                 Section {
                     HStack {
-                        Image(systemName: RemoteConfigService.shared.isLoaded ? "checkmark.circle.fill" : "clock.fill")
-                            .foregroundColor(RemoteConfigService.shared.isLoaded ? .green : .orange)
+                        Image(systemName: remoteConfig.isLoaded ? "checkmark.circle.fill" : "clock.fill")
+                            .foregroundColor(remoteConfig.isLoaded ? .green : .orange)
                         Text("Remote Config Status")
                         Spacer()
-                        Text(RemoteConfigService.shared.isLoaded ? "Loaded" : "Loading...")
+                        Text(remoteConfig.isLoaded ? "Loaded" : "Loading...")
                             .foregroundColor(.secondary)
                     }
                     
                     HStack {
                         Text("Monthly Price")
                         Spacer()
-                        Text(String(format: "$%.2f", RemoteConfigService.shared.getMonthlyPrice()))
+                        Text(String(format: "$%.2f", remoteConfig.getMonthlyPrice()))
                             .foregroundColor(.secondary)
                     }
                     
                     HStack {
                         Text("Messaging Variant")
                         Spacer()
-                        Text(RemoteConfigService.shared.messagingVariant.rawValue)
+                        Text(remoteConfig.messagingVariant.rawValue)
                             .foregroundColor(.secondary)
                             .font(.caption)
                     }

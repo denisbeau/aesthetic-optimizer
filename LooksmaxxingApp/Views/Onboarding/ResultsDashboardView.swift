@@ -3,6 +3,7 @@ import SwiftUI
 struct ResultsDashboardView: View {
     @Binding var currentScreen: Int
     @ObservedObject var onboardingData: OnboardingData
+    @ObservedObject private var remoteConfig = RemoteConfigService.shared
     
     @State private var showContent = false
     @State private var averageBarHeight: CGFloat = 0
@@ -43,7 +44,7 @@ struct ResultsDashboardView: View {
                     .opacity(showContent ? 1 : 0)
                     
                     // Analysis Statement (A/B tested via Remote Config)
-                    Text(RemoteConfigService.shared.getResultsSubheadline())
+                    Text(remoteConfig.getResultsSubheadline())
                         .font(.system(size: 15, weight: .medium))
                         .foregroundColor(.white.opacity(0.8))
                         .multilineTextAlignment(.center)
@@ -89,7 +90,7 @@ struct ResultsDashboardView: View {
                     .padding(.horizontal, 40)
                     
                     // Gap Callout (A/B tested via Remote Config)
-                    Text(RemoteConfigService.shared.getResultsGapCallout(scoreDifference: onboardingData.scoreDifference))
+                    Text(remoteConfig.getResultsGapCallout(scoreDifference: onboardingData.scoreDifference))
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(Color(hex: "F13644"))
                         .opacity(showAnalysis ? 1 : 0)
@@ -103,7 +104,7 @@ struct ResultsDashboardView: View {
                             currentScreen = 16
                         }
                     }) {
-                        Text(RemoteConfigService.shared.getString(for: .resultsCTA, fallback: "Check your symptoms"))
+                        Text(remoteConfig.getString(for: .resultsCTA, fallback: "Check your symptoms"))
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(Color(hex: "0F172A"))
                             .frame(maxWidth: .infinity)
