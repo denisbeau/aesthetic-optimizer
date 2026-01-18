@@ -55,6 +55,15 @@ class RemoteConfigService: ObservableObject {
     // MARK: - Configuration Loading
     
     func loadConfig() {
+        // Unit tests can trigger app/framework initialization in odd ways on CI.
+        // Avoid doing network work / async logging during tests.
+        if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+            DispatchQueue.main.async {
+                self.isLoaded = true
+            }
+            return
+        }
+
         // Check if Firebase is configured before using RemoteConfig
         guard FirebaseApp.app() != nil else {
             print("⚠️ [RemoteConfig] Firebase not configured (GoogleService-Info.plist missing) - using defaults only")
