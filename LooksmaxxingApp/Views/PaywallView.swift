@@ -85,7 +85,7 @@ struct PaywallView: View {
                     
                     // Pricing
                     VStack(spacing: 10) {
-                        Text("$14.99")
+                        Text(String(format: "$%.2f", RemoteConfigService.shared.getMonthlyPrice()))
                             .font(.system(size: 50, weight: .bold, design: .rounded))
                         
                         Text("per month")

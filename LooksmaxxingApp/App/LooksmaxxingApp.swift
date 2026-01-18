@@ -16,10 +16,17 @@ struct LooksmaxxingApp: App {
     @StateObject private var streakVM = StreakViewModel.shared
     
     init() {
-        // Initialize Firebase only if GoogleService-Info.plist exists
-        // This allows builds to succeed in CI where the file is gitignored
-        if Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil {
-            FirebaseApp.configure()
+        // Initialize Firebase only if GoogleService-Info.plist exists AND is valid.
+        // This allows builds to succeed in CI where the file may be absent or a placeholder.
+        if
+            let filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
+            let options = FirebaseOptions(contentsOfFile: filePath)
+        {
+            FirebaseApp.configure(options: options)
+        } else {
+            #if DEBUG
+            print("⚠️ [Firebase] Skipping FirebaseApp.configure() (missing or invalid GoogleService-Info.plist)")
+            #endif
         }
         setupApp()
     }

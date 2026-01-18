@@ -16,6 +16,28 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Inject GoogleService-Info.plist (for Firebase/Remote Config)
+      env:
+        GOOGLESERVICE_INFO_PLIST_B64: ${{ secrets.GOOGLESERVICE_INFO_PLIST_B64 }}
+      run: |
+        mkdir -p "LooksmaxxingApp/Resources"
+        if [ -z "${GOOGLESERVICE_INFO_PLIST_B64}" ]; then
+          echo "⚠️ GOOGLESERVICE_INFO_PLIST_B64 secret not set. Creating placeholder GoogleService-Info.plist for CI."
+          cat > "LooksmaxxingApp/Resources/GoogleService-Info.plist" <<'EOF'
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0"><dict></dict></plist>
+        EOF
+        else
+          python3 - <<'PY'
+        import os, base64, pathlib
+        b64 = os.environ["GOOGLESERVICE_INFO_PLIST_B64"]
+        out = pathlib.Path("LooksmaxxingApp/Resources/GoogleService-Info.plist")
+        out.write_bytes(base64.b64decode(b64))
+        print(f"✅ Wrote {out} ({out.stat().st_size} bytes)")
+        PY
+        fi
+
     - name: Select Xcode 15
       run: sudo xcode-select -s /Applications/Xcode_15.2.app
 

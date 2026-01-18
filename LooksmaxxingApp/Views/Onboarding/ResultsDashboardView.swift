@@ -42,8 +42,8 @@ struct ResultsDashboardView: View {
                     }
                     .opacity(showContent ? 1 : 0)
                     
-                    // Analysis Statement
-                    Text("Your responses indicate significant appearance anxiety*")
+                    // Analysis Statement (A/B tested via Remote Config)
+                    Text(RemoteConfigService.shared.getResultsSubheadline())
                         .font(.system(size: 15, weight: .medium))
                         .foregroundColor(.white.opacity(0.8))
                         .multilineTextAlignment(.center)
@@ -88,8 +88,8 @@ struct ResultsDashboardView: View {
                     .frame(height: 280)
                     .padding(.horizontal, 40)
                     
-                    // Gap Callout
-                    Text("\(onboardingData.scoreDifference)% higher concern than average")
+                    // Gap Callout (A/B tested via Remote Config)
+                    Text(RemoteConfigService.shared.getResultsGapCallout(scoreDifference: onboardingData.scoreDifference))
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(Color(hex: "F13644"))
                         .opacity(showAnalysis ? 1 : 0)
@@ -97,13 +97,13 @@ struct ResultsDashboardView: View {
                     Spacer()
                         .frame(height: 30)
                     
-                    // CTA Button
+                    // CTA Button (A/B tested via Remote Config)
                     Button(action: {
                         withAnimation(.easeInOut(duration: 0.3)) {
                             currentScreen = 16
                         }
                     }) {
-                        Text("Check your symptoms")
+                        Text(RemoteConfigService.shared.getString(for: .resultsCTA, fallback: "Check your symptoms"))
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(Color(hex: "0F172A"))
                             .frame(maxWidth: .infinity)

@@ -66,3 +66,15 @@ TestResults/
 *.env
 *.env.*
 GoogleService-Info.plist
+GoogleService-Info*.plist
+*service-account*.json
+firebase-service-account*.json
+*-firebase-adminsdk-*.json
+
+# Temporary files
+*.zip
+drive-download-*/
+BUILD-*.zip
+
+# Node (scripts)
+node_modules/

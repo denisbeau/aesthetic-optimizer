@@ -57,12 +57,15 @@ class RemoteConfigService: ObservableObject {
     func loadConfig() {
         // Check if Firebase is configured before using RemoteConfig
         guard FirebaseApp.app() != nil else {
+            print("⚠️ [RemoteConfig] Firebase not configured (GoogleService-Info.plist missing) - using defaults only")
             // Firebase not configured, use defaults only
             DispatchQueue.main.async {
                 self.isLoaded = true
             }
             return
         }
+        
+        print("🔄 [RemoteConfig] Starting fetch from Firebase...")
         
         let remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
@@ -86,13 +89,30 @@ class RemoteConfigService: ObservableObject {
         
         remoteConfig.fetch { status, error in
             if status == .success {
+                print("✅ [RemoteConfig] Fetch successful")
                 remoteConfig.activate { changed, error in
+                    if let error = error {
+                        print("⚠️ [RemoteConfig] Activate error: \(error.localizedDescription)")
+                    } else {
+                        print("✅ [RemoteConfig] Activated (changed: \(changed))")
+                    }
+                    
+                    // Log key values for verification
+                    let headline = remoteConfig.configValue(forKey: ConfigKey.resultsHeadline.rawValue).stringValue ?? "not found"
+                    let monthlyPrice = remoteConfig.configValue(forKey: ConfigKey.monthlyPrice.rawValue).stringValue ?? "not found"
+                    print("📊 [RemoteConfig] Sample values - results_headline: '\(headline)', monthly_price: '\(monthlyPrice)'")
+                    
                     DispatchQueue.main.async {
                         self.updateVariant()
                         self.isLoaded = true
                     }
                 }
             } else {
+                if let error = error {
+                    print("❌ [RemoteConfig] Fetch failed: \(error.localizedDescription)")
+                } else {
+                    print("⚠️ [RemoteConfig] Fetch status: \(status.rawValue) - using defaults")
+                }
                 // Firebase not configured, use defaults
                 DispatchQueue.main.async {
                     self.isLoaded = true

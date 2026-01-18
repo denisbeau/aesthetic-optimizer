@@ -118,6 +118,39 @@ struct SettingsView: View {
                     Text("Legal")
                 }
                 
+                // MARK: - Remote Config Status (Debug)
+                #if DEBUG
+                Section {
+                    HStack {
+                        Image(systemName: RemoteConfigService.shared.isLoaded ? "checkmark.circle.fill" : "clock.fill")
+                            .foregroundColor(RemoteConfigService.shared.isLoaded ? .green : .orange)
+                        Text("Remote Config Status")
+                        Spacer()
+                        Text(RemoteConfigService.shared.isLoaded ? "Loaded" : "Loading...")
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    HStack {
+                        Text("Monthly Price")
+                        Spacer()
+                        Text(String(format: "$%.2f", RemoteConfigService.shared.getMonthlyPrice()))
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    HStack {
+                        Text("Messaging Variant")
+                        Spacer()
+                        Text(RemoteConfigService.shared.messagingVariant.rawValue)
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                    }
+                } header: {
+                    Text("Remote Config")
+                } footer: {
+                    Text("Shows values from Firebase. If prices/messages match Firebase Console, Remote Config is working.")
+                }
+                #endif
+                
                 // MARK: - About Section
                 Section {
                     HStack {

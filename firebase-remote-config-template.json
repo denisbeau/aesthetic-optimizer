@@ -67,13 +67,5 @@
         "value": "true"
       }
     }
-  },
-  "version": {
-    "versionNumber": "1",
-    "updateTime": "",
-    "updateUser": {
-      "email": ""
-    },
-    "description": "Initial Remote Config setup for messaging variants"
   }
 }
