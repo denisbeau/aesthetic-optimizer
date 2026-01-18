@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseRemoteConfig
+import FirebaseCore
 
 class RemoteConfigService: ObservableObject {
     static let shared = RemoteConfigService()
@@ -54,6 +55,15 @@ class RemoteConfigService: ObservableObject {
     // MARK: - Configuration Loading
     
     func loadConfig() {
+        // Check if Firebase is configured before using RemoteConfig
+        guard FirebaseApp.app() != nil else {
+            // Firebase not configured, use defaults only
+            DispatchQueue.main.async {
+                self.isLoaded = true
+            }
+            return
+        }
+        
         let remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
         settings.minimumFetchInterval = 3600 // 1 hour cache
@@ -92,6 +102,7 @@ class RemoteConfigService: ObservableObject {
     }
     
     private func updateVariant() {
+        guard FirebaseApp.app() != nil else { return }
         let remoteConfig = RemoteConfig.remoteConfig()
         let variantString = remoteConfig.configValue(forKey: ConfigKey.messagingVariant.rawValue).stringValue ?? MessagingVariant.brutalHonesty.rawValue
         messagingVariant = MessagingVariant(rawValue: variantString) ?? .brutalHonesty
@@ -100,11 +111,13 @@ class RemoteConfigService: ObservableObject {
     // MARK: - Public API for Views
     
     func getString(for key: ConfigKey, fallback: String) -> String {
+        guard FirebaseApp.app() != nil else { return fallback }
         let remoteConfig = RemoteConfig.remoteConfig()
         return remoteConfig.configValue(forKey: key.rawValue).stringValue ?? fallback
     }
     
     func getDouble(for key: ConfigKey, fallback: Double) -> Double {
+        guard FirebaseApp.app() != nil else { return fallback }
         let remoteConfig = RemoteConfig.remoteConfig()
         let configValue = remoteConfig.configValue(forKey: key.rawValue)
         if configValue.source != .static {
@@ -117,6 +130,7 @@ class RemoteConfigService: ObservableObject {
     }
     
     func getBool(for key: ConfigKey, fallback: Bool) -> Bool {
+        guard FirebaseApp.app() != nil else { return fallback }
         let remoteConfig = RemoteConfig.remoteConfig()
         let configValue = remoteConfig.configValue(forKey: key.rawValue)
         if configValue.source != .static {
