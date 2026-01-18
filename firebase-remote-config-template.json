@@ -1,0 +1,79 @@
+{
+  "conditions": [],
+  "parameters": {
+    "onboarding_messaging_variant": {
+      "defaultValue": {
+        "value": "brutal_honesty"
+      },
+      "description": "Controls which messaging set to use"
+    },
+    "results_headline": {
+      "defaultValue": {
+        "value": "You're spiraling harder than most"
+      }
+    },
+    "results_subheadline": {
+      "defaultValue": {
+        "value": "Your responses indicate significant appearance anxiety*"
+      }
+    },
+    "results_gap_callout": {
+      "defaultValue": {
+        "value": "% higher concern than average"
+      }
+    },
+    "results_cta": {
+      "defaultValue": {
+        "value": "Check your symptoms"
+      }
+    },
+    "paywall_headline": {
+      "defaultValue": {
+        "value": "Stop spiraling. Start optimizing."
+      }
+    },
+    "paywall_subheadline": {
+      "defaultValue": {
+        "value": "(optional - currently not used)"
+      }
+    },
+    "paywall_cta_text": {
+      "defaultValue": {
+        "value": "Become a Member"
+      }
+    },
+    "paywall_free_trial_text": {
+      "defaultValue": {
+        "value": "Try For $0.00"
+      }
+    },
+    "monthly_price": {
+      "defaultValue": {
+        "value": "14.99"
+      }
+    },
+    "show_annual_plan": {
+      "defaultValue": {
+        "value": "false"
+      }
+    },
+    "show_signature_screen": {
+      "defaultValue": {
+        "value": "true"
+      }
+    },
+    "show_symptom_checklist": {
+      "defaultValue": {
+        "value": "true"
+      }
+    }
+  },
+  "version": {
+    "versionNumber": "1",
+    "updateTime": "",
+    "updateUser": {
+      "email": ""
+    },
+    "description": "Initial Remote Config setup for messaging variants"
+  }
+}
