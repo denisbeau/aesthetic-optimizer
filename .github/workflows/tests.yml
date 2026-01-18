@@ -30,11 +30,21 @@ jobs:
         EOF
         else
           python3 - <<'PY'
-        import os, base64, pathlib
-        b64 = os.environ["GOOGLESERVICE_INFO_PLIST_B64"]
+        import os, base64, pathlib, binascii
+
+        raw = os.environ["GOOGLESERVICE_INFO_PLIST_B64"]
         out = pathlib.Path("LooksmaxxingApp/Resources/GoogleService-Info.plist")
-        out.write_bytes(base64.b64decode(b64))
-        print(f"✅ Wrote {out} ({out.stat().st_size} bytes)")
+
+        # We accept either:
+        # 1) base64-encoded plist bytes, OR
+        # 2) raw XML plist text (common if someone pasted the file contents into the secret)
+        try:
+            decoded = base64.b64decode(raw, validate=True)
+            out.write_bytes(decoded)
+            print(f"✅ Wrote {out} from base64 ({out.stat().st_size} bytes)")
+        except binascii.Error:
+            out.write_text(raw, encoding="utf-8")
+            print(f"✅ Wrote {out} from raw text ({out.stat().st_size} bytes)")
         PY
         fi
 
